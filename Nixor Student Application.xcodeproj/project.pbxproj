@@ -7,13 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1937B7EF20EE207D0024A047 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1937B7EE20EE207D0024A047 /* GoogleService-Info.plist */; };
+		1937B7F120EE3BCA0024A047 /* common_util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1937B7F020EE3BCA0024A047 /* common_util.swift */; };
+		1937B7F320EE43BD0024A047 /* StudentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1937B7F220EE43BD0024A047 /* StudentDetails.swift */; };
+		1937B7F720EE4BD50024A047 /* accountTypeGetSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1937B7F620EE4BD50024A047 /* accountTypeGetSet.swift */; };
+		1948E15420EE5A7C00AADC59 /* home_screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1948E15320EE5A7C00AADC59 /* home_screen.swift */; };
+		1948E15720EE7D3D00AADC59 /* UserPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1948E15620EE7D3D00AADC59 /* UserPhoto.swift */; };
 		19B59C2620E52EBA00D865DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B59C2520E52EBA00D865DF /* AppDelegate.swift */; };
-		19B59C2820E52EBA00D865DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B59C2720E52EBA00D865DF /* ViewController.swift */; };
+		19B59C2820E52EBA00D865DF /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B59C2720E52EBA00D865DF /* Login.swift */; };
 		19B59C2B20E52EBA00D865DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B59C2920E52EBA00D865DF /* Main.storyboard */; };
 		19B59C2D20E52EBA00D865DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B59C2C20E52EBA00D865DF /* Assets.xcassets */; };
 		19B59C3020E52EBA00D865DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B59C2E20E52EBA00D865DF /* LaunchScreen.storyboard */; };
 		19B59C3B20E52EBA00D865DF /* Nixor_Student_ApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B59C3A20E52EBA00D865DF /* Nixor_Student_ApplicationTests.swift */; };
 		19B59C4620E52EBA00D865DF /* Nixor_Student_ApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B59C4520E52EBA00D865DF /* Nixor_Student_ApplicationUITests.swift */; };
+		4DE8985377C0A6E358113E93 /* Pods_Nixor_Student_Application.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDAEDD2DD69566AE02CAA810 /* Pods_Nixor_Student_Application.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +41,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1937B7EE20EE207D0024A047 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1937B7F020EE3BCA0024A047 /* common_util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = common_util.swift; sourceTree = "<group>"; };
+		1937B7F220EE43BD0024A047 /* StudentDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetails.swift; sourceTree = "<group>"; };
+		1937B7F620EE4BD50024A047 /* accountTypeGetSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = accountTypeGetSet.swift; sourceTree = "<group>"; };
+		1948E15320EE5A7C00AADC59 /* home_screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = home_screen.swift; sourceTree = "<group>"; };
+		1948E15620EE7D3D00AADC59 /* UserPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhoto.swift; sourceTree = "<group>"; };
 		19B59C2220E52EBA00D865DF /* Nixor Student Application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nixor Student Application.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B59C2520E52EBA00D865DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		19B59C2720E52EBA00D865DF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		19B59C2720E52EBA00D865DF /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		19B59C2A20E52EBA00D865DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		19B59C2C20E52EBA00D865DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19B59C2F20E52EBA00D865DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +60,9 @@
 		19B59C4120E52EBA00D865DF /* Nixor Student ApplicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nixor Student ApplicationUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B59C4520E52EBA00D865DF /* Nixor_Student_ApplicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nixor_Student_ApplicationUITests.swift; sourceTree = "<group>"; };
 		19B59C4720E52EBA00D865DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDAEDD2DD69566AE02CAA810 /* Pods_Nixor_Student_Application.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nixor_Student_Application.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D102A7492625505949F0EEDB /* Pods-Nixor Student Application.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nixor Student Application.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nixor Student Application/Pods-Nixor Student Application.debug.xcconfig"; sourceTree = "<group>"; };
+		E5EB4197F7DA97221FDEA4A9 /* Pods-Nixor Student Application.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nixor Student Application.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nixor Student Application/Pods-Nixor Student Application.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DE8985377C0A6E358113E93 /* Pods_Nixor_Student_Application.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +91,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		190ECF9320EEBED700AEF69A /* User */ = {
+			isa = PBXGroup;
+			children = (
+				1948E15620EE7D3D00AADC59 /* UserPhoto.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		1937B7F420EE44350024A047 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				19B59C2720E52EBA00D865DF /* Login.swift */,
+				1937B7F220EE43BD0024A047 /* StudentDetails.swift */,
+				1937B7F820EE4BDA0024A047 /* User */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		1937B7F520EE443D0024A047 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				1937B7F020EE3BCA0024A047 /* common_util.swift */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		1937B7F820EE4BDA0024A047 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				1937B7F620EE4BD50024A047 /* accountTypeGetSet.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		1948E15520EE5A8A00AADC59 /* Application_Home */ = {
+			isa = PBXGroup;
+			children = (
+				1948E15320EE5A7C00AADC59 /* home_screen.swift */,
+			);
+			path = Application_Home;
+			sourceTree = "<group>";
+		};
 		19B59C1920E52EBA00D865DF = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +140,8 @@
 				19B59C3920E52EBA00D865DF /* Nixor Student ApplicationTests */,
 				19B59C4420E52EBA00D865DF /* Nixor Student ApplicationUITests */,
 				19B59C2320E52EBA00D865DF /* Products */,
+				CE404AB148AA46B4ABE40310 /* Pods */,
+				1DED49CC4A5C1B73BD947E35 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,11 +159,15 @@
 			isa = PBXGroup;
 			children = (
 				19B59C2520E52EBA00D865DF /* AppDelegate.swift */,
-				19B59C2720E52EBA00D865DF /* ViewController.swift */,
-				19B59C2920E52EBA00D865DF /* Main.storyboard */,
+				1937B7F420EE44350024A047 /* Authentication */,
+				1937B7F520EE443D0024A047 /* Misc */,
+				190ECF9320EEBED700AEF69A /* User */,
+				1948E15520EE5A8A00AADC59 /* Application_Home */,
 				19B59C2C20E52EBA00D865DF /* Assets.xcassets */,
 				19B59C2E20E52EBA00D865DF /* LaunchScreen.storyboard */,
+				19B59C2920E52EBA00D865DF /* Main.storyboard */,
 				19B59C3120E52EBA00D865DF /* Info.plist */,
+				1937B7EE20EE207D0024A047 /* GoogleService-Info.plist */,
 			);
 			path = "Nixor Student Application";
 			sourceTree = "<group>";
@@ -125,6 +190,23 @@
 			path = "Nixor Student ApplicationUITests";
 			sourceTree = "<group>";
 		};
+		1DED49CC4A5C1B73BD947E35 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BDAEDD2DD69566AE02CAA810 /* Pods_Nixor_Student_Application.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE404AB148AA46B4ABE40310 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D102A7492625505949F0EEDB /* Pods-Nixor Student Application.debug.xcconfig */,
+				E5EB4197F7DA97221FDEA4A9 /* Pods-Nixor Student Application.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +214,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19B59C4A20E52EBA00D865DF /* Build configuration list for PBXNativeTarget "Nixor Student Application" */;
 			buildPhases = (
+				68545841F49410C654633BD4 /* [CP] Check Pods Manifest.lock */,
 				19B59C1E20E52EBA00D865DF /* Sources */,
 				19B59C1F20E52EBA00D865DF /* Frameworks */,
 				19B59C2020E52EBA00D865DF /* Resources */,
+				A6DFE28EF8229C0AE66937F6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -188,7 +272,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Hassan Abbasi";
 				TargetAttributes = {
 					19B59C2120E52EBA00D865DF = {
@@ -233,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19B59C3020E52EBA00D865DF /* LaunchScreen.storyboard in Resources */,
+				1937B7EF20EE207D0024A047 /* GoogleService-Info.plist in Resources */,
 				19B59C2D20E52EBA00D865DF /* Assets.xcassets in Resources */,
 				19B59C2B20E52EBA00D865DF /* Main.storyboard in Resources */,
 			);
@@ -254,13 +339,75 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		68545841F49410C654633BD4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Nixor Student Application-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A6DFE28EF8229C0AE66937F6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Nixor Student Application/Pods-Nixor Student Application-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Nixor Student Application/Pods-Nixor Student Application-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		19B59C1E20E52EBA00D865DF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19B59C2820E52EBA00D865DF /* ViewController.swift in Sources */,
+				1937B7F320EE43BD0024A047 /* StudentDetails.swift in Sources */,
+				1937B7F720EE4BD50024A047 /* accountTypeGetSet.swift in Sources */,
+				19B59C2820E52EBA00D865DF /* Login.swift in Sources */,
+				1937B7F120EE3BCA0024A047 /* common_util.swift in Sources */,
+				1948E15420EE5A7C00AADC59 /* home_screen.swift in Sources */,
 				19B59C2620E52EBA00D865DF /* AppDelegate.swift in Sources */,
+				1948E15720EE7D3D00AADC59 /* UserPhoto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +476,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -336,6 +484,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -386,6 +535,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -393,6 +543,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -424,9 +575,11 @@
 		};
 		19B59C4B20E52EBA00D865DF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D102A7492625505949F0EEDB /* Pods-Nixor Student Application.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8U8ABLMRK4;
 				INFOPLIST_FILE = "Nixor Student Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.btb.Nixor-Student-Application";
@@ -438,9 +591,11 @@
 		};
 		19B59C4C20E52EBA00D865DF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5EB4197F7DA97221FDEA4A9 /* Pods-Nixor Student Application.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8U8ABLMRK4;
 				INFOPLIST_FILE = "Nixor Student Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.btb.Nixor-Student-Application";

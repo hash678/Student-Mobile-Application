@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="Login" customModule="Nixor_Student_Application" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -19,6 +22,105 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="37.600000000000001" y="33.733133433283363"/>
+        </scene>
+        <!--Home screen-->
+        <scene sceneID="ULB-LX-kKB">
+            <objects>
+                <viewController storyboardIdentifier="home_sceenIntent" id="sEi-XW-a8r" customClass="home_screen" customModule="Nixor_Student_Application" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GnB-yN-8Mq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FH-71-9pX">
+                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                                <color key="backgroundColor" red="0.56470588235294117" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.56470588239999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items>
+                                    <navigationItem id="i5f-JD-k0w">
+                                        <barButtonItem key="leftBarButtonItem" title="Nixor Points" id="Pl6-4G-J4G">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="menu" id="cPo-dE-4aI">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCe-Uf-QDD">
+                                <rect key="frame" x="0.0" y="64" width="414" height="28"/>
+                                <color key="backgroundColor" red="0.56470588239999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="fjF-wX-zoM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giw-uJ-BaM">
+                                <rect key="frame" x="0.0" y="92" width="414" height="600"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gt9-bd-Wi3">
+                                        <rect key="frame" x="171.33333333333334" y="35.666666666666671" width="73" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="si8-49-gUP">
+                                        <rect key="frame" x="152.33333333333334" y="16" width="110.00000000000003" height="20.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="gt9-bd-Wi3" firstAttribute="centerX" secondItem="giw-uJ-BaM" secondAttribute="centerX" id="GRB-CU-xlh"/>
+                                    <constraint firstItem="gt9-bd-Wi3" firstAttribute="top" secondItem="si8-49-gUP" secondAttribute="bottom" constant="-1" id="mkO-oj-36G"/>
+                                    <constraint firstItem="si8-49-gUP" firstAttribute="centerX" secondItem="giw-uJ-BaM" secondAttribute="centerX" id="pdb-Jd-5Mu"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="student_mode" translatesAutoresizingMaskIntoConstraints="NO" id="auW-hC-yKE">
+                                <rect key="frame" x="180.66666666666666" y="52" width="53" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="LRf-Rs-qwQ"/>
+                                    <constraint firstAttribute="width" constant="53" id="dgz-FM-Txm"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.56470588239999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="giw-uJ-BaM" firstAttribute="top" secondItem="fCe-Uf-QDD" secondAttribute="bottom" id="49i-Ex-cqp"/>
+                            <constraint firstItem="auW-hC-yKE" firstAttribute="top" secondItem="yTj-gt-ilm" secondAttribute="top" constant="32" id="4ev-oD-QPq"/>
+                            <constraint firstItem="fCe-Uf-QDD" firstAttribute="trailing" secondItem="yTj-gt-ilm" secondAttribute="trailing" id="Eyn-Iz-fRK"/>
+                            <constraint firstItem="fCe-Uf-QDD" firstAttribute="top" secondItem="3FH-71-9pX" secondAttribute="bottom" id="JS7-Kk-lvW"/>
+                            <constraint firstItem="si8-49-gUP" firstAttribute="top" secondItem="auW-hC-yKE" secondAttribute="bottom" constant="4" id="Vb6-sB-KZ5"/>
+                            <constraint firstItem="giw-uJ-BaM" firstAttribute="bottom" secondItem="yTj-gt-ilm" secondAttribute="bottom" id="Zbd-ky-LW6"/>
+                            <constraint firstItem="3FH-71-9pX" firstAttribute="leading" secondItem="yTj-gt-ilm" secondAttribute="leading" id="cpW-Vp-MCe"/>
+                            <constraint firstItem="giw-uJ-BaM" firstAttribute="trailing" secondItem="yTj-gt-ilm" secondAttribute="trailing" id="flp-EI-PZc"/>
+                            <constraint firstItem="fCe-Uf-QDD" firstAttribute="leading" secondItem="yTj-gt-ilm" secondAttribute="leading" id="hen-e5-uLD"/>
+                            <constraint firstItem="giw-uJ-BaM" firstAttribute="leading" secondItem="yTj-gt-ilm" secondAttribute="leading" id="kqc-DP-DdI"/>
+                            <constraint firstItem="3FH-71-9pX" firstAttribute="top" secondItem="yTj-gt-ilm" secondAttribute="top" id="o5V-Ta-IBU"/>
+                            <constraint firstItem="3FH-71-9pX" firstAttribute="trailing" secondItem="yTj-gt-ilm" secondAttribute="trailing" id="pSr-DK-B0q"/>
+                            <constraint firstItem="auW-hC-yKE" firstAttribute="centerX" secondItem="GnB-yN-8Mq" secondAttribute="centerX" id="uHG-9k-seS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="yTj-gt-ilm"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="studentIDLabel" destination="gt9-bd-Wi3" id="adK-LJ-L3H"/>
+                        <outlet property="studentNameLabel" destination="si8-49-gUP" id="CTL-pL-4fw"/>
+                        <outlet property="student_photo" destination="auW-hC-yKE" id="JRB-Ub-Ctl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bp3-bV-Xeq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="776.25" y="30.633802816901408"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="menu" width="26" height="25"/>
+        <image name="student_mode" width="214" height="263"/>
+    </resources>
 </document>
