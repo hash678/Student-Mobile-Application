@@ -9,6 +9,8 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseStorage
+import Kingfisher
+import M13Checkbox
 class common_util{
     
     
@@ -108,24 +110,135 @@ class common_util{
     //    String domain = context.getString(R.string.domain_textView);
     //    return  email.replaceAll(domain,"").replace(".","-");
     //    }
-    public func circleImage(image: UIImageView?) -> UIImageView?{
-        image?.layer.cornerRadius = 25
-        image?.layer.masksToBounds = true
-        return image
-    }
+   
     public func getUserData(key: String) -> String?{
         return UserDefaults.standard.string(forKey: key)
     }
     
     public func loadImageViewURLFirebase(url: String, imageview:UIImageView){
-        let storageRef = Storage.storage().reference(forURL: url)
-        storageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) -> Void in
-            let pic = UIImage(data: data!)
-                imageview.image = pic
-        }
+        let url = URL(string: url)
+        imageview.kf.setImage(with: url)
         
+        //        let storageRef = Storage.storage().reference(forURL: url)
+//        storageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) -> Void in
+//            let pic = UIImage(data: data!)
+//                imageview.image = pic
+//        }
+//
+//    }
+}
+    
+   
+}
+
+extension UIImageView{
+     func circleImage(){
+        self.layer.cornerRadius = 25
+        self.layer.masksToBounds = true
+    }
+}
+extension UIView{
+    //cell.view.layer.shadowColor = UIColor.black.cgColor
+   
+
+    func giveMeShadowsBitch(){
+        self.layer.shadowOffset = CGSize(width: 0, height: 1)
+        self.layer.shadowRadius = 10;
+        self.layer.shadowOpacity = 0.5;
+    }
+}
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+extension UIViewController {
     
+    func showToast(message : String) {
+        
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center;
+        toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    } }
+extension Double {
+    /// Rounds the double to decimal places value
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+}
+extension M13Checkbox{
+    func isChecked() -> Bool{
+        if self.checkState == CheckState.checked{
+            return true
+        }else{
+            return false
+        }}
+}
+extension Date {
+    var yesterday: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
+    }
+    var tomorrow: Date {
+        return Calendar.current.date(byAdding: .day, value: 1, to: noon)!
+    }
+    var noon: Date {
+        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
+    }
+    var month: Int {
+        return Calendar.current.component(.month,  from: self)
+    }
+    var isLastDayOfMonth: Bool {
+        return tomorrow.month != month
+    }
+}
+extension Dictionary{
+    func checkIfAlValuesFalse() -> Bool{
+        
+        
+        for key in self.indices{
+      
+                let value = self[key].value as! Bool
+                if value == true{
+                    return false
+                }
+            
+            
+        }
+        return true
+    }
     
+}
+extension UIView {
+    
+    func setCardView(){
+       let view = self
+        view.layer.cornerRadius = 5.0
+        view.layer.borderColor  =  UIColor.clear.cgColor
+        view.layer.borderWidth = 5.0
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowColor =  UIColor.lightGray.cgColor
+        view.layer.shadowRadius = 5.0
+        view.layer.shadowOffset = CGSize(width:5, height: 5)
+        view.layer.masksToBounds = true
+        
+    }
 }

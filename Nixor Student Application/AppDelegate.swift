@@ -9,14 +9,19 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import GoogleMaps
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    public let mapAppkey = "AIzaSyB1XK0m166UakTKoWlhPLoYK5AMgIQmcjM"
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
        FirebaseApp.configure()
+        GMSServices.provideAPIKey(mapAppkey)
+       
    
         return true
     }

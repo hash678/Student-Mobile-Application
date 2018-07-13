@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="headerMain" customModule="Nixor_Student_Application" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="L8F-LY-hgK"/>
+                <outlet property="student_id" destination="1KY-XN-oFs" id="neD-by-UL0"/>
+                <outlet property="student_name" destination="fjE-hN-1oo" id="CK9-Je-igu"/>
+                <outlet property="student_photo" destination="b8i-IR-M4c" id="wZD-0a-cvh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="399" height="75"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="student_mode" translatesAutoresizingMaskIntoConstraints="NO" id="b8i-IR-M4c">
+                    <rect key="frame" x="15" y="7" width="61" height="61"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="61" id="Lp1-JA-Yf3"/>
+                        <constraint firstAttribute="width" constant="61" id="SHf-la-tB0"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjE-hN-1oo">
+                    <rect key="frame" x="84" y="13" width="99" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nixorsharkdark" translatesAutoresizingMaskIntoConstraints="NO" id="FHf-3o-WOX">
+                    <rect key="frame" x="335" y="32" width="64" height="31"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="31" id="05Y-wN-rgM"/>
+                        <constraint firstAttribute="width" constant="64" id="v8r-4c-T8f"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KY-XN-oFs">
+                    <rect key="frame" x="84" y="32" width="65" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.56470588239999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="FHf-3o-WOX" secondAttribute="trailing" id="5ui-Hr-Psy"/>
+                <constraint firstItem="1KY-XN-oFs" firstAttribute="leading" secondItem="b8i-IR-M4c" secondAttribute="trailing" constant="8" id="Dpq-mK-CDt"/>
+                <constraint firstItem="fjE-hN-1oo" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="13" id="Fz6-le-AK1"/>
+                <constraint firstItem="b8i-IR-M4c" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="7" id="abj-dJ-VfE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="FHf-3o-WOX" secondAttribute="bottom" constant="12" id="jmi-8R-zbs"/>
+                <constraint firstItem="1KY-XN-oFs" firstAttribute="top" secondItem="fjE-hN-1oo" secondAttribute="bottom" constant="1" id="mHf-sq-pIc"/>
+                <constraint firstItem="fjE-hN-1oo" firstAttribute="leading" secondItem="b8i-IR-M4c" secondAttribute="trailing" constant="8" id="vEZ-YX-Ip8"/>
+                <constraint firstItem="b8i-IR-M4c" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="vdO-or-DQG"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-802.5" y="-320.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="nixorsharkdark" width="210" height="74"/>
+        <image name="student_mode" width="214" height="263"/>
+    </resources>
+</document>

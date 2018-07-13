@@ -15,7 +15,12 @@ class Login: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // here is an entry point into our app
-       signInUserTemp()
+       if Auth.auth().currentUser == nil {
+            self.signInUserTemp()
+            
+        }else{
+           userSignedIn()
+        }
       }
     
     func intialize(){}
@@ -57,11 +62,7 @@ class Login: UIViewController {
         Auth.auth().signIn(withEmail: username, password: password) {
             (user, error) in
             if user != nil {
-                self.LoggedInUser = user
-                print("Signed in user")
-                self.phoneNumber = UserDefaults.standard.string(forKey: "phone_number")
-                self.checkIfUserDataExists(userPhoneNumber: self.phoneNumber!)
-                print("Phone Number is: \(self.phoneNumber!)")
+                self.userSignedIn()
             }else {
                 if let myError = error?.localizedDescription {
                     print(myError)
@@ -72,11 +73,22 @@ class Login: UIViewController {
         }
     }
     
+    public func userSignedIn(){
+       
+        print("Signed in user")
+        self.phoneNumber = UserDefaults.standard.string(forKey: "phone_number")
+        if self.phoneNumber == nil{
+            self.commonutil.storeinUserDetails(key: "phone_number", value: self.userPhonenumber)
+            self.phoneNumber = UserDefaults.standard.string(forKey: "phone_number")
+        }
+        self.checkIfUserDataExists(userPhoneNumber: self.phoneNumber!)
+        print("Phone Number is: \(self.phoneNumber!)")
+    }
+    
    
     func intentToNextViewController(){
-     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let home_screen = storyboard.instantiateViewController(withIdentifier: "home_sceenIntent")as! home_screen
-        self.present(home_screen,animated: true, completion: nil)
+     let NavigationController = storyboard?.instantiateViewController(withIdentifier: "NavigationController") as! NavigationController
+        present(NavigationController, animated: true, completion:nil)
     }
 }
 
