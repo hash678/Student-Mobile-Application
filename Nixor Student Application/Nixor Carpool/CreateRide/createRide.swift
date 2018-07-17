@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import M13Checkbox
+import FirebaseAuth
 class createRide: UIViewController{
     
     @IBOutlet weak var days: UIStackView!
@@ -37,8 +38,8 @@ class createRide: UIViewController{
     var username:String?
     var studentName:String?
     var studentID:String?
-    //TODO: Change once a proper Auth is implemented
-    let userNumber = "03332230503"
+   
+    var userNumber:String?
     var privateCarOrTaxiSelected = privateCarOrTaxi.taxi
     var initalride:initalRideData?
     var ride_type = rideType.once{
@@ -46,7 +47,7 @@ class createRide: UIViewController{
             switch(ride_type){
             case .scheduled:pickerDateAndTime.datePickerMode = UIDatePickerMode.time; days.isHidden = false;
             daysView.isHidden = false;pickerDateAndTime.minuteInterval = 15;
-            case .once: pickerDateAndTime.datePickerMode = UIDatePickerMode.dateAndTime; days.isHidden = true;
+            case .once: pickerDateAndTime.datePickerMode = UIDatePickerMode.dateAndTime; days.isHidden = true; pickerDateAndTime.minimumDate =  Date().tomorrow
               daysView.isHidden = true;pickerDateAndTime.minuteInterval = 15;
             }
         }
@@ -60,6 +61,7 @@ class createRide: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        userNumber = commonutil.formatNumber(number: (Auth.auth().currentUser?.phoneNumber)!)
         intializeView()
         getMyData()
     }

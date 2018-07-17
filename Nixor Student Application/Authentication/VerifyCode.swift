@@ -1,34 +1,65 @@
-import UIKit
-import Foundation
-import Firebase
-import FirebaseAuth
-import FirebaseFirestore
+//
+//  VerifyCode.swift
+//  Nixor Student Application
+//
+//  Created by Hassan Abbasi on 17/07/2018.
+//  Copyright © 2018 Hassan Abbasi. All rights reserved.
+//
 
-class Login: UIViewController {
-    let username = "hassan@gmail.com"
-    let password = "123456"
+import UIKit
+import PinCodeTextField
+import FirebaseAuth
+import Firebase
+class VerifyCode: UIViewController {
+    var verification:String?
+    @IBOutlet weak var codeEntry: PinCodeTextField!
+    @IBOutlet weak var verifyCode: UIButton!
     var LoggedInUser:AuthDataResult?
     var commonutil = common_util()
-    var phoneNumber: String?
-    public var userPhonenumber = "3332230503"
+    var credential:PhoneAuthCredential?
+    
+    
+    @IBAction func verifyCode(_ sender: UIButton) {
+        
+        if let code = codeEntry.text, verification != nil {
+          credential = PhoneAuthProvider.provider().credential(
+                withVerificationID: verification!,
+                verificationCode: code)
+            signIn(credential: credential!)
+        }
+        
+        
+    }
+    
+    func signIn(credential:PhoneAuthCredential){
+        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+            if let error = error {
+               self.showToast(message: error.localizedDescription)
+                return
+            }else{
+                print("Code verified")
+                self.userSignedIn()
+            }
+           
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // here is an entry point into our app
-       if Auth.auth().currentUser == nil {
-            self.signInUserTemp()
-            
-        }else{
-           userSignedIn()
-        }
-      }
+         self.dismissKeyboard()
+        navigationController?.title = "Login"
+        navigationController?.navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+       
+        // Do any additional setup after loading the view.
+    }
     
-    func intialize(){}
+   
+
     func checkIfUserDataExists(userPhoneNumber: String){
         Firestore.firestore().collection("account_link").document(userPhoneNumber).getDocument { (document, error) in
             if error == nil{
                 //print("Document: \(document) ")
-               //Account exists, NSP DATA AVAILABLE
+                //Account exists, NSP DATA AVAILABLE
                 var accountType = accountTypeGetSet()
                 accountType.mode = document?.get("mode") as? String
                 accountType.username = document?.get("username") as? String
@@ -54,49 +85,26 @@ class Login: UIViewController {
                 }}
         }
     }
-
-    
-    //A trash method I am using. I will replace this with the proper implementation once my developer account is set up
-    //TODO: add phone auth
-    func signInUserTemp(){
-        Auth.auth().signIn(withEmail: username, password: password) {
-            (user, error) in
-            if user != nil {
-                self.userSignedIn()
-            }else {
-                if let myError = error?.localizedDescription {
-                    print(myError)
-                }else{
-                    print("Error")
-                }
-            }
-        }
-    }
-    
+    var phoneNumber:String?
     public func userSignedIn(){
-       
+        
         print("Signed in user")
-        self.phoneNumber = UserDefaults.standard.string(forKey: "phone_number")
-        if self.phoneNumber == nil{
-            self.commonutil.storeinUserDetails(key: "phone_number", value: self.userPhonenumber)
-            self.phoneNumber = UserDefaults.standard.string(forKey: "phone_number")
-        }
+     self.phoneNumber = commonutil.formatNumber(number: (Auth.auth().currentUser?.phoneNumber)!)
+
         self.checkIfUserDataExists(userPhoneNumber: self.phoneNumber!)
-        print("Phone Number is: \(self.phoneNumber!)")
+       
     }
     
-   
+    
     func intentToNextViewController(){
-     let NavigationController = storyboard?.instantiateViewController(withIdentifier: "NavigationController") as! NavigationController
+        let NavigationController = storyboard?.instantiateViewController(withIdentifier: "NavigationController") as! NavigationController
         present(NavigationController, animated: true, completion:nil)
     }
+
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return UIStatusBarStyle.lightContent
+    }
+
+
 }
-
-
-
-    
-    
- 
-
-
-

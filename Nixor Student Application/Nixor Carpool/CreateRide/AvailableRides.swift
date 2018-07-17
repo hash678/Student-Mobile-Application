@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 import FirebaseFirestore
 import GoogleMaps
+import FirebaseFunctions
 class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate, onRequestButtonClicked{
    
     
     
    
-    
+     lazy var functions = Functions.functions()
     @IBOutlet weak var noAvailableRides: UILabel!
     var selectedIndexPath:IndexPath?
       var indicator: UIActivityIndicatorView?
@@ -386,6 +387,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      tableView.rowHeight = 70
         let previousIndexPath = selectedIndexPath
         if indexPath == selectedIndexPath{
          selectedIndexPath = nil
@@ -459,14 +461,27 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     func createRide(id:String, user:String, indexPath:IndexPath){
         
         let users = [user,username]
+        print("Cloud function called")
+        let dataToSave:Dictionary<String,Any> = ["users":users,"Date":Timestamp().seconds]
+        let data:[String:Any] = ["username1":user,"username2":username!,"map":dataToSave,"id":id]
         
-        let data:Dictionary<String,Any> = ["users":users,"Date":Timestamp().seconds]
-        constants.userCarpoolMessagesDB.child(username!).child(id).setValue(data)
-        constants.userCarpoolMessagesDB.child(user).child(id).setValue(data){ (error,ref ) in
-            self.resetRows(indexPath: indexPath)
-           self.tabBarController?.selectedIndex = 2
+        functions.httpsCallable("carpool_function").call(data) { (response, error) in
+            print(error)
+            print(response)
+            if error == nil && response != nil{
+                self.resetRows(indexPath: indexPath)
+                self.tabBarController?.selectedIndex = 2
+                
+            }else if error != nil {
+                self.showToast(message: error.debugDescription)
+            }
             
         }
+        
+        
+        
+        
+     
         
         
     }

@@ -135,15 +135,16 @@ class Chat: JSQMessagesViewController, UIImagePickerControllerDelegate, UINaviga
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
 		
-		
+		if messages[indexPath.item].senderId != "NixorApp"{
 		if  let  photo = userAvatars[messages[indexPath.item].senderId]  {
 		let url = URL(string:photo)
+			cell.avatarImageView.circleImage()
 			cell.avatarImageView.kf.setImage(with: url)
 		}else{
 				getPhotoUrl(cell: cell, username: messages[indexPath.item].senderId)
 		}
 		
-		
+		}
 		
 		return cell
 		
@@ -158,7 +159,7 @@ class Chat: JSQMessagesViewController, UIImagePickerControllerDelegate, UINaviga
 			if error == nil && response != nil{
 				if response?.get("photourl") != nil{
 					let url = URL(string: response?.get("photourl") as! String)
-					self.userAvatars[username] = response?.get("photourl") as! String
+					self.userAvatars[username] = (response?.get("photourl") as! String)
 					cell.avatarImageView.kf.setImage(with: url )
 					cell.avatarImageView.circleImage()
 					cell.avatarImageView.isHidden = false;

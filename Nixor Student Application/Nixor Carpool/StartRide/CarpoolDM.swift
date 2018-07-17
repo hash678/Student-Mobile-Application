@@ -16,6 +16,9 @@ class CarpoolDM: UIViewController{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.5649999976, green: 0, blue: 0, alpha: 1)
+        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let embeddedVC = segue.destination as? Chat, segue.identifier == "chat_details" {

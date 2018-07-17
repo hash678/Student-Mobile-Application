@@ -41,7 +41,7 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
         
         cell.student_name.text = convoList[indexPath.item].user
         cell.setCardView()
-        
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         let dateSelected = Date.init(timeIntervalSince1970: convoList[indexPath.item].date!)
         //Format date
         let formatter = DateFormatter()
@@ -71,6 +71,7 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
         super.viewDidLoad()
         self.tableview.tableFooterView = UIView()
         self.tableview.rowHeight = 75
+        
         username = commonUtil.getUserData(key: "username")
         db =  constants.userCarpoolMessagesDB.child(username!)
         getChatInfo()
@@ -78,7 +79,7 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
     
     func getChatInfo(){
         self.convoList = [conversation]()
-        constants.userCarpoolMessagesDB.child(username!).observe(.value) { (snapshot) in
+        constants.userCarpoolMessagesDB.child(username!).queryOrdered(byChild: "Date").observe(.value) { (snapshot) in
             for snaps in snapshot.children{
              
               if let snapshots = snaps as? DataSnapshot{
@@ -92,6 +93,7 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
                     print("Casting failed")
                 }
             }
+            self.convoList.reverse()
             self.tableview.reloadData()
         }
         

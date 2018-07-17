@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>The app needs to access user&apos;s location for Nixor Carpool feature</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -18,10 +16,33 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.262510153933-u4146jhl2clbl5ool1gicasdr1lkihtp</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>The app needs to access user's location for Nixor Carpool feature</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>The app needs to access user's location for Nixor Carpool feature</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>The app needs to access user's location for Nixor Carpool feature</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used for photo sharing in chat app and SharksOnCloud</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -36,12 +57,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>The app needs to access user&apos;s location for Nixor Carpool feature</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>The app needs to access user&apos;s location for Nixor Carpool feature</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Used for photo sharing in chat app and SharksOnCloud</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
