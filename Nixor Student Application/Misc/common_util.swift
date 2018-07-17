@@ -227,6 +227,24 @@ extension Dictionary{
     }
     
 }
+
+/*
+How accessible is it?
+
+ How deep are you nesting it?
+ pushID?
+ .document().
+ 
+ Users -> Bucket -> pujksdbkasjbsakjImage -> url
+ Users -> Bucket -> pujksdbkasjbsakjImage-> metaData["Date","Type","size"] -> smallData ->
+ 
+Repetition matters when you have update data
+Why?
+ You have to update at multiple locations. IF I MISS OUT ON ANY 1
+ 
+Anything that can be, is or will be useful.
+ 
+ */
 extension UIView {
     
     func setCardView(){

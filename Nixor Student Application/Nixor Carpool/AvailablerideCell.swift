@@ -10,7 +10,11 @@ import Foundation
 import UIKit
 import GoogleMaps
 class AvailablerideCell: UITableViewCell{
-    
+    var itemClicked:String?
+    var user:String?
+    @IBAction func onRequest(_ sender: Any) {
+        delegate?.requestButtonClicked(id:itemClicked,user:user,indexPath: currentIndexPath!)
+    }
     @IBOutlet weak var student_name: UILabel!
     @IBOutlet weak var hidingLayout: UIView!
     
@@ -20,16 +24,16 @@ class AvailablerideCell: UITableViewCell{
     @IBOutlet weak var costperHead: UILabel!
     @IBOutlet weak var available_days: UILabel!
     @IBOutlet weak var student_id: UILabel!
-    @IBOutlet weak var batch_year: UILabel!
-    @IBOutlet weak var ride_summary: UILabel!
-    @IBOutlet weak var date_posted: UILabel!
+    
     @IBOutlet weak var student_photo: UIImageView!
     
     @IBOutlet weak var topView: UIView!
+    var delegate:onRequestButtonClicked?
     
+    var currentIndexPath:IndexPath?
+    let expandedHeight:CGFloat = 324
+
     
-    public let expandedHeight:CGFloat = 324
-    public let defaultHeight:CGFloat = 70
     
     var isObserving = false
     func checkHeight(){
@@ -54,9 +58,7 @@ class AvailablerideCell: UITableViewCell{
         }
     }
     
-    
-    
-    
-    
-    
+}
+protocol onRequestButtonClicked {
+    func requestButtonClicked(id:String?,user:String?,indexPath:IndexPath)
 }

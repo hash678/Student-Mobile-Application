@@ -200,7 +200,7 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         selector.insertSegment(withTitle: "Other", at: 3, animated: true)
         selector.selectedSegmentIndex = 0
         indicator!.startAnimating()
-        Firestore.firestore().collection("Past Papers").document("names").getDocument { (document, error) in
+        constants.pastpaperSubjectDB.getDocument { (document, error) in
             if document != nil{
                 let data = document?.data()
                 for indexPath in (data?.indices)!{
@@ -241,9 +241,9 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         indicator!.startAnimating()
         var query:Query
         if onlythesepapers == nil {
-            query = Firestore.firestore().collection("Past Papers").document("Subjects").collection(subjectName).order(by: "year")
+            query = constants.pastpaperSubjects.collection(subjectName).order(by: "year")
         }else{
-            query = Firestore.firestore().collection("Past Papers").document("Subjects").collection(subjectName).whereField("type", isEqualTo: onlythesepapers!)
+            query = constants.pastpaperSubjects.collection(subjectName).whereField("type", isEqualTo: onlythesepapers!)
         }
         query.getDocuments { (Query, error) in
             if Query != nil{

@@ -15,7 +15,7 @@ import Firebase
 import FirebaseFirestore
 class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate{
     
-    
+   
     let constantClass = constants()
     
     //My location variables
@@ -34,10 +34,12 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             }
         }
     }
-    let costPerKMPrivateCar:Double = 10
+    let costPerKMPrivateCar:Double = 20
     let costPerKMTaxi:Double = 30
     
     public var initalRideDataFilled:initalRideData?
+    
+  
     
     var numberOfSeats:Int = 1 {
         didSet{
@@ -224,11 +226,11 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         addMyLocationsMarker()
         if campusSelected == campus.Main {
             addNixorMainCampusMarker()
-            drawPath(destination: constantClass.nixorMainCampuslocation, origin: [myLat!,myLong!])
+            drawPath(destination: constants.nixorMainCampuslocation, origin: [myLat!,myLong!])
             
         }else{
             addNixorNCFPCampusMarker()
-            drawPath(destination: constantClass.nixorNCFPCampusLocation, origin: [myLat!,myLong!])
+            drawPath(destination: constants.nixorNCFPCampusLocation, origin: [myLat!,myLong!])
         }
     }
     
@@ -256,8 +258,8 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         
         let MyMarkerImage = UIImageView(image: #imageLiteral(resourceName: "myMarker"))
         var rect = MyMarkerImage.frame
-        rect.size.height =  constantClass.myMarkerIconSize
-        rect.size.width = constantClass.myMarkerIconSize
+        rect.size.height =  constants.myMarkerIconSize
+        rect.size.width = constants.myMarkerIconSize
         MyMarkerImage.frame = rect
         marker.iconView = MyMarkerImage
         
@@ -292,14 +294,14 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     //MARK: Add marker for nixor main campus
     func addNixorMainCampusMarker(){
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: constantClass.nixorMainCampuslocation[0], longitude: constantClass.nixorMainCampuslocation[1])
+        marker.position = CLLocationCoordinate2D(latitude: constants.nixorMainCampuslocation[0], longitude: constants.nixorMainCampuslocation[1])
         marker.title = "Nixor Main Campus"
         marker.snippet = "Main Campus"
         
         let NixorMarkerImage = UIImageView(image: #imageLiteral(resourceName: "nixorMarker"))
         var rect = NixorMarkerImage.frame
-        rect.size.height = constantClass.nixorMarkerIconSize
-        rect.size.width = constantClass.nixorMarkerIconSize
+        rect.size.height = constants.nixorMarkerIconSize
+        rect.size.width = constants.nixorMarkerIconSize
         NixorMarkerImage.frame = rect
         marker.iconView = NixorMarkerImage
         marker.map =  mainMap
@@ -311,11 +313,11 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     //MARK: Add marker for Nixor NCFP campus
     func addNixorNCFPCampusMarker(){
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: constantClass.nixorNCFPCampusLocation[0], longitude: constantClass.nixorNCFPCampusLocation[1])
+        marker.position = CLLocationCoordinate2D(latitude: constants.nixorNCFPCampusLocation[0], longitude: constants.nixorNCFPCampusLocation[1])
         let NixorMarkerImage = UIImageView(image: #imageLiteral(resourceName: "nixorMarker"))
         var rect = NixorMarkerImage.frame
-        rect.size.height = constantClass.nixorMarkerIconSize
-        rect.size.width = constantClass.nixorMarkerIconSize
+        rect.size.height = constants.nixorMarkerIconSize
+        rect.size.width = constants.nixorMarkerIconSize
         NixorMarkerImage.frame = rect
         marker.iconView = NixorMarkerImage
         marker.title = "Nixor NCFP Campus"
@@ -333,10 +335,10 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         addMyLocationsMarker()
         if campusSelected == campus.Main{
             addNixorMainCampusMarker()
-            drawPath(destination: constantClass.nixorMainCampuslocation, origin: [myLat!,myLong!])
+            drawPath(destination: constants.nixorMainCampuslocation, origin: [myLat!,myLong!])
         }else{
             addNixorNCFPCampusMarker()
-            drawPath(destination: constantClass.nixorNCFPCampusLocation, origin: [myLat!,myLong!])
+            drawPath(destination: constants.nixorNCFPCampusLocation, origin: [myLat!,myLong!])
         }
         
         
@@ -400,8 +402,8 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         let points = route.points
         let path = GMSPath.init(fromEncodedPath: points.stringValue)
         let polyline = GMSPolyline.init(path: path)
-        polyline.strokeColor = constantClass.routeColor
-        polyline.strokeWidth = constantClass.routeWidth
+        polyline.strokeColor = constants.routeColor
+        polyline.strokeWidth = constants.routeWidth
         polyline.map = self.mainMap
       
         setCommuteInformation(duration:route.duration, distance: route.distance, startDest:route.start_dest)
@@ -423,9 +425,9 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         
         if myLat != nil {
             if campusSelected == campus.Main{
-                drawPath(destination: constantClass.nixorMainCampuslocation, origin: [myLat!,myLong!])
+                drawPath(destination: constants.nixorMainCampuslocation, origin: [myLat!,myLong!])
             }else{
-                drawPath(destination: constantClass.nixorNCFPCampusLocation, origin: [myLat!,myLong!])
+                drawPath(destination: constants.nixorNCFPCampusLocation, origin: [myLat!,myLong!])
             }
         }
         
@@ -484,7 +486,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         var startDest = [Double:Double]()
         startDest[myLat!] = myLong!
         
-        rideDataFilled = rideData(student_name: initalRideDataFilled!.student_name, student_id: initalRideDataFilled!.student_id, student_number: initalRideDataFilled!.student_number, student_username: initalRideDataFilled!.student_username, privateCarOrTaxi: initalRideDataFilled!.privateCarOrTaxi, iAmtheDriver: initalRideDataFilled!.iAmtheDriver, oneTimeOrScheduled: initalRideDataFilled!.oneTimeOrScheduled, selectedDays: initalRideDataFilled!.selectedDays, selectedTime: initalRideDataFilled!.selectedTime, startDestMyLat: myLat,startDestMyLong: myLong, route: myRoute!, numberOfSeats: numberOfSeats, occupiedSeats: 1, estimatedCost: estimatedCost!, totalDistance: distance!, rideDuration: duration!, mainCampusOrNcfp: campusSelec!,summary:summary)
+        rideDataFilled = rideData(student_name: initalRideDataFilled!.student_name, student_id: initalRideDataFilled!.student_id, student_number: initalRideDataFilled!.student_number, student_username: initalRideDataFilled!.student_username, privateCarOrTaxi: initalRideDataFilled!.privateCarOrTaxi, iAmtheDriver: initalRideDataFilled!.iAmtheDriver, oneTimeOrScheduled: initalRideDataFilled!.oneTimeOrScheduled, selectedDays: initalRideDataFilled!.selectedDays, selectedTime: initalRideDataFilled!.selectedTime, startDestMyLat: myLat,startDestMyLong: myLong, route: myRoute!, numberOfSeats: numberOfSeats, occupiedSeats: 1, estimatedCost: estimatedCost!, totalDistance: distance!, rideDuration: duration!, mainCampusOrNcfp: campusSelec!,summary:summary,id:"id")
         
         
         return true
@@ -518,9 +520,9 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             
             
             
-            Firestore.firestore().collection("Carpool").document("Rides").collection("AvailableRides").addDocument(data: data) { (error) in
+            constants.carpoolDB.addDocument(data: data) { (error) in
                 if error == nil {
-                    let alertController = UIAlertController(title: "Ride posted", message: "Congratulations your ride has been posted. 10 Nixor points for you!", preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Ride posted", message: constants.carpoolRideBooked, preferredStyle: .alert)
                     
                     // Create the actions
                     let okAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: { (action) in
@@ -530,7 +532,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     alertController.addAction(okAction)
                     self.present(alertController, animated: true, completion: nil)
                 }else{
-                    let alertController = UIAlertController(title: "Ride cannot be posted", message: "We could not post your ride. Please make sure you are connected to the internet.", preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Ride cannot be posted", message: constants.carpoolRideNotBooked, preferredStyle: .alert)
                     
                     // Create the actions
                     let okAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: { (action) in

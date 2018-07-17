@@ -31,7 +31,6 @@ struct rideData{
     var rideDuration:String!
     var mainCampusOrNcfp:String!
     var summary:String?
-    
-    
-    
+    var id:String!
+  
 }

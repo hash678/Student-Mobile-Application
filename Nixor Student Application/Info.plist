@@ -40,6 +40,8 @@
 	<string>The app needs to access user&apos;s location for Nixor Carpool feature</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>The app needs to access user&apos;s location for Nixor Carpool feature</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used for photo sharing in chat app and SharksOnCloud</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -10,8 +10,11 @@ import Foundation
 import UIKit
 import FirebaseFirestore
 import GoogleMaps
-class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate{
+class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate, onRequestButtonClicked{
+   
     
+    
+   
     
     @IBOutlet weak var noAvailableRides: UILabel!
     var selectedIndexPath:IndexPath?
@@ -20,10 +23,11 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     let userClass = UserPhoto()
     @IBOutlet weak var tableView: UITableView!
    
-    var constantClass = constants()
+    let commonUtil = common_util()
+    var username:String?
     var handler:ListenerRegistration?
     var campus:String = "Main"
-    
+    var usersPhoto = [String:String]()
     
     
  
@@ -43,9 +47,9 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func getAvailableRides(){
- 
+
         
-      handler = Firestore.firestore().collection("Carpool").document("Rides").collection("AvailableRides").whereField("mainCampusOrNcfp", isEqualTo: self.campus).addSnapshotListener { (response, error) in
+      handler = constants.carpoolDB.whereField("mainCampusOrNcfp", isEqualTo: self.campus).addSnapshotListener { (response, error) in
             if error == nil && response != nil {
                 self.noAvailableRides.isHidden = true
                        self.resetTableView()
@@ -54,7 +58,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }
                 for documents in response!.documents {
                     let doc:Dictionary = documents.data()
-                    self.rides.append(self.mapToRideObject(document: doc))
+                    self.rides.append(self.mapToRideObject(document: doc,id: documents.documentID))
               
                 }
                 
@@ -76,7 +80,9 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     func resetTableView(){
          self.rides = [rideData]()
         showloading()
+          self.tableView.rowHeight = 70
          self.tableView.reloadData()
+      
         
     }
     
@@ -85,17 +91,22 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         handler?.remove()
         self.campus = campus
         getAvailableRides()
+        if selectedIndexPath != nil {
+            resetRows(indexPath: selectedIndexPath!)
+        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         intLoading()
+        self.tableView.rowHeight = 70
+       username = commonUtil.getUserData(key: "username")
        changeCampus("Main")
     }
     
     //MARK: Firebase data to rideData object
-    func mapToRideObject(document map:Dictionary<String,Any>) -> rideData{
+    func mapToRideObject(document map:Dictionary<String,Any>,id:String) -> rideData{
         let student_name = map["student_name"] as! String
         let student_id = map["student_id"] as! String
         let student_username = map["student_username"] as! String
@@ -130,19 +141,19 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
         
         
-        let myRide = rideData(student_name: student_name, student_id: student_id, student_number: student_number, student_username: student_username, privateCarOrTaxi: privateCarOrTaxi, iAmtheDriver: iAmtheDriver, oneTimeOrScheduled: oneTimeOrScheduled, selectedDays: selectedDays, selectedTime: selectedTime, startDestMyLat: startDestMyLat, startDestMyLong: startDestMyLong, route: route, numberOfSeats: numberOfSeats, occupiedSeats: occupiedSeats+1, estimatedCost: estimatedCost, totalDistance: totalDistance, rideDuration: rideDuration, mainCampusOrNcfp: mainCampusOrNcfp, summary: summary)
+        let myRide = rideData(student_name: student_name, student_id: student_id, student_number: student_number, student_username: student_username, privateCarOrTaxi: privateCarOrTaxi, iAmtheDriver: iAmtheDriver, oneTimeOrScheduled: oneTimeOrScheduled, selectedDays: selectedDays, selectedTime: selectedTime, startDestMyLat: startDestMyLat, startDestMyLong: startDestMyLong, route: route, numberOfSeats: numberOfSeats, occupiedSeats: occupiedSeats+1, estimatedCost: estimatedCost, totalDistance: totalDistance, rideDuration: rideDuration, mainCampusOrNcfp: mainCampusOrNcfp, summary: summary,id:id)
         return myRide
         
     }
     
     //MARK: Tableview item photo
     func getPhotoUrl(cell:AvailablerideCell, username:String){
-        Firestore.firestore().collection("users").document(username).getDocument { (response, error) in
+        constants.userDB.document(username).getDocument { (response, error) in
             if error == nil && response != nil{
                 if response?.get("photourl") != nil{
                           let url = URL(string: response?.get("photourl") as! String)
                     cell.student_photo.kf.setImage(with: url )
-                    
+                    self.usersPhoto[username] = (response?.get("photourl") as! String)
                 }
                 
             }
@@ -166,8 +177,8 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         marker.position = CLLocationCoordinate2D(latitude: myRide.startDestMyLat, longitude: myRide.startDestMyLong)
         let MyMarkerImage = UIImageView(image: #imageLiteral(resourceName: "myMarker"))
         var rect = MyMarkerImage.frame
-        rect.size.height = constantClass.myMarkerIconSize
-        rect.size.width = constantClass.myMarkerIconSize
+        rect.size.height = constants.myMarkerIconSize
+        rect.size.width = constants.myMarkerIconSize
         MyMarkerImage.frame = rect
         marker.iconView = MyMarkerImage
         marker.map =  cell.map
@@ -176,19 +187,19 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         var nixorLong:Double?
         
         if myRide.mainCampusOrNcfp == "Main"{
-            nixorLat = constantClass.nixorMainCampuslocation[0]
-            nixorLong = constantClass.nixorMainCampuslocation[1]
+            nixorLat = constants.nixorMainCampuslocation[0]
+            nixorLong = constants.nixorMainCampuslocation[1]
         }else{
-            nixorLat = constantClass.nixorNCFPCampusLocation[0]
-            nixorLong = constantClass.nixorNCFPCampusLocation[1]
+            nixorLat = constants.nixorNCFPCampusLocation[0]
+            nixorLong = constants.nixorNCFPCampusLocation[1]
         }
         
         let Nixormarker = GMSMarker()
         Nixormarker.position = CLLocationCoordinate2D(latitude:nixorLat!, longitude: nixorLong!)
         let NixorMarkerImage = UIImageView(image: #imageLiteral(resourceName: "nixorMarker"))
         var Nixorrect = NixorMarkerImage.frame
-        Nixorrect.size.height = constantClass.nixorMarkerIconSize
-        Nixorrect.size.width = constantClass.nixorMarkerIconSize
+        Nixorrect.size.height = constants.nixorMarkerIconSize
+        Nixorrect.size.width = constants.nixorMarkerIconSize
         NixorMarkerImage.frame = Nixorrect
         Nixormarker.iconView = NixorMarkerImage
         Nixormarker.map =  cell.map
@@ -196,8 +207,8 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         let points = myRide.route
         let path = GMSPath.init(fromEncodedPath: points!)
         let polyline = GMSPolyline.init(path: path)
-        polyline.strokeColor = constantClass.routeColor
-        polyline.strokeWidth = constantClass.routeWidth
+        polyline.strokeColor = constants.routeColor
+        polyline.strokeWidth = constants.routeWidth
         polyline.map = cell.map
     }
     
@@ -249,16 +260,27 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         cell.topView.setCardView()
         cell.hidingLayout.setCardView()
         
-        
-        
+      
+     
         if object.student_name != nil, object.student_id != nil, object.numberOfSeats != nil, object.student_username != nil{
               cell.isHidden = false
-         
+            
+           
+            cell.itemClicked = object.id
+          cell.user = object.student_username
+            
             //Set map
             setMap(myRide: object, cell: cell)
           
             //Get ride host's image
-            getPhotoUrl(cell: cell, username: object.student_username)
+            
+            if let photourl = usersPhoto[object.student_username]{
+                cell.student_photo.circleImage()
+                let url = URL(string: photourl)
+                cell.student_photo.kf.setImage(with: url)
+            }else{
+            
+                getPhotoUrl(cell: cell, username: object.student_username)}
             
             //Set host's basic information
             cell.student_name.text = object.student_name
@@ -325,24 +347,43 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     //Function for count
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
+     
          return rides.count+1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "AvailablerideCell", for: indexPath) as! AvailablerideCell
-        
+        cell.delegate = self
+       
         if indexPath.row >= rides.count{
             cell.isHidden = true
             return cell
         }else{
+            cell.currentIndexPath = indexPath
             cell = setRideInformation(ride: rides[indexPath.row], cell: cell)
             return cell
             
         }}
     
 
-    
+    func resetRows(indexPath:IndexPath){
+        let previousIndexPath = selectedIndexPath
+        if indexPath == selectedIndexPath{
+            selectedIndexPath = nil
+        }else{
+            selectedIndexPath = indexPath
+        }
+        var indexPaths : Array<IndexPath> = []
+        if let previous = previousIndexPath{
+            indexPaths.append(previous)
+        }
+        if let current = selectedIndexPath{
+            indexPaths.append(current)
+        }
+        if indexPaths.count > 0 {
+            tableView.reloadRows(at: indexPaths, with:.automatic)
+        }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let previousIndexPath = selectedIndexPath
@@ -400,4 +441,40 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     func showloading(){
         indicator?.startAnimating()
     }
+    
+    
+    
+    
+    
+    
+    
+    func requestButtonClicked(id:String?,user:String?,indexPath:IndexPath) {
+        if let docid = id, let userID = user {
+            createRide(id: docid, user: userID,indexPath:indexPath)
+            
+        }
+    
+    }
+    
+    func createRide(id:String, user:String, indexPath:IndexPath){
+        
+        let users = [user,username]
+        
+        let data:Dictionary<String,Any> = ["users":users,"Date":Timestamp().seconds]
+        constants.userCarpoolMessagesDB.child(username!).child(id).setValue(data)
+        constants.userCarpoolMessagesDB.child(user).child(id).setValue(data){ (error,ref ) in
+            self.resetRows(indexPath: indexPath)
+           self.tabBarController?.selectedIndex = 2
+            
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
 }

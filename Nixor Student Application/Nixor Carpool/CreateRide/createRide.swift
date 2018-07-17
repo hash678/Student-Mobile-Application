@@ -89,6 +89,7 @@ class createRide: UIViewController{
     }
     
     //Get Selected days
+    //Dictionary -> HASHMAP
     func setSelectedDays(){
         selectedDays["Monday"] = monday.isChecked()
         selectedDays["Tuesday"] = tuesday.isChecked()
@@ -213,6 +214,10 @@ class createRide: UIViewController{
         initializeDateTimePicker()
         
     }
+    
+    
+    
+    
     
     
 }

@@ -31,7 +31,7 @@ class UserPhoto{
                     return
                 }
                 
-                Firestore.firestore().collection("users").document(username).setData(["photourl" : downloadURL.absoluteString])
+                constants.userDB.document(username).setData(["photourl" : downloadURL.absoluteString])
                 self.setDisplay(imageview: imageview, profileurl: downloadURL.absoluteString)
                 print(downloadURL)
             }
@@ -53,7 +53,7 @@ class UserPhoto{
     
     //This method simply checks to see if photourl is already saved in Firebase, retrieves it from there saves it in sharedpref and then loads image
     private func checkIfPhotoIntialized(username: String, imageview:UIImageView){
-        Firestore.firestore().collection("users").document(username).getDocument { (document, error) in
+        constants.userDB.document(username).getDocument { (document, error) in
             if document != nil {
                 if let profileUrl = document?.get("photourl") as? String {
                     self.commonutil.storeinUserDetails(key: "profileurl", value: profileUrl)

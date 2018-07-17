@@ -22,6 +22,13 @@
 		1948E15420EE5A7C00AADC59 /* home_screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1948E15320EE5A7C00AADC59 /* home_screen.swift */; };
 		1948E15720EE7D3D00AADC59 /* UserPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1948E15620EE7D3D00AADC59 /* UserPhoto.swift */; };
 		195F2AF120F8CB9F0088A18D /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2AF020F8CB9F0088A18D /* constants.swift */; };
+		195F2AF520FB4C100088A18D /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2AF420FB4C100088A18D /* Chat.swift */; };
+		195F2AF720FB4CD00088A18D /* message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2AF620FB4CD00088A18D /* message.swift */; };
+		195F2AF920FB4DE10088A18D /* messageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2AF820FB4DE10088A18D /* messageItem.swift */; };
+		195F2AFF20FB858A0088A18D /* MessagesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2AFE20FB858A0088A18D /* MessagesHandler.swift */; };
+		195F2B0120FBB8B70088A18D /* ConversationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2B0020FBB8B70088A18D /* ConversationsList.swift */; };
+		195F2B0320FBB97D0088A18D /* ConversationItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2B0220FBB97D0088A18D /* ConversationItemTableViewCell.swift */; };
+		195F2B0620FD5DB20088A18D /* CarpoolDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2B0520FD5DB20088A18D /* CarpoolDM.swift */; };
 		199139F420F62C7700E6F27B /* initialRideData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199139F320F62C7700E6F27B /* initialRideData.swift */; };
 		199257EB20F6939800DC452E /* AvailableRides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199257EA20F6939800DC452E /* AvailableRides.swift */; };
 		199257ED20F697CA00DC452E /* AvailablerideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199257EC20F697CA00DC452E /* AvailablerideCell.swift */; };
@@ -76,6 +83,13 @@
 		1948E15320EE5A7C00AADC59 /* home_screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = home_screen.swift; sourceTree = "<group>"; };
 		1948E15620EE7D3D00AADC59 /* UserPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhoto.swift; sourceTree = "<group>"; };
 		195F2AF020F8CB9F0088A18D /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		195F2AF420FB4C100088A18D /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; usesTabs = 1; };
+		195F2AF620FB4CD00088A18D /* message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = message.swift; sourceTree = "<group>"; };
+		195F2AF820FB4DE10088A18D /* messageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageItem.swift; sourceTree = "<group>"; };
+		195F2AFE20FB858A0088A18D /* MessagesHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesHandler.swift; sourceTree = "<group>"; };
+		195F2B0020FBB8B70088A18D /* ConversationsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsList.swift; sourceTree = "<group>"; };
+		195F2B0220FBB97D0088A18D /* ConversationItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationItemTableViewCell.swift; sourceTree = "<group>"; };
+		195F2B0520FD5DB20088A18D /* CarpoolDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarpoolDM.swift; sourceTree = "<group>"; };
 		199139F320F62C7700E6F27B /* initialRideData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = initialRideData.swift; sourceTree = "<group>"; };
 		199257EA20F6939800DC452E /* AvailableRides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableRides.swift; sourceTree = "<group>"; };
 		199257EC20F697CA00DC452E /* AvailablerideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailablerideCell.swift; sourceTree = "<group>"; };
@@ -164,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				1937B7F020EE3BCA0024A047 /* common_util.swift */,
+				195F2AFE20FB858A0088A18D /* MessagesHandler.swift */,
 				195F2AF020F8CB9F0088A18D /* constants.swift */,
 			);
 			path = Misc;
@@ -185,7 +200,27 @@
 			path = Application_Home;
 			sourceTree = "<group>";
 		};
-		199257E720F6831100DC452E /* StartRide */ = {
+		195F2B0420FBFCC90088A18D /* StartRide */ = {
+			isa = PBXGroup;
+			children = (
+				195F2B0220FBB97D0088A18D /* ConversationItemTableViewCell.swift */,
+				195F2B0020FBB8B70088A18D /* ConversationsList.swift */,
+				195F2B0520FD5DB20088A18D /* CarpoolDM.swift */,
+			);
+			path = StartRide;
+			sourceTree = "<group>";
+		};
+		195F2B0720FD61E40088A18D /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				195F2AF820FB4DE10088A18D /* messageItem.swift */,
+				195F2AF620FB4CD00088A18D /* message.swift */,
+				195F2AF420FB4C100088A18D /* Chat.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		199257E720F6831100DC452E /* CreateRide */ = {
 			isa = PBXGroup;
 			children = (
 				199257EA20F6939800DC452E /* AvailableRides.swift */,
@@ -195,7 +230,7 @@
 				199139F320F62C7700E6F27B /* initialRideData.swift */,
 				19B0E33F20F7C14900BFCEEF /* CarpoolFilters.swift */,
 			);
-			path = StartRide;
+			path = CreateRide;
 			sourceTree = "<group>";
 		};
 		19AD9C4820F1ECB100C63B6D /* TableviewCells */ = {
@@ -255,17 +290,17 @@
 				190ECF9320EEBED700AEF69A /* User */,
 				1948E15520EE5A8A00AADC59 /* Application_Home */,
 				190ECF9E20F01E2700AEF69A /* PastPapers */,
+				195F2B0720FD61E40088A18D /* Chat */,
+				19E2054320F37ED700132494 /* Nixor Carpool */,
 				19B59C2E20E52EBA00D865DF /* LaunchScreen.storyboard */,
 				19C3A40C20F036C4007E7912 /* Assets.xcassets */,
 				19B59C2920E52EBA00D865DF /* Main.storyboard */,
-				199257EC20F697CA00DC452E /* AvailablerideCell.swift */,
 				193B578420F25697009FCD68 /* NavigationController.swift */,
 				193B577A20F22392009FCD68 /* header.xib */,
 				193B578220F25042009FCD68 /* SharksOnCloud.swift */,
 				193B577E20F226CB009FCD68 /* headerMain.swift */,
 				19B59C3120E52EBA00D865DF /* Info.plist */,
 				1937B7EE20EE207D0024A047 /* GoogleService-Info.plist */,
-				19E2054320F37ED700132494 /* Nixor Carpool */,
 			);
 			path = "Nixor Student Application";
 			sourceTree = "<group>";
@@ -291,9 +326,11 @@
 		19E2054320F37ED700132494 /* Nixor Carpool */ = {
 			isa = PBXGroup;
 			children = (
+				195F2B0420FBFCC90088A18D /* StartRide */,
 				19E2053D20F35D9800132494 /* Carpool.swift */,
 				19E2054120F37EC500132494 /* LocationManager.swift */,
-				199257E720F6831100DC452E /* StartRide */,
+				199257EC20F697CA00DC452E /* AvailablerideCell.swift */,
+				199257E720F6831100DC452E /* CreateRide */,
 			);
 			path = "Nixor Carpool";
 			sourceTree = "<group>";
@@ -498,6 +535,8 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/JASON/JASON.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/M13Checkbox/M13Checkbox.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -515,6 +554,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JASON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M13Checkbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -543,11 +584,14 @@
 				190ECF9B20F0086400AEF69A /* paperObject.swift in Sources */,
 				199139F420F62C7700E6F27B /* initialRideData.swift in Sources */,
 				190ECF9D20F014B000AEF69A /* paperCellTableViewCell.swift in Sources */,
+				195F2AF920FB4DE10088A18D /* messageItem.swift in Sources */,
 				193B577F20F226CB009FCD68 /* headerMain.swift in Sources */,
 				1937B7F120EE3BCA0024A047 /* common_util.swift in Sources */,
 				19C3A41320F0B1F0007E7912 /* PdfLoader.swift in Sources */,
+				195F2AF520FB4C100088A18D /* Chat.swift in Sources */,
 				19E2054920F5EC3900132494 /* rideData.swift in Sources */,
 				19C3A41520F0BC65007E7912 /* pdfMultiView.swift in Sources */,
+				195F2B0320FBB97D0088A18D /* ConversationItemTableViewCell.swift in Sources */,
 				193B578520F25697009FCD68 /* NavigationController.swift in Sources */,
 				199257EB20F6939800DC452E /* AvailableRides.swift in Sources */,
 				19E2053E20F35D9800132494 /* Carpool.swift in Sources */,
@@ -557,10 +601,14 @@
 				190ECF9520EF5F9C00AEF69A /* PastPapers.swift in Sources */,
 				19B0E34020F7C14900BFCEEF /* CarpoolFilters.swift in Sources */,
 				195F2AF120F8CB9F0088A18D /* constants.swift in Sources */,
+				195F2AFF20FB858A0088A18D /* MessagesHandler.swift in Sources */,
 				19E2054720F54E1400132494 /* createRide.swift in Sources */,
 				193B578320F25043009FCD68 /* SharksOnCloud.swift in Sources */,
+				195F2AF720FB4CD00088A18D /* message.swift in Sources */,
 				190ECF9920EFCAEA00AEF69A /* subjectCellTableViewCell.swift in Sources */,
 				19E2054220F37EC500132494 /* LocationManager.swift in Sources */,
+				195F2B0120FBB8B70088A18D /* ConversationsList.swift in Sources */,
+				195F2B0620FD5DB20088A18D /* CarpoolDM.swift in Sources */,
 				1948E15720EE7D3D00AADC59 /* UserPhoto.swift in Sources */,
 				199257ED20F697CA00DC452E /* AvailablerideCell.swift in Sources */,
 			);
