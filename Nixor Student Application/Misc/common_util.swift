@@ -29,6 +29,51 @@ class common_util{
         return formattedNumber
     }
     
+    func convertSecondsToDate(interval:Double) -> String{
+        
+        let calendar = NSCalendar.current
+        let date = Date(timeIntervalSince1970: interval)
+        if calendar.isDateInYesterday(date) {
+            
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.dateFormat = "h:mm a"
+            formatter.amSymbol = "AM"
+            formatter.pmSymbol = "PM"
+            
+            let dateString = formatter.string(from: date)
+           
+            
+            return "Yesterday, \(dateString)"
+            
+            
+            
+        }
+        else if calendar.isDateInToday(date) {
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.dateFormat = "h:mm a"
+            formatter.amSymbol = "AM"
+            formatter.pmSymbol = "PM"
+            
+            let dateString = formatter.string(from: date)
+            return dateString
+        
+        }
+        else if calendar.isDateInTomorrow(date) { return "Tomorrow" }
+        else {
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.dateFormat = "h:mm a 'on' MMMM dd, yyyy"
+            formatter.amSymbol = "AM"
+            formatter.pmSymbol = "PM"
+            
+            let dateString = formatter.string(from: date)
+            return dateString
+            
+        }
+    }
+    
     //Method to save the StudentDetails struct in in "IOS SharedPref (yes I know.)
     func saveUserData(userObject: StudentDetails){
         if let email = userObject.student_email {
@@ -104,6 +149,22 @@ class common_util{
         }
         print("Student Details: \(student)")
         return student
+    }
+    
+    
+    func showAlert(title:String,message:String,buttonMessage:String,view:UIViewController){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: buttonMessage, style: UIAlertActionStyle.default,  handler: { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        // Add the actions
+        alertController.addAction(cancelAction)
+        
+        // Present the controller
+        view.present(alertController, animated: true, completion: nil)
+        
+       
     }
     
     //    public String extractUsername(Context context, String email){

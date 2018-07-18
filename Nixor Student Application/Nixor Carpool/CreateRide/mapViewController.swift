@@ -545,19 +545,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             
             
         }else{
-            
-            
-            let alertController = UIAlertController(title: "Information incomplete", message: "Please make sure all fields are filled.", preferredStyle: .alert)
-            
-            let cancelAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,  handler: { (action) in
-                alertController.dismiss(animated: true, completion: nil)
-            })
-            // Add the actions
-            alertController.addAction(cancelAction)
-            
-            // Present the controller
-            self.present(alertController, animated: true, completion: nil)
-            
+            commonutil.showAlert(title: "Information incomplete", message: "Please make sure all fields are filled.", buttonMessage: "OK", view: self)
             print("Data is incorrect")
         }
     }

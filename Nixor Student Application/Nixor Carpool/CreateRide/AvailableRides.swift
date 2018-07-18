@@ -11,6 +11,7 @@ import UIKit
 import FirebaseFirestore
 import GoogleMaps
 import FirebaseFunctions
+import FirebaseDatabase
 class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate, onRequestButtonClicked{
    
     
@@ -101,8 +102,10 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         intLoading()
+        
         self.tableView.rowHeight = 70
        username = commonUtil.getUserData(key: "username")
+        checkForNewRequestMessages()
        changeCampus("Main")
     }
     
@@ -319,18 +322,8 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
                 
             }else{
                 
-                //If the ride is a one time thing
-                let dateSelected = Date.init(timeIntervalSince1970: object.selectedTime)
-                //Format date
-                let formatter = DateFormatter()
-                formatter.locale = Locale(identifier: "en_US_POSIX")
-                formatter.dateFormat = "h:mm a 'on' MMMM dd, yyyy"
-                formatter.amSymbol = "AM"
-                formatter.pmSymbol = "PM"
-                
-                let dateString = formatter.string(from: dateSelected)
-                // Format: "4:44 PM on June 23, 2016\n"
-                cell.available_days.text = dateString
+               
+                cell.available_days.text = commonUtil.convertSecondsToDate(interval: object.selectedTime)
                 cell.ride_time.isHidden = true
             }
             
@@ -462,18 +455,17 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         let users = [user,username]
         print("Cloud function called")
-        let dataToSave:Dictionary<String,Any> = ["users":users,"Date":Timestamp().seconds]
+        let dataToSave:Dictionary<String,Any> = ["users":users,"Date":Timestamp().seconds,"RideOwner":user]
         let data:[String:Any] = ["username1":user,"username2":username!,"map":dataToSave,"id":id]
         
         functions.httpsCallable("carpool_function").call(data) { (response, error) in
-            print(error)
-            print(response)
             if error == nil && response != nil{
                 self.resetRows(indexPath: indexPath)
                 self.tabBarController?.selectedIndex = 2
                 
             }else if error != nil {
-                self.showToast(message: error.debugDescription)
+                self.commonUtil.showAlert(title: "Request failed", message: "Please make sure you are connected to the internet. If this problem persists please contact Nixor College", buttonMessage: "OK", view: self)
+               
             }
             
         }
@@ -488,6 +480,74 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     
     
+    
+    //All methods below are for checking for new messages and showing badges accordingly
+    
+    var newMessageListeners = [DatabaseReference]()
+    
+    func newMessageIdsAdded(){
+        let newMessageCount = newMesagesIDS.count
+        let tabbaritem = self.tabBarController!.tabBar.items![2]
+        if newMessageCount > 0{
+            tabbaritem.badgeColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            
+            tabbaritem.badgeValue = "\(newMessageCount)"
+            let attribute : [String : Any] = [NSAttributedStringKey.foregroundColor.rawValue : UIColor.black]
+            tabbaritem.setBadgeTextAttributes(attribute, for: .normal)
+        }else{
+            tabbaritem.badgeValue = nil
+        }
+    }
+    
+    var newMesagesIDS = [String]()
+        
+     
+    
+  
+    
+    
+    func checkEachMessageNodeForNewMessages(id:String){
+       // print(id)
+        constants.CarpoolMessagesDB.child(id).queryOrderedByKey().queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
+            for snaps in snapshot.children{
+                let data = snaps as! DataSnapshot
+         
+               //print(data)
+                let usersender = data.childSnapshot(forPath: "username").value as? String
+                if usersender != self.username {
+                   
+                    self.newMesagesIDS.append(data.key)
+                    self.newMessageIdsAdded()
+                   // self.newMessageCount = self.newMessageCount + 1
+                }else{
+                    if self.newMesagesIDS.contains(data.key){
+                        self.newMesagesIDS.remove(at: self.newMesagesIDS.index(of: data.key)!)
+                        self.newMessageIdsAdded()
+                    }
+                }
+                
+            }
+        }) { (error) in
+            print(error)
+        }
+        
+      newMessageListeners.append(constants.CarpoolMessagesDB.child(id))
+        
+        
+    }
+    
+    func checkForNewRequestMessages(){
+        constants.userCarpoolMessagesDB.child(username!).observeSingleEvent(of: .value) { (datasnaphot) in
+          //  print(datasnaphot)
+            for snaps in datasnaphot.children{
+                print(snaps)
+                let id = (snaps as! DataSnapshot).key
+                self.checkEachMessageNodeForNewMessages(id: id)
+            }
+            
+        }
+        
+    }
     
     
     

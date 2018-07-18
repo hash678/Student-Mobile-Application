@@ -10,6 +10,7 @@ import UIKit
 
 class ConversationItemTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var lastMessage: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var student_id: UILabel!
     @IBOutlet weak var student_name: UILabel!

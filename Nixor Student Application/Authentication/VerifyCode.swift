@@ -34,7 +34,8 @@ class VerifyCode: UIViewController {
     func signIn(credential:PhoneAuthCredential){
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
             if let error = error {
-               self.showToast(message: error.localizedDescription)
+               
+                self.commonutil.showAlert(title: "Verification failed", message: error.localizedDescription, buttonMessage: "OK", view: self)
                 return
             }else{
                 print("Code verified")

@@ -14,14 +14,17 @@ import MobileCoreServices
 import AVKit
 class Chat: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate ,MessageReceieved{
 	
-	
+	var messageIDS = [String]()
 	var id:String?
 	var userAvatars = [String:String]()
 	
 	
-	func messageReceived(senderID: String, text: String, displaname:String) {
-	messages.append(JSQMessage(senderId: senderID, displayName: displaname, text: text))
-		collectionView.reloadData()
+	func messageReceived(senderID: String, text: String, displaname:String,messageID:String) {
+	
+		if !messageIDS.contains(messageID){
+			messageIDS.append(messageID)
+		messages.append(JSQMessage(senderId: senderID, displayName: displaname, text: text))
+			collectionView.reloadData()}
 	}
 	
 	

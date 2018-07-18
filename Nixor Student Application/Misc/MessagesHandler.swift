@@ -9,9 +9,9 @@
 import Foundation
 import  FirebaseDatabase
 import FirebaseStorage
-
+import Firebase
 protocol MessageReceieved: class {
-    func messageReceived(senderID:String, text:String, displaname:String)
+    func messageReceived(senderID:String, text:String, displaname:String,messageID:String)
 }
 class MessagesHandler{
     
@@ -25,7 +25,7 @@ class MessagesHandler{
     }
     func sendMessage(senderID:String, senderName:String, text:String){
         
-        let data:Dictionary<String, Any> = ["username":senderID,"student_name":senderName,"message":text]
+        let data:Dictionary<String, Any> = ["username":senderID,"student_name":senderName,"message":text,"date":Timestamp().seconds]
         
         MessagesHandler.db!.childByAutoId().setValue(data)
         
@@ -38,7 +38,7 @@ class MessagesHandler{
             if let data = snapshot.value as? NSDictionary{
                 if let senderID = data["username"] as? String{
                     if let text = data["message"] as? String, let displayname = data["student_name"] as? String{
-                        self.delegate?.messageReceived(senderID: senderID, text: text, displaname:displayname )
+                        self.delegate?.messageReceived(senderID: senderID, text: text, displaname:displayname,messageID: snapshot.key)
                     }
                     
                 }

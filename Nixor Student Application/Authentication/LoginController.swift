@@ -39,7 +39,8 @@ class LoginController: UIViewController {
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
             if let error = error {
                 print(error)
-                self.showToast(message: error.localizedDescription)
+                self.commonutil.showAlert(title: "Couldn't send code", message: error.localizedDescription, buttonMessage: "OK", view: self)
+                
                 return
             }else{
                 UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
