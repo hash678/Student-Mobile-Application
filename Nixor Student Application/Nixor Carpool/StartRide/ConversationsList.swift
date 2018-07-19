@@ -73,8 +73,10 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableview.tableFooterView = UIView()
-        self.tableview.rowHeight = 75
-     
+        self.tableview.rowHeight = 60
+       
+        self.tabBarController?.tabBarItem.badgeValue = nil
+       
         
         
         username = commonUtil.getUserData(key: "username")
@@ -242,6 +244,10 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
    
+    
+    
+    
+    
     
     @IBAction func changeRideList(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex{

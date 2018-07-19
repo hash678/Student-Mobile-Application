@@ -37,4 +37,8 @@ struct constants{
     public static let userCarpoolMessagesDB = Database.database().reference().child("user-messages")
 
     
+    
+    //SHARKS ON CLOUD
+    public static let sharksOnCloudSubjectsA2 = Firestore.firestore().collection("SharksOnCloud").document("A2").collection("Subjects")
+    public static let sharksOnCloudSubjectsAs = Firestore.firestore().collection("SharksOnCloud").document("AS").collection("Subjects")
 }

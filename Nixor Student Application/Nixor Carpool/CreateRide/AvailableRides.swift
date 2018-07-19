@@ -10,13 +10,15 @@ import Foundation
 import UIKit
 import FirebaseFirestore
 import GoogleMaps
+import CoreLocation
 import FirebaseFunctions
 import FirebaseDatabase
-class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate, onRequestButtonClicked{
+import FoldingCell
+class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate, onRequestButtonClicked, CLLocationManagerDelegate{
    
     
-    
-   
+    var locationManager:LocationManager?
+    var coreLocationManager = CLLocationManager()
      lazy var functions = Functions.functions()
     @IBOutlet weak var noAvailableRides: UILabel!
     var selectedIndexPath:IndexPath?
@@ -30,7 +32,8 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     var handler:ListenerRegistration?
     var campus:String = "Main"
     var usersPhoto = [String:String]()
-    
+    var myLat:Double?
+    var myLong:Double?
     
  
     
@@ -41,6 +44,10 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         default: break
         }
     }
+    
+    
+    
+    
     
    
     
@@ -65,10 +72,21 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }
                 
                 
-            
-            
+                if self.myLat != nil{
+                    print("SORT MY DISTANCE")
+                let coordinate = CLLocation(latitude: self.myLat!, longitude: self.myLong!)
+                
+                    self.rides =  self.rides.sorted(by: { (coordinate.distance(from: CLLocation(latitude: $0.startDestMyLat, longitude: $0.startDestMyLong))) < (coordinate.distance(from: CLLocation(latitude: $1.startDestMyLat, longitude: $1.startDestMyLong)))
+                        
+                    })
+                    
+                }
+                
+        
                 self.hideLoading()
-                self.tableView.reloadData()
+                self.setRidesCount(count:self.rides.count)
+               
+              
                 
                 
             }else{
@@ -81,9 +99,10 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
  
     func resetTableView(){
          self.rides = [rideData]()
+        setRidesCount(count:self.rides.count)
         showloading()
-          self.tableView.rowHeight = 70
-         self.tableView.reloadData()
+        
+        
       
         
     }
@@ -93,16 +112,15 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         handler?.remove()
         self.campus = campus
         getAvailableRides()
-        if selectedIndexPath != nil {
-            resetRows(indexPath: selectedIndexPath!)
-        }
+      
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         intLoading()
-        
+        coreLocationManager.delegate = self
+        checkPermissionToAccessLocation()
         self.tableView.rowHeight = 70
        username = commonUtil.getUserData(key: "username")
         checkForNewRequestMessages()
@@ -157,6 +175,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
                 if response?.get("photourl") != nil{
                           let url = URL(string: response?.get("photourl") as! String)
                     cell.student_photo.kf.setImage(with: url )
+                       cell.student_photo2.kf.setImage(with: url )
                     self.usersPhoto[username] = (response?.get("photourl") as! String)
                 }
                 
@@ -261,11 +280,6 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     func setRideInformation(ride object:rideData, cell:AvailablerideCell) -> AvailablerideCell{
         
         //Set cell background and design
-        cell.topView.setCardView()
-        cell.hidingLayout.setCardView()
-        
-      
-     
         if object.student_name != nil, object.student_id != nil, object.numberOfSeats != nil, object.student_username != nil{
               cell.isHidden = false
             
@@ -282,20 +296,30 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.student_photo.circleImage()
                 let url = URL(string: photourl)
                 cell.student_photo.kf.setImage(with: url)
+                cell.student_photo2.circleImage()
+                cell.student_photo2.kf.setImage(with: url)
             }else{
             
                 getPhotoUrl(cell: cell, username: object.student_username)}
             
             //Set host's basic information
+            
+            cell.student_name2.text = object.student_name
+            cell.student_id2.text = object.student_id
+            
+            
             cell.student_name.text = object.student_name
             cell.student_id.text = object.student_id
             
             //Calculate cost per person. Adding 1 here to account for you
             let costperperson = (object.estimatedCost as Double)/Double(object.occupiedSeats + 1)
             cell.costperHead.text = "\(costperperson.rounded(toPlaces: 0))"
+            cell.costperHead2.text = "\(costperperson.rounded(toPlaces: 0))"
             
             //Set number of seats
             cell.number_seats.text = "\(object.numberOfSeats!)"
+            cell.number_seats2.text = "\(object.numberOfSeats!)"
+            
             
             //Set ride timings and related information
             
@@ -303,6 +327,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
             if object.oneTimeOrScheduled == "scheduled"{
                 //Get the name of days for the schedule
                 cell.available_days.text = daysArraytoString(dayArray: object.selectedDays!)
+                  cell.available_days2.text = daysArraytoString(dayArray: object.selectedDays!)
                 
                 //Get timing for the schedule
                 //Convert seconds to date
@@ -319,12 +344,16 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
                 
                 cell.ride_time.text = dateString
                 cell.ride_time.isHidden = false
+                cell.ride_time2.text = dateString
+                cell.ride_time2.isHidden = false
                 
             }else{
                 
                
                 cell.available_days.text = commonUtil.convertSecondsToDate(interval: object.selectedTime)
                 cell.ride_time.isHidden = true
+                cell.available_days2.text = commonUtil.convertSecondsToDate(interval: object.selectedTime)
+                cell.ride_time2.isHidden = true
             }
             
         }else{
@@ -335,87 +364,191 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     
+    let closedHeight:CGFloat = 70
+    let openLHeight:CGFloat = 320
     
     
-    //Below are the methods for the tableView.
     
-    //Function for count
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-     
-         return rides.count+1
+        return rides.count
     }
+    
+    
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "AvailablerideCell", for: indexPath) as! AvailablerideCell
+        let durations: [TimeInterval] = [0.26, 0.2, 0.2]
+        cell.durationsForExpandedState = durations
+        cell.durationsForCollapsedState = durations
+        cell.currentIndexPath = indexPath
         cell.delegate = self
-       
-        if indexPath.row >= rides.count{
-            cell.isHidden = true
-            return cell
-        }else{
-            cell.currentIndexPath = indexPath
-            cell = setRideInformation(ride: rides[indexPath.row], cell: cell)
-            return cell
-            
-        }}
+        cell = setRideInformation(ride: rides[indexPath.row], cell: cell)
+        return cell
+        
+        
+    }
     
-
-    func resetRows(indexPath:IndexPath){
-        let previousIndexPath = selectedIndexPath
-        if indexPath == selectedIndexPath{
-            selectedIndexPath = nil
-        }else{
-            selectedIndexPath = indexPath
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard case let cell as myFoldingCell = cell else {
+            return
         }
-        var indexPaths : Array<IndexPath> = []
-        if let previous = previousIndexPath{
-            indexPaths.append(previous)
+        
+        cell.backgroundColor = .clear
+        
+        if cellHeights[indexPath.row] == closedHeight {
+            cell.unfold(false, animated: false, completion: nil)
+        } else {
+            cell.unfold(true, animated: false, completion: nil)
         }
-        if let current = selectedIndexPath{
-            indexPaths.append(current)
-        }
-        if indexPaths.count > 0 {
-            tableView.reloadRows(at: indexPaths, with:.automatic)
-        }
+        
+        
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      tableView.rowHeight = 70
-        let previousIndexPath = selectedIndexPath
-        if indexPath == selectedIndexPath{
-         selectedIndexPath = nil
-        }else{
-            selectedIndexPath = indexPath
-        }
-        var indexPaths : Array<IndexPath> = []
-        if let previous = previousIndexPath{
-            indexPaths.append(previous)
-        }
-        if let current = selectedIndexPath{
-            indexPaths.append(current)
-        }
-        if indexPaths.count > 0 {
-            tableView.reloadRows(at: indexPaths, with:.automatic)
+        let cell = tableView.cellForRow(at: indexPath) as! FoldingCell
+        
+        if cell.isAnimating() {
+            return
         }
         
-    }
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-       
-        (cell as! AvailablerideCell).watchFrameChanges()
+        var duration = 0.0
+        let cellIsCollapsed = cellHeights[indexPath.row] == 70
+        if cellIsCollapsed {
+            cellHeights[indexPath.row] = openLHeight
+            cell.unfold(true, animated: true, completion: nil)
+            
+            duration = 0.5
+        } else {
+            cellHeights[indexPath.row] = closedHeight
+            cell.unfold(false, animated: true, completion: nil)
+            duration = 0.8
+        }
+        
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { () -> Void in
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }, completion: nil)
     }
     
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-       
-        (cell as! AvailablerideCell).ignoreFrameChanges()
-    }
+    
+     var cellHeights: [CGFloat] = []
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath == selectedIndexPath {
-            return 324
-        }else{
-            return 70
-        }
+        return cellHeights[indexPath.row]
     }
+    
+    
+    
+    func setRidesCount(count:Int){
+          cellHeights = Array(repeating: closedHeight, count: count)
+         self.tableView.reloadData()
+    }
+    
+    
+    
+    
+//    //Below are the methods for the tableView.
+//
+//    //Function for count
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//
+//         return rides.count+1
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        var cell = tableView.dequeueReusableCell(withIdentifier: "AvailablerideCell", for: indexPath) as! AvailablerideCell
+//        cell.delegate = self
+//
+//        if indexPath.row >= rides.count{
+//            cell.isHidden = true
+//            return cell
+//        }else{
+//            cell.currentIndexPath = indexPath
+//            cell = setRideInformation(ride: rides[indexPath.row], cell: cell)
+//            return cell
+//
+//        }}
+//
+//
+//    func selectRow(indexPath:IndexPath){
+//        if selectedIndexPath != nil{
+//
+//            if selectedIndexPath == indexPath{
+//                selectedIndexPath = nil
+//                tableView.reloadRows(at: [indexPath], with: .automatic)
+//            }else{
+//                let previous = selectedIndexPath
+//                selectedIndexPath = nil
+//                tableView.reloadRows(at: [previous!], with: .automatic)
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                    self.selectRow(indexPath: indexPath)
+//                }
+//
+//
+//            }
+//
+//
+//
+//        }else{
+//            selectedIndexPath = indexPath
+//            tableView.reloadRows(at: [indexPath], with: .automatic)
+//
+//        }
+//
+//
+//    }
+//
+//    func resetRows(indexPath:IndexPath){
+//        let previousIndexPath = selectedIndexPath
+//
+//        if indexPath == selectedIndexPath{
+//            selectedIndexPath = nil
+//
+//        }else{
+//
+//            selectedIndexPath = indexPath
+//        }
+//
+//        if let previous = previousIndexPath{
+//            tableView.reloadRows(at: [previous], with:.automatic)
+//            // indexPaths.append(previous)
+//        }
+//
+//        var indexPaths : Array<IndexPath> = []
+//
+//        if let current = selectedIndexPath{
+//            indexPaths.append(current)
+//        }
+//        if indexPaths.count > 0 {
+//            tableView.reloadRows(at: indexPaths, with:.automatic)
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    // resetRows(indexPath: indexPath)
+//      selectRow(indexPath: indexPath)
+//    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//
+//        (cell as! AvailablerideCell).watchFrameChanges()
+//    }
+//
+//    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//
+//        (cell as! AvailablerideCell).ignoreFrameChanges()
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath == selectedIndexPath {
+//            return 324
+//        }else{
+//            return 70
+//        }
+//    }
     
     //MARK: Just some basic loading and shashkay scene
     func intLoading(){
@@ -460,7 +593,6 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         functions.httpsCallable("carpool_function").call(data) { (response, error) in
             if error == nil && response != nil{
-                self.resetRows(indexPath: indexPath)
                 self.tabBarController?.selectedIndex = 2
                 
             }else if error != nil {
@@ -480,6 +612,36 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     
     
+    //MARK: Check permission to access user's location
+    func checkPermissionToAccessLocation(){
+        let authorizationCode = CLLocationManager.authorizationStatus()
+        
+        
+        if authorizationCode == CLAuthorizationStatus.notDetermined && coreLocationManager.responds(to:#selector(CLLocationManager.requestAlwaysAuthorization)){
+            if Bundle.main.object(forInfoDictionaryKey: "NSLocationAlwaysUsageDescription") != nil{
+                coreLocationManager.requestAlwaysAuthorization()
+            }else{
+                print("No description available")
+            }
+            
+            
+        }else{
+            getLocation()
+            
+        }
+    }
+    
+    //MARK: Gets location using location Manager class
+    func getLocation(){
+        locationManager = LocationManager.sharedInstance
+        locationManager?.startUpdatingLocationWithCompletionHandler({ (lat, long, status, verbMessage, error) in
+            self.myLat = lat
+            self.myLong = long
+        })
+    }
+    
+    
+    
     
     //All methods below are for checking for new messages and showing badges accordingly
     
@@ -487,7 +649,8 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func newMessageIdsAdded(){
         let newMessageCount = newMesagesIDS.count
-        let tabbaritem = self.tabBarController!.tabBar.items![2]
+        
+        if let tabbaritem = self.tabBarController?.tabBar.items?[2]{
         if newMessageCount > 0{
             tabbaritem.badgeColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             
@@ -498,7 +661,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
             tabbaritem.badgeValue = nil
         }
     }
-    
+    }
     var newMesagesIDS = [String]()
         
      
@@ -507,6 +670,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     
     func checkEachMessageNodeForNewMessages(id:String){
+        
        // print(id)
         constants.CarpoolMessagesDB.child(id).queryOrderedByKey().queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
             for snaps in snapshot.children{
@@ -515,10 +679,10 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
                //print(data)
                 let usersender = data.childSnapshot(forPath: "username").value as? String
                 if usersender != self.username {
-                   
+                    if !self.newMesagesIDS.contains(data.key){
                     self.newMesagesIDS.append(data.key)
-                    self.newMessageIdsAdded()
-                   // self.newMessageCount = self.newMessageCount + 1
+                        self.newMessageIdsAdded()}
+                   
                 }else{
                     if self.newMesagesIDS.contains(data.key){
                         self.newMesagesIDS.remove(at: self.newMesagesIDS.index(of: data.key)!)
@@ -537,6 +701,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func checkForNewRequestMessages(){
+             newMesagesIDS = [String]()
         constants.userCarpoolMessagesDB.child(username!).observeSingleEvent(of: .value) { (datasnaphot) in
           //  print(datasnaphot)
             for snaps in datasnaphot.children{

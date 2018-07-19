@@ -24,16 +24,10 @@ class LoginController: UIViewController {
         countryPicker.setCountryByCode("PK")
         self.dismissKeyboard()
         navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.5649999976, green: 0, blue: 0, alpha: 1)
-        checkAuth()
+      
     }
 
-    
-    func checkAuth(){
-        if  Auth.auth().currentUser != nil{
-             self.userSignedIn()
-            
-        }
-    }
+ 
     
     func sendCodePhone(phoneNumber:String){
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
@@ -53,10 +47,7 @@ class LoginController: UIViewController {
     }
     
     
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return UIStatusBarStyle.lightContent
-    }
-    
+   
     @IBAction func sendCode(_ sender: UIButton) {
         if let phoneNumber = phoneNumberEntry.text {
             print(countryPicker.selectedCountry)
@@ -67,50 +58,11 @@ class LoginController: UIViewController {
     
     }
     
-    func checkIfUserDataExists(userPhoneNumber: String){
-        Firestore.firestore().collection("account_link").document(userPhoneNumber).getDocument { (document, error) in
-            if error == nil{
-                //print("Document: \(document) ")
-                //Account exists, NSP DATA AVAILABLE
-                var accountType = accountTypeGetSet()
-                accountType.mode = document?.get("mode") as? String
-                accountType.username = document?.get("username") as? String
-                if let username = accountType.username, let type = accountType.mode{
-                    self.checkAccountType(whatmode: type, username: username)}
-            }else{
-                //Account doesn't exist. NSP DATA MISSING
-                //TODO: NSP LOGIN
-                
-            }
-            
-        }}
-    
-    //Check's to see account type and process accordingly. Also saves the user data to IOS SharedPref (Deal with it :p)
-    func checkAccountType(whatmode mode: String, username: String){
-        let db = Firestore.firestore()
-        db.collection("users").document(username).getDocument { (document, error) in
-            if error == nil{
-                if  let documentObtained = document{
-                    let student = self.commonutil.documentToStudentObject(firebaseDocument: documentObtained)
-                    self.commonutil.saveUserData(userObject: student)
-                    self.intentToNextViewController()
-                }}
-        }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return UIStatusBarStyle.lightContent
     }
-    var phoneNumber:String?
-    public func userSignedIn(){
-        
-        print("Signed in user")
-        self.phoneNumber = commonutil.formatNumber(number: (Auth.auth().currentUser?.phoneNumber)!)
-        
-        self.checkIfUserDataExists(userPhoneNumber: self.phoneNumber!)
-        
-    }
-    
-    
-    func intentToNextViewController(){
-        let NavigationController = storyboard?.instantiateViewController(withIdentifier: "NavigationController") as! NavigationController
-        present(NavigationController, animated: true, completion:nil)
-    }
+ 
+  
   
 }

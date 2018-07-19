@@ -37,14 +37,17 @@ class Chat: JSQMessagesViewController, UIImagePickerControllerDelegate, UINaviga
 		self.inputToolbar.tintColor = #colorLiteral(red: 0.5649999976, green: 0, blue: 0, alpha: 1)
 		self.inputToolbar.contentView.rightBarButtonItem.tintColor =  #colorLiteral(red: 0.5649999976, green: 0, blue: 0, alpha: 1)
 		self.automaticallyScrollsToMostRecentMessage = true
+		self.inputToolbar.contentView.rightBarButtonItem.setTitleColor(#colorLiteral(red: 0.5649999976, green: 0, blue: 0, alpha: 1), for: .normal)
+		self.inputToolbar.contentView.rightBarButtonContainerView.tintColor = #colorLiteral(red: 0.5649999976, green: 0, blue: 0, alpha: 1)
 		
+		self.collectionView.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.9294117647, blue: 0.9333333333, alpha: 1)
 		MessagesHandler.db = constants.CarpoolMessagesDB.child(id!)
 		MessagesHandler.Instance.delegate = self
 		MessagesHandler.Instance.observerMessages()
 		self.senderId = commonUtil.getUserData(key: "username")
 		//TODO: Change this back
 		//self.senderDisplayName = commonUtil.getUserData(key: "student_name")
-		self.senderDisplayName = "Hassan Anjum Abbasi"
+		self.senderDisplayName = "Hassan Abbasi"
 		
 		picker.delegate = self
 	}

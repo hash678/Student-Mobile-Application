@@ -43,11 +43,18 @@
 		19C3A40D20F036C5007E7912 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19C3A40C20F036C4007E7912 /* Assets.xcassets */; };
 		19C3A41320F0B1F0007E7912 /* PdfLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3A41220F0B1F0007E7912 /* PdfLoader.swift */; };
 		19C3A41520F0BC65007E7912 /* pdfMultiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3A41420F0BC65007E7912 /* pdfMultiView.swift */; };
+		19D53D2E21010A070065D8E7 /* AuthNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D53D2D21010A070065D8E7 /* AuthNavigationController.swift */; };
 		19E2053E20F35D9800132494 /* Carpool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E2053D20F35D9800132494 /* Carpool.swift */; };
 		19E2054020F3770A00132494 /* mapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E2053F20F3770A00132494 /* mapViewController.swift */; };
 		19E2054220F37EC500132494 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E2054120F37EC500132494 /* LocationManager.swift */; };
 		19E2054720F54E1400132494 /* createRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E2054620F54E1400132494 /* createRide.swift */; };
 		19E2054920F5EC3900132494 /* rideData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E2054820F5EC3900132494 /* rideData.swift */; };
+		19FFEA2A20FFAE0100E5429C /* ShowMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FFEA2920FFAE0100E5429C /* ShowMap.swift */; };
+		19FFEA2E210094E700E5429C /* sharksOnCloudSubjectCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FFEA2D210094E700E5429C /* sharksOnCloudSubjectCellTableViewCell.swift */; };
+		19FFEA302100A93000E5429C /* Buckets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FFEA2F2100A93000E5429C /* Buckets.swift */; };
+		19FFEA332100AE7900E5429C /* bucketsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FFEA322100AE7900E5429C /* bucketsTableViewCell.swift */; };
+		19FFEA362100CB4B00E5429C /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FFEA352100CB4B00E5429C /* LaunchScreenViewController.swift */; };
+		19FFEA382100CCC400E5429C /* LoginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FFEA372100CCC400E5429C /* LoginHandler.swift */; };
 		4DE8985377C0A6E358113E93 /* Pods_Nixor_Student_Application.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDAEDD2DD69566AE02CAA810 /* Pods_Nixor_Student_Application.framework */; };
 /* End PBXBuildFile section */
 
@@ -112,11 +119,18 @@
 		19C3A40C20F036C4007E7912 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19C3A41220F0B1F0007E7912 /* PdfLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfLoader.swift; sourceTree = "<group>"; };
 		19C3A41420F0BC65007E7912 /* pdfMultiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdfMultiView.swift; sourceTree = "<group>"; };
+		19D53D2D21010A070065D8E7 /* AuthNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationController.swift; sourceTree = "<group>"; };
 		19E2053D20F35D9800132494 /* Carpool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carpool.swift; sourceTree = "<group>"; };
 		19E2053F20F3770A00132494 /* mapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapViewController.swift; sourceTree = "<group>"; };
 		19E2054120F37EC500132494 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		19E2054620F54E1400132494 /* createRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createRide.swift; sourceTree = "<group>"; };
 		19E2054820F5EC3900132494 /* rideData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rideData.swift; sourceTree = "<group>"; };
+		19FFEA2920FFAE0100E5429C /* ShowMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMap.swift; sourceTree = "<group>"; };
+		19FFEA2D210094E700E5429C /* sharksOnCloudSubjectCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sharksOnCloudSubjectCellTableViewCell.swift; sourceTree = "<group>"; };
+		19FFEA2F2100A93000E5429C /* Buckets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buckets.swift; sourceTree = "<group>"; };
+		19FFEA322100AE7900E5429C /* bucketsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bucketsTableViewCell.swift; sourceTree = "<group>"; };
+		19FFEA352100CB4B00E5429C /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		19FFEA372100CCC400E5429C /* LoginHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHandler.swift; sourceTree = "<group>"; };
 		BDAEDD2DD69566AE02CAA810 /* Pods_Nixor_Student_Application.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nixor_Student_Application.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D102A7492625505949F0EEDB /* Pods-Nixor Student Application.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nixor Student Application.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nixor Student Application/Pods-Nixor Student Application.debug.xcconfig"; sourceTree = "<group>"; };
 		E5EB4197F7DA97221FDEA4A9 /* Pods-Nixor Student Application.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nixor Student Application.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nixor Student Application/Pods-Nixor Student Application.release.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +188,9 @@
 				1937B7F820EE4BDA0024A047 /* User */,
 				19AE4DAB20FE6674001A5BC9 /* LoginController.swift */,
 				19AE4DAD20FE7378001A5BC9 /* VerifyCode.swift */,
+				19FFEA352100CB4B00E5429C /* LaunchScreenViewController.swift */,
+				19D53D2D21010A070065D8E7 /* AuthNavigationController.swift */,
+				19FFEA372100CCC400E5429C /* LoginHandler.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -207,6 +224,7 @@
 		195F2B0420FBFCC90088A18D /* StartRide */ = {
 			isa = PBXGroup;
 			children = (
+				19FFEA2920FFAE0100E5429C /* ShowMap.swift */,
 				195F2B0220FBB97D0088A18D /* ConversationItemTableViewCell.swift */,
 				195F2B0020FBB8B70088A18D /* ConversationsList.swift */,
 				195F2B0520FD5DB20088A18D /* CarpoolDM.swift */,
@@ -228,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				199257EA20F6939800DC452E /* AvailableRides.swift */,
+				199257EC20F697CA00DC452E /* AvailablerideCell.swift */,
 				19E2053F20F3770A00132494 /* mapViewController.swift */,
 				19E2054620F54E1400132494 /* createRide.swift */,
 				19E2054820F5EC3900132494 /* rideData.swift */,
@@ -291,19 +310,18 @@
 				19AE4DA820FE0208001A5BC9 /* Nixor Student Application.entitlements */,
 				19B59C2520E52EBA00D865DF /* AppDelegate.swift */,
 				1937B7F420EE44350024A047 /* Authentication */,
+				19FFEA2C2100933C00E5429C /* Design */,
 				1937B7F520EE443D0024A047 /* Misc */,
 				190ECF9320EEBED700AEF69A /* User */,
 				1948E15520EE5A8A00AADC59 /* Application_Home */,
 				190ECF9E20F01E2700AEF69A /* PastPapers */,
 				195F2B0720FD61E40088A18D /* Chat */,
 				19E2054320F37ED700132494 /* Nixor Carpool */,
+				19FFEA2B2100932300E5429C /* SharksOnCloud */,
 				19B59C2E20E52EBA00D865DF /* LaunchScreen.storyboard */,
 				19C3A40C20F036C4007E7912 /* Assets.xcassets */,
 				19B59C2920E52EBA00D865DF /* Main.storyboard */,
 				193B578420F25697009FCD68 /* NavigationController.swift */,
-				193B577A20F22392009FCD68 /* header.xib */,
-				193B578220F25042009FCD68 /* SharksOnCloud.swift */,
-				193B577E20F226CB009FCD68 /* headerMain.swift */,
 				19B59C3120E52EBA00D865DF /* Info.plist */,
 				1937B7EE20EE207D0024A047 /* GoogleService-Info.plist */,
 			);
@@ -334,10 +352,37 @@
 				195F2B0420FBFCC90088A18D /* StartRide */,
 				19E2053D20F35D9800132494 /* Carpool.swift */,
 				19E2054120F37EC500132494 /* LocationManager.swift */,
-				199257EC20F697CA00DC452E /* AvailablerideCell.swift */,
 				199257E720F6831100DC452E /* CreateRide */,
 			);
 			path = "Nixor Carpool";
+			sourceTree = "<group>";
+		};
+		19FFEA2B2100932300E5429C /* SharksOnCloud */ = {
+			isa = PBXGroup;
+			children = (
+				19FFEA2F2100A93000E5429C /* Buckets.swift */,
+				193B578220F25042009FCD68 /* SharksOnCloud.swift */,
+				19FFEA342100AEE000E5429C /* CellViews */,
+			);
+			path = SharksOnCloud;
+			sourceTree = "<group>";
+		};
+		19FFEA2C2100933C00E5429C /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				193B577A20F22392009FCD68 /* header.xib */,
+				193B577E20F226CB009FCD68 /* headerMain.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		19FFEA342100AEE000E5429C /* CellViews */ = {
+			isa = PBXGroup;
+			children = (
+				19FFEA2D210094E700E5429C /* sharksOnCloudSubjectCellTableViewCell.swift */,
+				19FFEA322100AE7900E5429C /* bucketsTableViewCell.swift */,
+			);
+			path = CellViews;
 			sourceTree = "<group>";
 		};
 		1DED49CC4A5C1B73BD947E35 /* Frameworks */ = {
@@ -546,6 +591,7 @@
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/CountryPickerView/CountryPickerView.framework",
+				"${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/JASON/JASON.framework",
@@ -567,6 +613,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountryPickerView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoldingCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JASON.framework",
@@ -596,10 +643,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1937B7F320EE43BD0024A047 /* StudentDetails.swift in Sources */,
+				19FFEA362100CB4B00E5429C /* LaunchScreenViewController.swift in Sources */,
 				1937B7F720EE4BD50024A047 /* accountTypeGetSet.swift in Sources */,
 				19AE4DAE20FE7378001A5BC9 /* VerifyCode.swift in Sources */,
+				19FFEA382100CCC400E5429C /* LoginHandler.swift in Sources */,
 				190ECF9B20F0086400AEF69A /* paperObject.swift in Sources */,
 				199139F420F62C7700E6F27B /* initialRideData.swift in Sources */,
+				19FFEA332100AE7900E5429C /* bucketsTableViewCell.swift in Sources */,
+				19FFEA2E210094E700E5429C /* sharksOnCloudSubjectCellTableViewCell.swift in Sources */,
+				19FFEA302100A93000E5429C /* Buckets.swift in Sources */,
 				190ECF9D20F014B000AEF69A /* paperCellTableViewCell.swift in Sources */,
 				195F2AF920FB4DE10088A18D /* messageItem.swift in Sources */,
 				193B577F20F226CB009FCD68 /* headerMain.swift in Sources */,
@@ -618,6 +670,7 @@
 				19E2054020F3770A00132494 /* mapViewController.swift in Sources */,
 				190ECF9520EF5F9C00AEF69A /* PastPapers.swift in Sources */,
 				19B0E34020F7C14900BFCEEF /* CarpoolFilters.swift in Sources */,
+				19D53D2E21010A070065D8E7 /* AuthNavigationController.swift in Sources */,
 				195F2AF120F8CB9F0088A18D /* constants.swift in Sources */,
 				195F2AFF20FB858A0088A18D /* MessagesHandler.swift in Sources */,
 				19E2054720F54E1400132494 /* createRide.swift in Sources */,
@@ -629,6 +682,7 @@
 				195F2B0620FD5DB20088A18D /* CarpoolDM.swift in Sources */,
 				1948E15720EE7D3D00AADC59 /* UserPhoto.swift in Sources */,
 				199257ED20F697CA00DC452E /* AvailablerideCell.swift in Sources */,
+				19FFEA2A20FFAE0100E5429C /* ShowMap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

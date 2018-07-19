@@ -9,54 +9,54 @@
 import Foundation
 import UIKit
 import GoogleMaps
-class AvailablerideCell: UITableViewCell{
+import FoldingCell
+class AvailablerideCell: FoldingCell{
     var itemClicked:String?
     var user:String?
     @IBAction func onRequest(_ sender: Any) {
         delegate?.requestButtonClicked(id:itemClicked,user:user,indexPath: currentIndexPath!)
     }
     @IBOutlet weak var student_name: UILabel!
-    @IBOutlet weak var hidingLayout: UIView!
-    
     @IBOutlet weak var map: GMSMapView!
     @IBOutlet weak var number_seats: UILabel!
     @IBOutlet weak var ride_time: UILabel!
     @IBOutlet weak var costperHead: UILabel!
     @IBOutlet weak var available_days: UILabel!
     @IBOutlet weak var student_id: UILabel!
-    
     @IBOutlet weak var student_photo: UIImageView!
     
-    @IBOutlet weak var topView: UIView!
+    
+    @IBOutlet weak var student_id2: UILabel!
+    @IBOutlet weak var ride_time2: UILabel!
+    
+    @IBOutlet weak var number_seats2: UILabel!
+    @IBOutlet weak var student_photo2: UIImageView!
+    
+    @IBOutlet weak var student_name2: UILabel!
+    
+    @IBOutlet weak var costperHead2: UILabel!
+    
+    @IBOutlet weak var available_days2: UILabel!
+    
+    
     var delegate:onRequestButtonClicked?
     
     var currentIndexPath:IndexPath?
-    let expandedHeight:CGFloat = 324
+   
+    
+    override func awakeFromNib() {
+        foregroundView.layer.cornerRadius = 10
+        foregroundView.layer.masksToBounds = true
+        super.awakeFromNib()
+    }
+    
+    override func animationDuration(_ itemIndex: NSInteger, type _: FoldingCell.AnimationType) -> TimeInterval {
+        let durations = [0.26, 0.2, 0.2]
+        return durations[itemIndex]
+    }
+
 
     
-    
-    var isObserving = false
-    func checkHeight(){
-        hidingLayout.isHidden = (frame.size.height < self.expandedHeight)
-    }
-    func watchFrameChanges(){
-        if !isObserving{
-        addObserver(self, forKeyPath: "frame", options: .new, context: nil)
-        isObserving = true
-            checkHeight()
-            
-        }
-    }
-    func ignoreFrameChanges(){
-        if isObserving {
-        isObserving = false
-            removeObserver(self, forKeyPath: "frame")}
-    }
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "frame"{
-            checkHeight()
-        }
-    }
     
 }
 protocol onRequestButtonClicked {
