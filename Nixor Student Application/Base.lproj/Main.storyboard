@@ -1357,7 +1357,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgv-QF-s5f">
-                                <rect key="frame" x="20" y="109" width="335" height="449"/>
+                                <rect key="frame" x="20" y="109" width="374" height="449"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57r-gB-kOI">
                                         <rect key="frame" x="15" y="8" width="34" height="30"/>
@@ -1367,7 +1367,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9f-0u-qSP" customClass="GMSMapView">
-                                        <rect key="frame" x="0.0" y="41" width="335" height="408"/>
+                                        <rect key="frame" x="0.0" y="41" width="374" height="408"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="delegate" destination="JAd-eE-kzc" id="pSr-RO-kse"/>
@@ -3106,12 +3106,6 @@
         <image name="snow_flake" width="50" height="50"/>
         <namedColor name="NixorColor">
             <color red="0.56499999759999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="NixorColor">
-            <color red="0.56499999761581421" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="NixorColor">
-            <color red="0.56499999761581421" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

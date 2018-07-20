@@ -335,23 +335,23 @@ extension Dictionary{
     
 }
 
-/*
-How accessible is it?
 
- How deep are you nesting it?
- pushID?
- .document().
- 
- Users -> Bucket -> pujksdbkasjbsakjImage -> url
- Users -> Bucket -> pujksdbkasjbsakjImage-> metaData["Date","Type","size"] -> smallData ->
- 
-Repetition matters when you have update data
-Why?
- You have to update at multiple locations. IF I MISS OUT ON ANY 1
- 
-Anything that can be, is or will be useful.
- 
- */
+extension UIView{
+    func bindToKeyboard(){
+        NotificationCenter.default.addObserver(self, selector: #selector(UIView.keyboardWillChange(notification:)), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+    func unbindToKeyboard(){
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    @objc
+    func keyboardWillChange(notification: Notification) {
+        self.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 0.0)
+
+    }
+    
+}
+
 extension UIView {
     
     func setCardView(){

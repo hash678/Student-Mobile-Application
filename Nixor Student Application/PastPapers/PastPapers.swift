@@ -70,6 +70,8 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
     }
     
+    
+   
     //Tableview design
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -82,7 +84,8 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             if subjects.count > indexPath.row{
                 
                 if searchActive {
-                    cell.subjectName.text! = filteredSubjects[indexPath.row]
+                    if filteredSubjects.count > indexPath.row{
+                        cell.subjectName.text! = filteredSubjects[indexPath.row]}
                 }else{
                     cell.subjectName.text! = subjects[indexPath.row]
                 }
@@ -98,12 +101,37 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         }else{
             
             var cell:UITableViewCell
+            
+            
+            
             if searchActive{
                 cell = self.getPaperCell(indexPath: indexPath.row, paper: filteredPaperObjects[indexPath.row])
             }else{
                 cell = self.getPaperCell(indexPath: indexPath.row, paper: paperObjectList[indexPath.row])
             }
             
+            if multiviewOn && selectedPaperURL != nil {
+                if searchActive{
+                    if filteredPaperUrls.contains(selectedPaperURL!){
+                        if indexPath.item == filteredPaperUrls.index(of: selectedPaperURL!){
+                            tableView.selectRow(at: indexPath, animated: true, scrollPosition: UITableViewScrollPosition.init(rawValue: indexPath.item)!)
+                        }
+                    }else{
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    }
+                    
+                }else{
+                
+                if paperUrlList.contains(selectedPaperURL!){
+                if indexPath.item == paperUrlList.index(of: selectedPaperURL!){
+                    tableView.selectRow(at: indexPath, animated: true, scrollPosition: UITableViewScrollPosition.init(rawValue: indexPath.item)!)
+                }
+                }else{
+                     tableView.deselectRow(at: indexPath, animated: true)
+                    }}
+                
+                
+            }
             
             let customColorView = UIView.init()
             customColorView.backgroundColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2938249144)
@@ -220,6 +248,7 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     func getPapers(subjectName:String, onlythesepapers:String?){
         self.view.endEditing(true)
         searchBar.text = ""
+        searchActive = false
           self.title = subjectName
         
         multiViewView.isHidden = false
@@ -254,7 +283,7 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         //  map.get("month"), map.get("year"), map.get("variant"), map.get("type"))
                         let paper = self.addDataToObject(monthO: docs["month"] as? String, yearO: docs["year"] as? String, variantO: docs["variant"] as? String, typeO: docs["type"] as? String)
                         if !self.isPaperObjectInvalid(paperObject: paper){
-                            print(paper)
+                        //    print(paper)
                             self.paperUrlList.append(docs["name"] as! String)
                             self.paperObjectList.append(paper)
                             
@@ -263,6 +292,8 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                     }
                     
                 }
+                
+                
                 self.tableView.reloadData()
                 
             }
@@ -298,6 +329,7 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         setMyData()
         getSubjects()
         searchBar.delegate = self
+        
     }
     
     //Simple meethod to convert data from firebase into a paper object.
@@ -517,6 +549,7 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         if subjectSelected == nil {
             searchActive = false
             searchBar.text = ""
+            
               navigationController?.popViewController(animated: true)
             
         } else{
@@ -535,7 +568,8 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         switch(sender.selectedSegmentIndex){
         case 0: multiviewOn = false
         self.showToast(message: "MultiView is off")
-        if let index = selectedRow{ self.tableView.deselectRow(at: index, animated: true)}
+        if let index = selectedRow{ self.tableView.deselectRow(at: index, animated: true)};
+            selectedPaperURL = nil;selectedRow = nil
         case 1: multiviewOn = true
         self.showToast(message: "MultiView is on")
             
@@ -566,10 +600,11 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             filteredSubjects = subjects.filter({( candy : String) -> Bool in
                 return candy.lowercased().contains(searchText.lowercased())
             })
-            if(filteredSubjects.count == 0){
+            
+             searchActive = true
+
+            if searchText == ""{
                 searchActive = false
-            } else {
-                searchActive = true
             }
             
             tableView.reloadData()
@@ -589,7 +624,7 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             if searchText == ""{
                 searchActive = false
             }
-//            }
+//
             tableView.reloadData()
         }
         
@@ -633,7 +668,7 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         var returnTulip = (filteredPaperUrls,filteredPaperObjects)
         let constraint = text.trimmingCharacters(in: .whitespacesAndNewlines)
         var firstsplit = constraint.split(separator: " ")
-        print(firstsplit.count)
+       // print(firstsplit.count)
         
         for indexPath in paperObjectArray.indices {
             var count = 0
@@ -641,22 +676,19 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             
             for index in firstsplit.indices{
                 let value = firstsplit[index].trimmingCharacters(in: .whitespacesAndNewlines).capitalized
-                
-                
-                
                 if(value != "PAPER" || value != "SCHEME"){
                     count += 1
-                    print("Count: \(count)")
+                   // print("Count: \(count)")
                 }else{
                     count += 1
                     found += 1
                 }
                 let contains = itContains(value: value, paperObject: paperObjectArray[indexPath])
-                print("value: \(value) contains: \(contains)")
+                //print("value: \(value) contains: \(contains)")
                 if contains {
                     found += 1
-                    print("found: \(found)")
-                    print("Got here: \(value)")
+                   // print("found: \(found)")
+                    //print("Got here: \(value)")
                 }
                 
             }
@@ -671,6 +703,8 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         return returnTulip
     }
     
+    
+
     
 }
 
