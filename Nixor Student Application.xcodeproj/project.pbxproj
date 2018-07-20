@@ -44,6 +44,8 @@
 		19C3A41320F0B1F0007E7912 /* PdfLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3A41220F0B1F0007E7912 /* PdfLoader.swift */; };
 		19C3A41520F0BC65007E7912 /* pdfMultiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3A41420F0BC65007E7912 /* pdfMultiView.swift */; };
 		19D53D2E21010A070065D8E7 /* AuthNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D53D2D21010A070065D8E7 /* AuthNavigationController.swift */; };
+		19D53D362101E1240065D8E7 /* NspLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D53D352101E1240065D8E7 /* NspLogin.swift */; };
+		19D53D3821020A110065D8E7 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D53D3721020A110065D8E7 /* HudView.swift */; };
 		19E2053E20F35D9800132494 /* Carpool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E2053D20F35D9800132494 /* Carpool.swift */; };
 		19E2054020F3770A00132494 /* mapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E2053F20F3770A00132494 /* mapViewController.swift */; };
 		19E2054220F37EC500132494 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E2054120F37EC500132494 /* LocationManager.swift */; };
@@ -120,6 +122,8 @@
 		19C3A41220F0B1F0007E7912 /* PdfLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfLoader.swift; sourceTree = "<group>"; };
 		19C3A41420F0BC65007E7912 /* pdfMultiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdfMultiView.swift; sourceTree = "<group>"; };
 		19D53D2D21010A070065D8E7 /* AuthNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationController.swift; sourceTree = "<group>"; };
+		19D53D352101E1240065D8E7 /* NspLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NspLogin.swift; sourceTree = "<group>"; };
+		19D53D3721020A110065D8E7 /* HudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
 		19E2053D20F35D9800132494 /* Carpool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carpool.swift; sourceTree = "<group>"; };
 		19E2053F20F3770A00132494 /* mapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapViewController.swift; sourceTree = "<group>"; };
 		19E2054120F37EC500132494 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -321,6 +325,7 @@
 				19B59C2E20E52EBA00D865DF /* LaunchScreen.storyboard */,
 				19C3A40C20F036C4007E7912 /* Assets.xcassets */,
 				19B59C2920E52EBA00D865DF /* Main.storyboard */,
+				19D53D352101E1240065D8E7 /* NspLogin.swift */,
 				193B578420F25697009FCD68 /* NavigationController.swift */,
 				19B59C3120E52EBA00D865DF /* Info.plist */,
 				1937B7EE20EE207D0024A047 /* GoogleService-Info.plist */,
@@ -370,6 +375,7 @@
 		19FFEA2C2100933C00E5429C /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				19D53D3721020A110065D8E7 /* HudView.swift */,
 				193B577A20F22392009FCD68 /* header.xib */,
 				193B577E20F226CB009FCD68 /* headerMain.swift */,
 			);
@@ -601,6 +607,7 @@
 				"${BUILT_PRODUCTS_DIR}/M13Checkbox/M13Checkbox.framework",
 				"${BUILT_PRODUCTS_DIR}/PinCodeTextField/PinCodeTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
@@ -623,6 +630,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M13Checkbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PinCodeTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
@@ -643,6 +651,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1937B7F320EE43BD0024A047 /* StudentDetails.swift in Sources */,
+				19D53D362101E1240065D8E7 /* NspLogin.swift in Sources */,
 				19FFEA362100CB4B00E5429C /* LaunchScreenViewController.swift in Sources */,
 				1937B7F720EE4BD50024A047 /* accountTypeGetSet.swift in Sources */,
 				19AE4DAE20FE7378001A5BC9 /* VerifyCode.swift in Sources */,
@@ -671,6 +680,7 @@
 				190ECF9520EF5F9C00AEF69A /* PastPapers.swift in Sources */,
 				19B0E34020F7C14900BFCEEF /* CarpoolFilters.swift in Sources */,
 				19D53D2E21010A070065D8E7 /* AuthNavigationController.swift in Sources */,
+				19D53D3821020A110065D8E7 /* HudView.swift in Sources */,
 				195F2AF120F8CB9F0088A18D /* constants.swift in Sources */,
 				195F2AFF20FB858A0088A18D /* MessagesHandler.swift in Sources */,
 				19E2054720F54E1400132494 /* createRide.swift in Sources */,

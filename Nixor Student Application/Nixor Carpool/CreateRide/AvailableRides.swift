@@ -175,7 +175,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
                 if response?.get("photourl") != nil{
                           let url = URL(string: response?.get("photourl") as! String)
                     cell.student_photo.kf.setImage(with: url )
-                       cell.student_photo2.kf.setImage(with: url )
+                    
                     self.usersPhoto[username] = (response?.get("photourl") as! String)
                 }
                 
@@ -296,17 +296,11 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.student_photo.circleImage()
                 let url = URL(string: photourl)
                 cell.student_photo.kf.setImage(with: url)
-                cell.student_photo2.circleImage()
-                cell.student_photo2.kf.setImage(with: url)
-            }else{
+                  }else{
             
                 getPhotoUrl(cell: cell, username: object.student_username)}
             
             //Set host's basic information
-            
-            cell.student_name2.text = object.student_name
-            cell.student_id2.text = object.student_id
-            
             
             cell.student_name.text = object.student_name
             cell.student_id.text = object.student_id
@@ -314,11 +308,11 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
             //Calculate cost per person. Adding 1 here to account for you
             let costperperson = (object.estimatedCost as Double)/Double(object.occupiedSeats + 1)
             cell.costperHead.text = "\(costperperson.rounded(toPlaces: 0))"
-            cell.costperHead2.text = "\(costperperson.rounded(toPlaces: 0))"
+         
             
             //Set number of seats
             cell.number_seats.text = "\(object.numberOfSeats!)"
-            cell.number_seats2.text = "\(object.numberOfSeats!)"
+          
             
             
             //Set ride timings and related information
@@ -327,34 +321,27 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
             if object.oneTimeOrScheduled == "scheduled"{
                 //Get the name of days for the schedule
                 cell.available_days.text = daysArraytoString(dayArray: object.selectedDays!)
-                  cell.available_days2.text = daysArraytoString(dayArray: object.selectedDays!)
-                
-                //Get timing for the schedule
-                //Convert seconds to date
-                let date = Date.init(timeIntervalSince1970: object.selectedTime)
-                //Format date
-                let formatter = DateFormatter()
-                formatter.locale = Locale(identifier: "en_US_POSIX")
-                formatter.dateFormat = "h:mm a"
-                formatter.amSymbol = "AM"
-                formatter.pmSymbol = "PM"
-                
-                let dateString = formatter.string(from: date)
-                 // Format: "4:44 PM"
-                
-                cell.ride_time.text = dateString
-                cell.ride_time.isHidden = false
-                cell.ride_time2.text = dateString
-                cell.ride_time2.isHidden = false
-                
-            }else{
-                
-               
-                cell.available_days.text = commonUtil.convertSecondsToDate(interval: object.selectedTime)
-                cell.ride_time.isHidden = true
-                cell.available_days2.text = commonUtil.convertSecondsToDate(interval: object.selectedTime)
-                cell.ride_time2.isHidden = true
-            }
+              }else{
+                 cell.available_days.text = commonUtil.convertSecondsToDateOnly(interval: object.selectedTime)
+             }
+            
+            //Get timing for the schedule
+            //Convert seconds to date
+            let date = Date.init(timeIntervalSince1970: object.selectedTime)
+            //Format date
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.dateFormat = "h:mm a"
+            formatter.amSymbol = "AM"
+            formatter.pmSymbol = "PM"
+            
+            let dateString = formatter.string(from: date)
+            // Format: "4:44 PM"
+            
+            cell.ride_time.text = dateString
+            cell.ride_time.isHidden = false
+            
+            
             
         }else{
             
@@ -364,8 +351,8 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     
-    let closedHeight:CGFloat = 70
-    let openLHeight:CGFloat = 320
+    let closedHeight:CGFloat = 80
+    let openLHeight:CGFloat = 240
     
     
     
@@ -379,7 +366,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "AvailablerideCell", for: indexPath) as! AvailablerideCell
-        let durations: [TimeInterval] = [0.26, 0.2, 0.2]
+        let durations: [TimeInterval] = [0.26, 0.26, 0.26]
         cell.durationsForExpandedState = durations
         cell.durationsForCollapsedState = durations
         cell.currentIndexPath = indexPath
@@ -391,7 +378,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard case let cell as myFoldingCell = cell else {
+        guard case let cell as AvailablerideCell = cell else {
             return
         }
         
@@ -415,7 +402,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
         
         var duration = 0.0
-        let cellIsCollapsed = cellHeights[indexPath.row] == 70
+        let cellIsCollapsed = cellHeights[indexPath.row] == closedHeight
         if cellIsCollapsed {
             cellHeights[indexPath.row] = openLHeight
             cell.unfold(true, animated: true, completion: nil)
@@ -448,108 +435,6 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
          self.tableView.reloadData()
     }
     
-    
-    
-    
-//    //Below are the methods for the tableView.
-//
-//    //Function for count
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//
-//         return rides.count+1
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        var cell = tableView.dequeueReusableCell(withIdentifier: "AvailablerideCell", for: indexPath) as! AvailablerideCell
-//        cell.delegate = self
-//
-//        if indexPath.row >= rides.count{
-//            cell.isHidden = true
-//            return cell
-//        }else{
-//            cell.currentIndexPath = indexPath
-//            cell = setRideInformation(ride: rides[indexPath.row], cell: cell)
-//            return cell
-//
-//        }}
-//
-//
-//    func selectRow(indexPath:IndexPath){
-//        if selectedIndexPath != nil{
-//
-//            if selectedIndexPath == indexPath{
-//                selectedIndexPath = nil
-//                tableView.reloadRows(at: [indexPath], with: .automatic)
-//            }else{
-//                let previous = selectedIndexPath
-//                selectedIndexPath = nil
-//                tableView.reloadRows(at: [previous!], with: .automatic)
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                    self.selectRow(indexPath: indexPath)
-//                }
-//
-//
-//            }
-//
-//
-//
-//        }else{
-//            selectedIndexPath = indexPath
-//            tableView.reloadRows(at: [indexPath], with: .automatic)
-//
-//        }
-//
-//
-//    }
-//
-//    func resetRows(indexPath:IndexPath){
-//        let previousIndexPath = selectedIndexPath
-//
-//        if indexPath == selectedIndexPath{
-//            selectedIndexPath = nil
-//
-//        }else{
-//
-//            selectedIndexPath = indexPath
-//        }
-//
-//        if let previous = previousIndexPath{
-//            tableView.reloadRows(at: [previous], with:.automatic)
-//            // indexPaths.append(previous)
-//        }
-//
-//        var indexPaths : Array<IndexPath> = []
-//
-//        if let current = selectedIndexPath{
-//            indexPaths.append(current)
-//        }
-//        if indexPaths.count > 0 {
-//            tableView.reloadRows(at: indexPaths, with:.automatic)
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    // resetRows(indexPath: indexPath)
-//      selectRow(indexPath: indexPath)
-//    }
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//
-//        (cell as! AvailablerideCell).watchFrameChanges()
-//    }
-//
-//    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//
-//        (cell as! AvailablerideCell).ignoreFrameChanges()
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath == selectedIndexPath {
-//            return 324
-//        }else{
-//            return 70
-//        }
-//    }
-    
     //MARK: Just some basic loading and shashkay scene
     func intLoading(){
         indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
@@ -579,7 +464,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     func requestButtonClicked(id:String?,user:String?,indexPath:IndexPath) {
         if let docid = id, let userID = user {
             createRide(id: docid, user: userID,indexPath:indexPath)
-            
+           
         }
     
     }
@@ -594,6 +479,8 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         functions.httpsCallable("carpool_function").call(data) { (response, error) in
             if error == nil && response != nil{
                 self.tabBarController?.selectedIndex = 2
+                
+              
                 
             }else if error != nil {
                 self.commonUtil.showAlert(title: "Request failed", message: "Please make sure you are connected to the internet. If this problem persists please contact Nixor College", buttonMessage: "OK", view: self)

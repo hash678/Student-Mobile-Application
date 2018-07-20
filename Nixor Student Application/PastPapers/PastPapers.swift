@@ -574,16 +574,22 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             
             tableView.reloadData()
         }else{
-            print("Typed: \(searchText)")
+
             let obtanedTulips = filterSubjects(text: searchText, paperObjectArray: paperObjectList, paperListUrl: paperUrlList)
             filteredPaperObjects = obtanedTulips.paperS
             filteredPaperUrls = obtanedTulips.paperUrls
             
-            if(filteredPaperObjects.count == 0){
-                searchActive = false
-            } else {
+//            if(filteredPaperObjects.count == 0){
+//                searchActive = false
+//            } else {
+            
+            
                 searchActive = true
+            
+            if searchText == ""{
+                searchActive = false
             }
+//            }
             tableView.reloadData()
         }
         
@@ -596,7 +602,7 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     //Search Subjects
     func stringContains(key:String, value:String) -> Bool{
-        if key.range(of:value) != nil {
+        if key.contains(value) {
             return true
         }
         return false
@@ -614,6 +620,13 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         }
     }
     
+    
+    
+    
+    
+    
+    
+    
     func filterSubjects(text:String, paperObjectArray:[paperObject],paperListUrl:[String]) -> (paperUrls:[String], paperS:[paperObject]){
         var filteredPaperObjects = [paperObject]()
         var filteredPaperUrls = [String]()
@@ -627,12 +640,19 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             var found = 0
             
             for index in firstsplit.indices{
-                let value = firstsplit[index].trimmingCharacters(in: .whitespacesAndNewlines)
+                let value = firstsplit[index].trimmingCharacters(in: .whitespacesAndNewlines).capitalized
+                
+                
+                
                 if(value != "PAPER" || value != "SCHEME"){
                     count += 1
                     print("Count: \(count)")
+                }else{
+                    count += 1
+                    found += 1
                 }
                 let contains = itContains(value: value, paperObject: paperObjectArray[indexPath])
+                print("value: \(value) contains: \(contains)")
                 if contains {
                     found += 1
                     print("found: \(found)")
@@ -645,8 +665,9 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 filteredPaperUrls.append(paperListUrl[indexPath])
             }
             
-            returnTulip = (filteredPaperUrls,filteredPaperObjects)
+           
         }
+         returnTulip = (filteredPaperUrls,filteredPaperObjects)
         return returnTulip
     }
     

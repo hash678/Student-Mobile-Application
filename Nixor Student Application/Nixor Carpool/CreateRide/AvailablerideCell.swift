@@ -26,17 +26,7 @@ class AvailablerideCell: FoldingCell{
     @IBOutlet weak var student_photo: UIImageView!
     
     
-    @IBOutlet weak var student_id2: UILabel!
-    @IBOutlet weak var ride_time2: UILabel!
-    
-    @IBOutlet weak var number_seats2: UILabel!
-    @IBOutlet weak var student_photo2: UIImageView!
-    
-    @IBOutlet weak var student_name2: UILabel!
-    
-    @IBOutlet weak var costperHead2: UILabel!
-    
-    @IBOutlet weak var available_days2: UILabel!
+  
     
     
     var delegate:onRequestButtonClicked?
@@ -45,13 +35,13 @@ class AvailablerideCell: FoldingCell{
    
     
     override func awakeFromNib() {
-        foregroundView.layer.cornerRadius = 10
+        foregroundView.layer.cornerRadius = 5
         foregroundView.layer.masksToBounds = true
         super.awakeFromNib()
     }
     
     override func animationDuration(_ itemIndex: NSInteger, type _: FoldingCell.AnimationType) -> TimeInterval {
-        let durations = [0.26, 0.2, 0.2]
+        let durations = [0.16, 0.16, 0.16]
         return durations[itemIndex]
     }
 

@@ -29,7 +29,7 @@ class common_util{
         return formattedNumber
     }
     
-    func convertSecondsToDate(interval:Double) -> String{
+    func convertSecondsToDateOnly(interval:Double) -> String{
         
         let calendar = NSCalendar.current
         let date = Date(timeIntervalSince1970: interval)
@@ -43,6 +43,52 @@ class common_util{
             
             let dateString = formatter.string(from: date)
            
+            
+            return "Yesterday"
+            
+            
+            
+        }
+        else if calendar.isDateInToday(date) {
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.dateFormat = "h:mm a"
+            formatter.amSymbol = "AM"
+            formatter.pmSymbol = "PM"
+            
+            let dateString = formatter.string(from: date)
+            return "Today"
+        
+        }
+        else if calendar.isDateInTomorrow(date) { return "Tomorrow" }
+        else {
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.dateFormat = "MMMM dd, yyyy"
+            formatter.amSymbol = "AM"
+            formatter.pmSymbol = "PM"
+            
+            let dateString = formatter.string(from: date)
+            return "Tomorrow, \(dateString)"
+            
+        }
+    }
+    
+    
+    func convertSecondsToDate(interval:Double) -> String{
+        
+        let calendar = NSCalendar.current
+        let date = Date(timeIntervalSince1970: interval)
+        if calendar.isDateInYesterday(date) {
+            
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.dateFormat = "h:mm a"
+            formatter.amSymbol = "AM"
+            formatter.pmSymbol = "PM"
+            
+            let dateString = formatter.string(from: date)
+            
             
             return "Yesterday, \(dateString)"
             
@@ -58,7 +104,7 @@ class common_util{
             
             let dateString = formatter.string(from: date)
             return dateString
-        
+            
         }
         else if calendar.isDateInTomorrow(date) { return "Tomorrow" }
         else {
