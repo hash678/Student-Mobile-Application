@@ -36,13 +36,18 @@
 		19AE4DAE20FE7378001A5BC9 /* VerifyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AE4DAD20FE7378001A5BC9 /* VerifyCode.swift */; };
 		19B0E34020F7C14900BFCEEF /* CarpoolFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E33F20F7C14900BFCEEF /* CarpoolFilters.swift */; };
 		19B59C2620E52EBA00D865DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B59C2520E52EBA00D865DF /* AppDelegate.swift */; };
-		19B59C2B20E52EBA00D865DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B59C2920E52EBA00D865DF /* Main.storyboard */; };
 		19B59C3020E52EBA00D865DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B59C2E20E52EBA00D865DF /* LaunchScreen.storyboard */; };
 		19B59C3B20E52EBA00D865DF /* Nixor_Student_ApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B59C3A20E52EBA00D865DF /* Nixor_Student_ApplicationTests.swift */; };
 		19B59C4620E52EBA00D865DF /* Nixor_Student_ApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B59C4520E52EBA00D865DF /* Nixor_Student_ApplicationUITests.swift */; };
 		19C3A40D20F036C5007E7912 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19C3A40C20F036C4007E7912 /* Assets.xcassets */; };
 		19C3A41320F0B1F0007E7912 /* PdfLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3A41220F0B1F0007E7912 /* PdfLoader.swift */; };
 		19C3A41520F0BC65007E7912 /* pdfMultiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3A41420F0BC65007E7912 /* pdfMultiView.swift */; };
+		19CA0CA32103585600F74057 /* PastpapersFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CA0CA22103585500F74057 /* PastpapersFilter.swift */; };
+		19CA0CA621037D3100F74057 /* filterObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CA0CA521037D3100F74057 /* filterObject.swift */; };
+		19CA0CA821049CD400F74057 /* PastpapersStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19CA0CA721049CD400F74057 /* PastpapersStoryboard.storyboard */; };
+		19CA0CAA21049DBF00F74057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19CA0CA921049DBF00F74057 /* Main.storyboard */; };
+		19CA0CAC21049F8100F74057 /* CarpoolStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19CA0CAB21049F8100F74057 /* CarpoolStoryboard.storyboard */; };
+		19CA0CAE2104A1A800F74057 /* SharksoncloudStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19CA0CAD2104A1A800F74057 /* SharksoncloudStoryboard.storyboard */; };
 		19D53D2E21010A070065D8E7 /* AuthNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D53D2D21010A070065D8E7 /* AuthNavigationController.swift */; };
 		19D53D362101E1240065D8E7 /* NspLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D53D352101E1240065D8E7 /* NspLogin.swift */; };
 		19D53D3821020A110065D8E7 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D53D3721020A110065D8E7 /* HudView.swift */; };
@@ -109,7 +114,6 @@
 		19B0E33F20F7C14900BFCEEF /* CarpoolFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarpoolFilters.swift; sourceTree = "<group>"; };
 		19B59C2220E52EBA00D865DF /* Nixor Student Application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nixor Student Application.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B59C2520E52EBA00D865DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		19B59C2A20E52EBA00D865DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		19B59C2F20E52EBA00D865DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19B59C3120E52EBA00D865DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B59C3620E52EBA00D865DF /* Nixor Student ApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nixor Student ApplicationTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +125,12 @@
 		19C3A40C20F036C4007E7912 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19C3A41220F0B1F0007E7912 /* PdfLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfLoader.swift; sourceTree = "<group>"; };
 		19C3A41420F0BC65007E7912 /* pdfMultiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdfMultiView.swift; sourceTree = "<group>"; };
+		19CA0CA22103585500F74057 /* PastpapersFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastpapersFilter.swift; sourceTree = "<group>"; };
+		19CA0CA521037D3100F74057 /* filterObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterObject.swift; sourceTree = "<group>"; };
+		19CA0CA721049CD400F74057 /* PastpapersStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PastpapersStoryboard.storyboard; sourceTree = "<group>"; };
+		19CA0CA921049DBF00F74057 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		19CA0CAB21049F8100F74057 /* CarpoolStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CarpoolStoryboard.storyboard; sourceTree = "<group>"; };
+		19CA0CAD2104A1A800F74057 /* SharksoncloudStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SharksoncloudStoryboard.storyboard; sourceTree = "<group>"; };
 		19D53D2D21010A070065D8E7 /* AuthNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationController.swift; sourceTree = "<group>"; };
 		19D53D352101E1240065D8E7 /* NspLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NspLogin.swift; sourceTree = "<group>"; };
 		19D53D3721020A110065D8E7 /* HudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
@@ -177,6 +187,8 @@
 		190ECF9E20F01E2700AEF69A /* PastPapers */ = {
 			isa = PBXGroup;
 			children = (
+				19CA0CA721049CD400F74057 /* PastpapersStoryboard.storyboard */,
+				19CA0CA421037CFC00F74057 /* Filter */,
 				19AD9C4A20F1ECF800C63B6D /* PDFViewer */,
 				19AD9C4920F1ECCA00C63B6D /* Objects */,
 				19AD9C4820F1ECB100C63B6D /* TableviewCells */,
@@ -324,9 +336,9 @@
 				19FFEA2B2100932300E5429C /* SharksOnCloud */,
 				19B59C2E20E52EBA00D865DF /* LaunchScreen.storyboard */,
 				19C3A40C20F036C4007E7912 /* Assets.xcassets */,
-				19B59C2920E52EBA00D865DF /* Main.storyboard */,
 				19D53D352101E1240065D8E7 /* NspLogin.swift */,
 				193B578420F25697009FCD68 /* NavigationController.swift */,
+				19CA0CA921049DBF00F74057 /* Main.storyboard */,
 				19B59C3120E52EBA00D865DF /* Info.plist */,
 				1937B7EE20EE207D0024A047 /* GoogleService-Info.plist */,
 			);
@@ -351,9 +363,19 @@
 			path = "Nixor Student ApplicationUITests";
 			sourceTree = "<group>";
 		};
+		19CA0CA421037CFC00F74057 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				19CA0CA22103585500F74057 /* PastpapersFilter.swift */,
+				19CA0CA521037D3100F74057 /* filterObject.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		19E2054320F37ED700132494 /* Nixor Carpool */ = {
 			isa = PBXGroup;
 			children = (
+				19CA0CAB21049F8100F74057 /* CarpoolStoryboard.storyboard */,
 				195F2B0420FBFCC90088A18D /* StartRide */,
 				19E2053D20F35D9800132494 /* Carpool.swift */,
 				19E2054120F37EC500132494 /* LocationManager.swift */,
@@ -365,6 +387,7 @@
 		19FFEA2B2100932300E5429C /* SharksOnCloud */ = {
 			isa = PBXGroup;
 			children = (
+				19CA0CAD2104A1A800F74057 /* SharksoncloudStoryboard.storyboard */,
 				19FFEA2F2100A93000E5429C /* Buckets.swift */,
 				193B578220F25042009FCD68 /* SharksOnCloud.swift */,
 				19FFEA342100AEE000E5429C /* CellViews */,
@@ -526,11 +549,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19CA0CA821049CD400F74057 /* PastpapersStoryboard.storyboard in Resources */,
 				19B59C3020E52EBA00D865DF /* LaunchScreen.storyboard in Resources */,
+				19CA0CAE2104A1A800F74057 /* SharksoncloudStoryboard.storyboard in Resources */,
 				1937B7EF20EE207D0024A047 /* GoogleService-Info.plist in Resources */,
+				19CA0CAC21049F8100F74057 /* CarpoolStoryboard.storyboard in Resources */,
+				19CA0CAA21049DBF00F74057 /* Main.storyboard in Resources */,
 				19C3A40D20F036C5007E7912 /* Assets.xcassets in Resources */,
 				193B577B20F22392009FCD68 /* header.xib in Resources */,
-				19B59C2B20E52EBA00D865DF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,6 +694,7 @@
 				19C3A41320F0B1F0007E7912 /* PdfLoader.swift in Sources */,
 				195F2AF520FB4C100088A18D /* Chat.swift in Sources */,
 				19AE4DAC20FE6674001A5BC9 /* LoginController.swift in Sources */,
+				19CA0CA32103585600F74057 /* PastpapersFilter.swift in Sources */,
 				19E2054920F5EC3900132494 /* rideData.swift in Sources */,
 				19C3A41520F0BC65007E7912 /* pdfMultiView.swift in Sources */,
 				195F2B0320FBB97D0088A18D /* ConversationItemTableViewCell.swift in Sources */,
@@ -691,6 +718,7 @@
 				195F2B0120FBB8B70088A18D /* ConversationsList.swift in Sources */,
 				195F2B0620FD5DB20088A18D /* CarpoolDM.swift in Sources */,
 				1948E15720EE7D3D00AADC59 /* UserPhoto.swift in Sources */,
+				19CA0CA621037D3100F74057 /* filterObject.swift in Sources */,
 				199257ED20F697CA00DC452E /* AvailablerideCell.swift in Sources */,
 				19FFEA2A20FFAE0100E5429C /* ShowMap.swift in Sources */,
 			);
@@ -728,14 +756,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		19B59C2920E52EBA00D865DF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				19B59C2A20E52EBA00D865DF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		19B59C2E20E52EBA00D865DF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

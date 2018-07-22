@@ -10,8 +10,9 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import CountryPickerView
-class LoginController: UIViewController {
+class LoginController: UIViewController , CountryPickerViewDelegate, CountryPickerViewDataSource  {
 
+    @IBOutlet weak var selectedCountryCode: UITextField!
     var phoneNumberVar:String?
     @IBOutlet weak var phoneNumberEntry: UITextField!
     @IBOutlet weak var countryPicker: CountryPickerView!
@@ -22,7 +23,9 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         countryPicker.setCountryByCode("PK")
-        self.dismissKeyboard()
+        countryPicker.delegate = self
+        countryPicker.dataSource = self
+        self.hideKeyboardWhenTappedAround()
         navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.5649999976, green: 0, blue: 0, alpha: 1)
       
     }
@@ -63,6 +66,9 @@ class LoginController: UIViewController {
         return UIStatusBarStyle.lightContent
     }
  
+    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
+        selectedCountryCode.text = country.phoneCode
+    }
   
   
 }

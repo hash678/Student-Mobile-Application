@@ -183,7 +183,7 @@ class createRide: UIViewController{
     //TODO: Add transfer of object
     @objc func next(sender: UIBarButtonItem) {
         if verifyDataIsCorrect() {
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let storyBoard: UIStoryboard = UIStoryboard(name: "CarpoolStoryboard", bundle: nil)
             let mapViewController = storyBoard.instantiateViewController(withIdentifier: "mapViewController") as! mapViewController
             mapViewController.initalRideDataFilled = self.initalride
             self.navigationController?.pushViewController(mapViewController, animated: true)

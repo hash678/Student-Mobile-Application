@@ -521,7 +521,7 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             indicator?.stopAnimating()
         }
         if secondPaper == nil {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let storyboard = UIStoryboard(name: "PastpapersStoryboard", bundle: nil)
             let singleView = storyboard.instantiateViewController(withIdentifier: "pdfIntent")as! PdfLoader
             singleView.url = url
             self.tableView.deselectRow(at: singlePaperSelectedRow!, animated: true)
@@ -529,7 +529,7 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             
         }else{
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let storyboard = UIStoryboard(name: "PastpapersStoryboard", bundle: nil)
             let multiView = storyboard.instantiateViewController(withIdentifier: "multiview")as! pdfMultiView
             multiView.secondPaper = url
             multiView.firstPaper = secondPaper

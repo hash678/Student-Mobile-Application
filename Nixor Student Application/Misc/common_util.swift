@@ -41,7 +41,7 @@ class common_util{
             formatter.amSymbol = "AM"
             formatter.pmSymbol = "PM"
             
-            let dateString = formatter.string(from: date)
+           // let dateString = formatter.string(from: date)
            
             
             return "Yesterday"
@@ -56,7 +56,7 @@ class common_util{
             formatter.amSymbol = "AM"
             formatter.pmSymbol = "PM"
             
-            let dateString = formatter.string(from: date)
+           // let dateString = formatter.string(from: date)
             return "Today"
         
         }

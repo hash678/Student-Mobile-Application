@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Sharks On Cloud-->
+        <scene sceneID="uaE-Nd-1mt">
+            <objects>
+                <viewController storyboardIdentifier="SharksOnCloud" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PPV-HZ-dr7" customClass="SharksOnCloud" customModule="Nixor_Student_Application" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oDa-9I-2JU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P27-PZ-0ar">
+                                <rect key="frame" x="0.0" y="100" width="375" height="567"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pwm-cg-8ma">
+                                        <rect key="frame" x="15" y="48" width="345" height="519"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sharksOnCloudSubjectCellTableViewCell" rowHeight="65" id="h0W-Wx-gsl" customClass="sharksOnCloudSubjectCellTableViewCell" customModule="Nixor_Student_Application" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="345" height="65"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h0W-Wx-gsl" id="b1A-k0-q5s">
+                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="64.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7n-kb-iVX">
+                                                            <rect key="frame" x="0.0" y="5" width="345" height="54.5"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Physics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwc-Lp-jmT">
+                                                                    <rect key="frame" x="15" y="20" width="44" height="15"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmn-5H-zYF">
+                                                                    <rect key="frame" x="293" y="12" width="37" height="30"/>
+                                                                    <state key="normal" title="heart"/>
+                                                                    <connections>
+                                                                        <action selector="favButton:" destination="h0W-Wx-gsl" eventType="touchUpInside" id="0Ce-rM-pvU"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" name="NixorColor"/>
+                                                            <constraints>
+                                                                <constraint firstItem="nwc-Lp-jmT" firstAttribute="leading" secondItem="I7n-kb-iVX" secondAttribute="leading" constant="15" id="Z3J-R4-dVz"/>
+                                                                <constraint firstItem="nwc-Lp-jmT" firstAttribute="centerY" secondItem="I7n-kb-iVX" secondAttribute="centerY" id="a0k-ya-S7Y"/>
+                                                                <constraint firstItem="kmn-5H-zYF" firstAttribute="centerY" secondItem="I7n-kb-iVX" secondAttribute="centerY" id="mOT-fb-kYF"/>
+                                                                <constraint firstAttribute="trailing" secondItem="kmn-5H-zYF" secondAttribute="trailing" constant="15" id="mWB-qZ-Qnv"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="I7n-kb-iVX" firstAttribute="leading" secondItem="b1A-k0-q5s" secondAttribute="leading" id="A66-WI-CoR"/>
+                                                        <constraint firstItem="I7n-kb-iVX" firstAttribute="top" secondItem="b1A-k0-q5s" secondAttribute="top" constant="5" id="bLi-C1-Af9"/>
+                                                        <constraint firstAttribute="trailing" secondItem="I7n-kb-iVX" secondAttribute="trailing" id="sgT-Gv-45l"/>
+                                                        <constraint firstAttribute="bottom" secondItem="I7n-kb-iVX" secondAttribute="bottom" constant="5" id="yz3-hJ-FHN"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="heartIcon" destination="kmn-5H-zYF" id="d0t-CY-ooN"/>
+                                                    <outlet property="subject_name" destination="nwc-Lp-jmT" id="e51-xs-msX"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="PPV-HZ-dr7" id="uFi-rr-mFR"/>
+                                            <outlet property="delegate" destination="PPV-HZ-dr7" id="Ex0-Zf-AOa"/>
+                                        </connections>
+                                    </tableView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VWN-f8-FMP">
+                                        <rect key="frame" x="15" y="10" width="345" height="29"/>
+                                        <segments>
+                                            <segment title="My Subjects"/>
+                                            <segment title="AS"/>
+                                            <segment title="A2"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="showSubjectsSelection:" destination="PPV-HZ-dr7" eventType="valueChanged" id="tcE-HJ-Egf"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Pwm-cg-8ma" secondAttribute="trailing" constant="15" id="6bQ-hT-2P4"/>
+                                    <constraint firstItem="Pwm-cg-8ma" firstAttribute="leading" secondItem="P27-PZ-0ar" secondAttribute="leading" constant="15" id="C03-lw-GXo"/>
+                                    <constraint firstAttribute="trailing" secondItem="VWN-f8-FMP" secondAttribute="trailing" constant="15" id="MPU-eP-3HW"/>
+                                    <constraint firstItem="VWN-f8-FMP" firstAttribute="top" secondItem="P27-PZ-0ar" secondAttribute="top" constant="10" id="rgC-Yj-uh2"/>
+                                    <constraint firstItem="Pwm-cg-8ma" firstAttribute="top" secondItem="VWN-f8-FMP" secondAttribute="bottom" constant="10" id="sPc-nB-0lS"/>
+                                    <constraint firstAttribute="bottom" secondItem="Pwm-cg-8ma" secondAttribute="bottom" id="vXb-De-fVz"/>
+                                    <constraint firstItem="VWN-f8-FMP" firstAttribute="leading" secondItem="P27-PZ-0ar" secondAttribute="leading" constant="15" id="w8G-iw-LF4"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yiq-y4-08D" customClass="headerMain" customModule="Nixor_Student_Application" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="80"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="xMj-K1-5WM"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.56470588239999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" name="NixorColor"/>
+                        <constraints>
+                            <constraint firstItem="yiq-y4-08D" firstAttribute="top" secondItem="ypd-9S-xq8" secondAttribute="top" id="CvO-O4-yeD"/>
+                            <constraint firstItem="yiq-y4-08D" firstAttribute="trailing" secondItem="ypd-9S-xq8" secondAttribute="trailing" id="DwJ-bK-NAF"/>
+                            <constraint firstItem="P27-PZ-0ar" firstAttribute="bottom" secondItem="ypd-9S-xq8" secondAttribute="bottom" id="E62-MF-fTY"/>
+                            <constraint firstItem="P27-PZ-0ar" firstAttribute="trailing" secondItem="ypd-9S-xq8" secondAttribute="trailing" id="H9p-3E-jcQ"/>
+                            <constraint firstItem="P27-PZ-0ar" firstAttribute="top" secondItem="yiq-y4-08D" secondAttribute="bottom" id="MXe-gX-Vql"/>
+                            <constraint firstItem="P27-PZ-0ar" firstAttribute="leading" secondItem="ypd-9S-xq8" secondAttribute="leading" id="QoJ-S5-YoD"/>
+                            <constraint firstItem="yiq-y4-08D" firstAttribute="leading" secondItem="ypd-9S-xq8" secondAttribute="leading" id="gm5-qv-ykN"/>
+                            <constraint firstItem="P27-PZ-0ar" firstAttribute="bottom" secondItem="ypd-9S-xq8" secondAttribute="bottom" id="hwJ-oH-bz2"/>
+                            <constraint firstItem="P27-PZ-0ar" firstAttribute="trailing" secondItem="ypd-9S-xq8" secondAttribute="trailing" id="oAP-2v-fUU"/>
+                            <constraint firstItem="P27-PZ-0ar" firstAttribute="leading" secondItem="ypd-9S-xq8" secondAttribute="leading" id="q3W-oR-Och"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ypd-9S-xq8"/>
+                    </view>
+                    <connections>
+                        <outlet property="header" destination="yiq-y4-08D" id="Iue-AW-nOR"/>
+                        <outlet property="tableview" destination="Pwm-cg-8ma" id="b3L-z2-4FP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pxz-38-l97" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4557.6000000000004" y="-765.06746626686663"/>
+        </scene>
+        <!--Buckets-->
+        <scene sceneID="NZD-fU-oZE">
+            <objects>
+                <viewController storyboardIdentifier="Buckets" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pCB-Fu-vzB" customClass="Buckets" customModule="Nixor_Student_Application" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qa9-9H-xLB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6j-tS-SUU">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ces-Og-9GV" customClass="headerMain" customModule="Nixor_Student_Application" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="gp5-ah-L4o"/>
+                                        </constraints>
+                                    </view>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PDb-aO-oW6">
+                                        <rect key="frame" x="15" y="90" width="299" height="29"/>
+                                        <segments>
+                                            <segment title="All"/>
+                                            <segment title="My Class"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6we-TV-P6l">
+                                        <rect key="frame" x="322" y="90" width="38" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Dz4-v0-Vub"/>
+                                            <constraint firstAttribute="width" constant="38" id="bv5-vb-KZk"/>
+                                        </constraints>
+                                        <state key="normal" image="filter"/>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wMQ-0e-Oik">
+                                        <rect key="frame" x="15" y="126" width="345" height="521"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="bucketsTableViewCell" rowHeight="65" id="Qr7-KJ-ghD" customClass="bucketsTableViewCell" customModule="Nixor_Student_Application" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="345" height="65"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qr7-KJ-ghD" id="hys-5O-J1U">
+                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="64.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oG6-oN-b8g">
+                                                            <rect key="frame" x="0.0" y="5" width="345" height="54.5"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample" translatesAutoresizingMaskIntoConstraints="NO" id="xNX-iL-4g4">
+                                                                    <rect key="frame" x="0.0" y="7.5" width="50" height="40"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="40" id="7dO-fo-a3j"/>
+                                                                        <constraint firstAttribute="width" constant="50" id="cJC-HR-ZEX"/>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="hcY-Qr-XOq"/>
+                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="yPo-HG-CeN"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hassan Anjum Abbasi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W25-FK-PlF">
+                                                                    <rect key="frame" x="59" y="5" width="123" height="15"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <color key="textColor" name="NixorColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chem 107" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIg-4K-fyO">
+                                                                    <rect key="frame" x="59" y="24" width="57" height="15"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <color key="textColor" name="NixorColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points:100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdI-Wd-1nC">
+                                                                    <rect key="frame" x="275" y="19.5" width="60" height="15"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstItem="rdI-Wd-1nC" firstAttribute="centerY" secondItem="oG6-oN-b8g" secondAttribute="centerY" id="4VQ-mQ-lzD"/>
+                                                                <constraint firstItem="sIg-4K-fyO" firstAttribute="leading" secondItem="xNX-iL-4g4" secondAttribute="trailing" constant="9" id="PAd-Sl-Jyr"/>
+                                                                <constraint firstItem="xNX-iL-4g4" firstAttribute="centerY" secondItem="oG6-oN-b8g" secondAttribute="centerY" id="TRm-D5-FD4"/>
+                                                                <constraint firstItem="sIg-4K-fyO" firstAttribute="top" secondItem="W25-FK-PlF" secondAttribute="bottom" constant="4" id="cLo-HE-Auo"/>
+                                                                <constraint firstItem="W25-FK-PlF" firstAttribute="leading" secondItem="xNX-iL-4g4" secondAttribute="trailing" constant="9" id="dSw-SY-mXN"/>
+                                                                <constraint firstItem="W25-FK-PlF" firstAttribute="top" secondItem="oG6-oN-b8g" secondAttribute="top" constant="5" id="etA-tc-CNt"/>
+                                                                <constraint firstItem="xNX-iL-4g4" firstAttribute="leading" secondItem="oG6-oN-b8g" secondAttribute="leading" id="qVe-oJ-TKX"/>
+                                                                <constraint firstItem="xNX-iL-4g4" firstAttribute="centerY" secondItem="oG6-oN-b8g" secondAttribute="centerY" id="ya4-aX-ksd"/>
+                                                                <constraint firstAttribute="trailing" secondItem="rdI-Wd-1nC" secondAttribute="trailing" constant="10" id="zZZ-eY-jyA"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="oG6-oN-b8g" firstAttribute="top" secondItem="hys-5O-J1U" secondAttribute="top" constant="5" id="92d-Ld-wgf"/>
+                                                        <constraint firstAttribute="trailing" secondItem="oG6-oN-b8g" secondAttribute="trailing" id="BxZ-dO-f5S"/>
+                                                        <constraint firstAttribute="bottom" secondItem="oG6-oN-b8g" secondAttribute="bottom" constant="5" id="Osh-zc-eCh"/>
+                                                        <constraint firstItem="oG6-oN-b8g" firstAttribute="leading" secondItem="hys-5O-J1U" secondAttribute="leading" id="fhz-z9-0dC"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="class_type" destination="sIg-4K-fyO" id="HnF-gx-Wd6"/>
+                                                    <outlet property="nixor_points" destination="rdI-Wd-1nC" id="14s-ZH-shz"/>
+                                                    <outlet property="student_name" destination="W25-FK-PlF" id="tbA-PF-Etk"/>
+                                                    <outlet property="student_photo" destination="xNX-iL-4g4" id="wye-na-XGe"/>
+                                                    <outlet property="view" destination="oG6-oN-b8g" id="zgk-Al-ES3"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="pCB-Fu-vzB" id="4z0-O9-eBy"/>
+                                            <outlet property="delegate" destination="pCB-Fu-vzB" id="mSg-3U-0Ap"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" name="NixorColor"/>
+                                <constraints>
+                                    <constraint firstItem="wMQ-0e-Oik" firstAttribute="leading" secondItem="V6j-tS-SUU" secondAttribute="leading" constant="15" id="12G-lB-Frr"/>
+                                    <constraint firstItem="wMQ-0e-Oik" firstAttribute="top" secondItem="6we-TV-P6l" secondAttribute="bottom" constant="6" id="2Iw-YL-hLP"/>
+                                    <constraint firstAttribute="bottom" secondItem="wMQ-0e-Oik" secondAttribute="bottom" id="3cS-fq-lPr"/>
+                                    <constraint firstItem="ces-Og-9GV" firstAttribute="top" secondItem="V6j-tS-SUU" secondAttribute="top" id="FuY-tN-NyV"/>
+                                    <constraint firstItem="ces-Og-9GV" firstAttribute="leading" secondItem="V6j-tS-SUU" secondAttribute="leading" id="HPy-Tb-nlX"/>
+                                    <constraint firstAttribute="trailing" secondItem="ces-Og-9GV" secondAttribute="trailing" id="N95-wZ-hUH"/>
+                                    <constraint firstItem="PDb-aO-oW6" firstAttribute="leading" secondItem="V6j-tS-SUU" secondAttribute="leading" constant="15" id="SeT-p5-pKa"/>
+                                    <constraint firstItem="wMQ-0e-Oik" firstAttribute="top" secondItem="PDb-aO-oW6" secondAttribute="bottom" constant="8" id="b5o-RU-EUW"/>
+                                    <constraint firstAttribute="trailing" secondItem="6we-TV-P6l" secondAttribute="trailing" constant="15" id="bh2-EU-tqv"/>
+                                    <constraint firstItem="6we-TV-P6l" firstAttribute="leading" secondItem="PDb-aO-oW6" secondAttribute="trailing" constant="8" id="fVx-wG-qQw"/>
+                                    <constraint firstItem="6we-TV-P6l" firstAttribute="top" secondItem="ces-Og-9GV" secondAttribute="bottom" constant="10" id="i5S-JW-SVV"/>
+                                    <constraint firstItem="PDb-aO-oW6" firstAttribute="top" secondItem="ces-Og-9GV" secondAttribute="bottom" constant="10" id="ytL-Tb-OLh"/>
+                                    <constraint firstAttribute="trailing" secondItem="wMQ-0e-Oik" secondAttribute="trailing" constant="15" id="zmN-Km-uJh"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="NixorColor"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="V6j-tS-SUU" firstAttribute="leading" secondItem="6Eu-fx-Fp3" secondAttribute="leading" id="87s-xV-odz"/>
+                            <constraint firstItem="6Eu-fx-Fp3" firstAttribute="trailing" secondItem="V6j-tS-SUU" secondAttribute="trailing" id="AkQ-TY-bOS"/>
+                            <constraint firstItem="V6j-tS-SUU" firstAttribute="top" secondItem="6Eu-fx-Fp3" secondAttribute="top" id="BN1-aW-RSe"/>
+                            <constraint firstItem="6Eu-fx-Fp3" firstAttribute="bottom" secondItem="V6j-tS-SUU" secondAttribute="bottom" id="wm2-56-L4c"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Eu-fx-Fp3"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableview" destination="wMQ-0e-Oik" id="sgz-Zd-goU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jp7-Od-6A6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5261.6000000000004" y="-765.06746626686663"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="filter" width="298" height="298"/>
+        <image name="sample" width="1440" height="1456"/>
+        <namedColor name="NixorColor">
+            <color red="0.56499999759999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
