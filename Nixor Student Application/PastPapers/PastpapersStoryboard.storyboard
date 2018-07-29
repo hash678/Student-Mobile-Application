@@ -127,6 +127,7 @@
                                                     <color key="backgroundColor" red="0.56470588239999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="IKm-d4-7ef" firstAttribute="centerY" secondItem="9j9-TZ-Kl1" secondAttribute="centerY" id="m0R-qz-oAd"/>
+                                                        <constraint firstItem="IKm-d4-7ef" firstAttribute="centerY" secondItem="9j9-TZ-Kl1" secondAttribute="centerY" id="rSB-QP-SsE"/>
                                                         <constraint firstItem="IKm-d4-7ef" firstAttribute="leading" secondItem="9j9-TZ-Kl1" secondAttribute="leading" constant="8" id="zHo-yR-ZaJ"/>
                                                         <constraint firstAttribute="trailing" secondItem="IKm-d4-7ef" secondAttribute="trailing" constant="8" id="zTp-zL-upa"/>
                                                     </constraints>
@@ -202,6 +203,10 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9LT-4K-MA0" customClass="CosmosView" customModule="Cosmos">
                                                             <rect key="frame" x="119" y="62" width="120" height="20"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="Yhl-Ni-fss"/>
+                                                                <constraint firstAttribute="width" constant="120" id="xWF-Ho-Fva"/>
+                                                            </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
                                                                     <color key="value" red="0.56470588239999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -13,6 +13,8 @@ class NspLogin: UIViewController {
 
     @IBOutlet weak var email_field: UITextField!
     lazy var functions = Functions.functions()
+    let commonUtil = common_util();
+    
     
     @IBOutlet weak var password_field: UITextField!
     override func viewDidLoad() {
@@ -24,13 +26,6 @@ class NspLogin: UIViewController {
     @IBAction func login(_ sender: UIButton) {
    
         if let email = email_field.text, let password = password_field.text {
-            
-//            const email=data['email'];
-//            const password=data['password'];
-//            const username=data['username'];
-//
-//            Functions.httpsCallable(<#T##Functions#>)
-            
             let username = email.replacingOccurrences(of: ".", with: "-")
             let data = ["email":"\(email)@nixorcollege.edu.pk","password":password,"username":username]
             print("\(email)@nixorcollege.edu.pk")
@@ -40,8 +35,18 @@ class NspLogin: UIViewController {
             functions.httpsCallable("NSP_EXTRACTION_FUNCTION").call(data) { (response, error) in
                 if response != nil {
                     print(JSON(response?.data))
-                }else{
-                    print(error)
+                    let jsonObject = JSON(response?.data)
+                    
+                    let studentDetails = StudentDetails(jsonObject: jsonObject)
+                    self.commonUtil.saveUserData(userObject: studentDetails)
+                   
+                    let SelectAccountType = self.storyboard?.instantiateViewController(withIdentifier: "SelectAccountType") as! SelectAccountType
+                    self.present(SelectAccountType, animated: true, completion:nil)
+                    
+                    
+                    
+                }else if error != nil{
+                 //   print(error)
                 }
             }
             

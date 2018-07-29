@@ -12,28 +12,24 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBOutlet weak var tableview: UITableView!
     var convoList = [conversation]()
-   var myRidesList = [conversation]()
+    var myRidesList = [conversation]()
     var otherRidesList = [conversation]()
     var selectedRideList = [conversation]()
     var chatIDS = [String]()
     var userPhotos = [String:String]()
     var userIDS = [String:String]()
     var showRidesFor:requestType = requestType.All
-   var username:String?
+    var username:String?
     var db:DatabaseReference?
     let commonUtil = common_util()
     var conversationRef = [DatabaseReference]()
     var chatID:String?
     
-    
-    
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let NavigationController = storyboard?.instantiateViewController(withIdentifier: "CarpoolDM") as! CarpoolDM
-        NavigationController.id = chatIDS[indexPath.item]
-     self.navigationController?.pushViewController(NavigationController, animated: true)
+        NavigationController.id = convoList[indexPath.row].chatID
+        self.navigationController?.pushViewController(NavigationController, animated: true)
         
         
     }
@@ -44,12 +40,12 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationItemTableViewCell") as! ConversationItemTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationItemTableViewCell") as! ConversationItemTableViewCell
         
         cell.student_name.text = selectedRideList[indexPath.item].user
         cell.setCardView()
         cell.selectionStyle = UITableViewCellSelectionStyle.none
-      
+        
         
         cell.date.text = commonUtil.convertSecondsToDate(interval: selectedRideList[indexPath.item].date!)
         
@@ -62,23 +58,40 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
             self.getPhotoUrl(cell: cell, username: selectedRideList[indexPath.item].user!)
         }
         
-        getLastMessageConversation(id: chatIDS[indexPath.item], cell: cell)
+        
+        let convo = self.convoList[indexPath.row]
+        
+            if let messageText = convo.lastMessage {
+                if convo.lastMessageUser != self.username {
+                    cell.lastMessage.font = UIFont.boldSystemFont(ofSize: 15.0)
+                }else{
+                    cell.lastMessage.font =  UIFont.systemFont(ofSize: 15.0)
+                }
+                cell.date.text = self.commonUtil.convertSecondsToDate(interval: convo.lastMessageDate!)
+                cell.lastMessage.text = messageText
+            }
+        
+        
         return cell
     }
     
-
-   
     
+    
+    func sortConvoByDate(){
+        convoList = convoList.sorted(by: {$0.lastMessageDate > $1.lastMessageDate})
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableview.tableFooterView = UIView()
         self.tableview.rowHeight = 60
-       
-        self.tabBarController?.tabBarItem.badgeValue = nil
-       
+        self.hideKeyboardWhenTappedAround()
+        if let tabbaritem = self.tabBarController?.tabBar.items?[2]{
         
-        
+                tabbaritem.badgeValue = nil
+            
+        }
+
         username = commonUtil.getUserData(key: "username")
         db =  constants.userCarpoolMessagesDB.child(username!)
         getChatInfo()
@@ -88,27 +101,29 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
         self.selectedRideList = [conversation]()
         constants.userCarpoolMessagesDB.child(username!).queryOrdered(byChild: "Date").observe(.value) { (snapshot) in
             for snaps in snapshot.children{
-             
-              if let snapshots = snaps as? DataSnapshot{
+                
+                if let snapshots = snaps as? DataSnapshot{
                     
-                   let convo = self.getDataFromSnapshot(data: snapshots, key: snapshots.key)
-                if !self.chatIDS.contains(convo.chatID!){
-                    
-                    if ((snapshots.value as! [String:Any])["RideOwner"] as! String) == self.username {
-                        self.myRidesList.append(convo)
-                    }else{
-                        self.otherRidesList.append(convo)
+                    let convo = self.getDataFromSnapshot(data: snapshots, key: snapshots.key)
+                    if !self.chatIDS.contains(convo.chatID!){
+                        
+                        if ((snapshots.value as! [String:Any])["RideOwner"] as! String) == self.username {
+                            self.myRidesList.append(convo)
+                        }else{
+                            self.otherRidesList.append(convo)
+                        }
+                        
+                        self.convoList.append(convo)
+                        self.chatIDS.append(convo.chatID!)
+                        
+                        self.getLastMessageConversation(convo)
                     }
-                    
-                    self.convoList.append(convo)
-                    self.chatIDS.append(convo.chatID!)
-                }
                 }else{
                     print("Casting failed")
                 }
             }
             self.checkRequestType()
-          
+            
         }
         
     }
@@ -125,7 +140,7 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
         self.tableview.reloadData()
     }
     
-
+    
     func getPhotoUrl(cell:ConversationItemTableViewCell, username:String){
         constants.userDB.document(username).getDocument { (response, error) in
             if error == nil && response != nil{
@@ -164,18 +179,20 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
         }
         delete.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         confirm.backgroundColor = #colorLiteral(red: 0.5649999976, green: 0, blue: 0, alpha: 1)
-
+        
         let swipeAction = UISwipeActionsConfiguration(actions: [delete, confirm])
         swipeAction.performsFirstActionWithFullSwipe = false
         return swipeAction
     }
+    
+    
+    
 
     
     
-    
-    
-    func getLastMessageConversation(id:String,cell:ConversationItemTableViewCell){
-    constants.CarpoolMessagesDB.child(id).queryOrderedByKey().queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
+    func getLastMessageConversation(_ conversa:conversation){
+        var convo = conversa
+        constants.CarpoolMessagesDB.child(convo.chatID!).queryOrderedByKey().queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
             for snaps in snapshot.children{
                 let data = snaps as! DataSnapshot
                 
@@ -186,64 +203,77 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
                 //print("\(message) message")
                 
                 if let messageText = message {
-                    if usersender != self.username {
-                        cell.lastMessage.font = UIFont.boldSystemFont(ofSize: 15.0)
-                    }else{
-                         cell.lastMessage.font =  UIFont.systemFont(ofSize: 15.0)
-                    }
-                    cell.date.text = self.commonUtil.convertSecondsToDate(interval: date!)
-                    cell.lastMessage.text = messageText
+                   convo.lastMessage = messageText
+                    convo.lastMessageUser = usersender
+                    convo.lastMessageDate = date
                 }
+                let index = self.indexOf(list: self.convoList, chatID: convo.chatID!)
+                self.convoList[index] = convo
             }
+            self.sortConvoByDate()
+            self.tableview.reloadData()
             
         }) { (error) in
             print(error)
         }
-        conversationRef.append(constants.CarpoolMessagesDB.child(id))
-  
+        conversationRef.append(constants.CarpoolMessagesDB.child(convo.chatID!))
+        
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        print("Disappeared")
-       // removeAllListeners()
-    }
+    
+ 
     func removeAllListeners(){
         for indexPath in conversationRef.indices{
             conversationRef[indexPath].removeAllObservers()
         }
     }
     
+    func indexOf(list:[conversation], chatID:String) -> Int{
+        let index = 0
+        
+        for indexPath in list.indices{
+            if list[indexPath].chatID == chatID{
+                return indexPath}
+        }
+        
+        return index
+        
+    }
+    
     func getDataFromSnapshot(data:DataSnapshot, key:String) -> conversation{
         
         if let snapshot = data.value as? [String:Any]{
-         
+            
             print(snapshot)
             var nameOfUser:String?
             
             let users = snapshot["users"] as! [String]
             
             for values in users{
-    // if values != username! {
-                    nameOfUser = values
-    //   }
+                nameOfUser = values
+                
             }
             
             let date:Double = snapshot["Date"] as! Double
+            
             let id:String = key
             
-            
-            let convo = conversation(user: nameOfUser, chatID: id, date: date)
+           
+            let convo = conversation(user: nameOfUser, chatID: id, date: date, lastMessage: nil, lastMessageUser: nil, lastMessageDate: date)
             print(convo)
             return convo
         }else{
+            
             print("Cant convert")
         }
-        return conversation(user: nil, chatID: nil, date: nil)
+       
+         let myDate = Date().timeIntervalSince1970
+        return conversation(user: nil, chatID: nil, date: nil, lastMessage: nil, lastMessageUser: nil, lastMessageDate: myDate)
     }
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return UIStatusBarStyle.lightContent
     }
     
-   
+    
     
     
     
@@ -261,17 +291,24 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
 }
+
+
 enum  requestType{
     case All
     case myRides
     case other
 }
-    struct conversation{
-       var user:String?
-        var chatID:String?
-        var date:Double?
-    }
+struct conversation{
+    var user:String?
+    var chatID:String?
+    var date:Double?
+    var lastMessage:String?
+    var lastMessageUser:String?
+    var lastMessageDate:Double!
+   
+    
+}
 
-        
+
 
 

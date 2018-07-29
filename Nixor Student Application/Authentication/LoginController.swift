@@ -43,23 +43,24 @@ class LoginController: UIViewController , CountryPickerViewDelegate, CountryPick
                 UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
                 let NavigationController =  self.storyboard?.instantiateViewController(withIdentifier: "VerifyCode") as! VerifyCode
                 NavigationController.verification = verificationID
+                NavigationController.number = phoneNumber
                 self.navigationController?.pushViewController(NavigationController, animated: true)
             }
            
         }
     }
     
-    
-   
-    @IBAction func sendCode(_ sender: UIButton) {
+    @IBAction func sendCode(_ sender: UIBarButtonItem) {
         if let phoneNumber = phoneNumberEntry.text {
             print(countryPicker.selectedCountry)
-          phoneNumberVar = countryPicker.selectedCountry.phoneCode+phoneNumber
+            phoneNumberVar = countryPicker.selectedCountry.phoneCode+phoneNumber
             sendCodePhone(phoneNumber: phoneNumberVar!)
         }
-    
-    
+        
     }
+    
+   
+    
     
 
     override var preferredStatusBarStyle: UIStatusBarStyle{

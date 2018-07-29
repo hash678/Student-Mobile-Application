@@ -39,8 +39,8 @@ private let commonutil = common_util()
                 if let username = accountType.username, let type = accountType.mode{
                     self.checkAccountType(whatmode: type, username: username)}
             }else{
-                //TODO: NSP LOGIN
-                
+                let NspLogin = self.viewController!.storyboard?.instantiateViewController(withIdentifier: "NspLogin") as! NavigationController
+                self.viewController!.present(NspLogin, animated: true, completion:nil)
             }
             
         }}

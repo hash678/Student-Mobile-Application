@@ -73,7 +73,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
                 
                 
                 if self.myLat != nil{
-                    print("SORT MY DISTANCE")
+                    print("SORT BY DISTANCE")
                 let coordinate = CLLocation(latitude: self.myLat!, longitude: self.myLong!)
                 
                     self.rides =  self.rides.sorted(by: { (coordinate.distance(from: CLLocation(latitude: $0.startDestMyLat, longitude: $0.startDestMyLong))) < (coordinate.distance(from: CLLocation(latitude: $1.startDestMyLat, longitude: $1.startDestMyLong)))
@@ -122,6 +122,7 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         coreLocationManager.delegate = self
         checkPermissionToAccessLocation()
         self.tableView.rowHeight = 70
+        self.hideKeyboardWhenTappedAround()
        username = commonUtil.getUserData(key: "username")
         checkForNewRequestMessages()
        changeCampus("Main")
@@ -474,13 +475,12 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
         let users = [user,username]
         print("Cloud function called")
         let dataToSave:Dictionary<String,Any> = ["users":users,"Date":Timestamp().seconds,"RideOwner":user]
+        
         let data:[String:Any] = ["username1":user,"username2":username!,"map":dataToSave,"id":id]
         
         functions.httpsCallable("carpool_function").call(data) { (response, error) in
             if error == nil && response != nil{
                 self.tabBarController?.selectedIndex = 2
-                
-              
                 
             }else if error != nil {
                 self.commonUtil.showAlert(title: "Request failed", message: "Please make sure you are connected to the internet. If this problem persists please contact Nixor College", buttonMessage: "OK", view: self)
@@ -503,15 +503,12 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     func checkPermissionToAccessLocation(){
         let authorizationCode = CLLocationManager.authorizationStatus()
         
-        
         if authorizationCode == CLAuthorizationStatus.notDetermined && coreLocationManager.responds(to:#selector(CLLocationManager.requestAlwaysAuthorization)){
             if Bundle.main.object(forInfoDictionaryKey: "NSLocationAlwaysUsageDescription") != nil{
                 coreLocationManager.requestAlwaysAuthorization()
             }else{
                 print("No description available")
             }
-            
-            
         }else{
             getLocation()
             

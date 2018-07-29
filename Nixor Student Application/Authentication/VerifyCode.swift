@@ -12,6 +12,8 @@ import FirebaseAuth
 import Firebase
 class VerifyCode: UIViewController {
     var verification:String?
+    var number:String?
+    
     @IBOutlet weak var codeEntry: PinCodeTextField!
     @IBOutlet weak var verifyCode: UIButton!
     var LoggedInUser:AuthDataResult?
@@ -19,17 +21,8 @@ class VerifyCode: UIViewController {
     var credential:PhoneAuthCredential?
     var handler:LoginHandler?
     
-    @IBAction func verifyCode(_ sender: UIButton) {
-        
-        if let code = codeEntry.text, verification != nil {
-          credential = PhoneAuthProvider.provider().credential(
-                withVerificationID: verification!,
-                verificationCode: code)
-            signIn(credential: credential!)
-        }
-        
-        
-    }
+    @IBOutlet weak var phoneNumber: UILabel!
+    
     
     func signIn(credential:PhoneAuthCredential){
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
@@ -48,15 +41,37 @@ class VerifyCode: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         handler = LoginHandler(view: self)
-         self.dismissKeyboard()
+         self.hideKeyboardWhenTappedAround()
         self.codeEntry.keyboardType = UIKeyboardType.phonePad
-        navigationController?.title = "Login"
+        navigationController?.title = "Verify phone number"
         navigationController?.navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
        
-        // Do any additional setup after loading the view.
+       phoneNumber.text = number
+        
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(VerifyCode.back(sender:)))
+          let nextButton = UIBarButtonItem(title: "Verify", style: UIBarButtonItemStyle.plain, target: self, action: #selector(VerifyCode.sendCode(sender:)))
+        self.navigationItem.rightBarButtonItem = nextButton
+        self.navigationItem.leftBarButtonItem = newBackButton
+
+        
+        
+    }
+    @objc func back(sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+        
+    }
+    @objc func sendCode(sender: UIBarButtonItem) {
+        
+        if let code = codeEntry.text, verification != nil {
+            credential = PhoneAuthProvider.provider().credential(
+                withVerificationID: verification!,
+                verificationCode: code)
+            signIn(credential: credential!)
+        }
+        
     }
     
-   
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return UIStatusBarStyle.lightContent
     }

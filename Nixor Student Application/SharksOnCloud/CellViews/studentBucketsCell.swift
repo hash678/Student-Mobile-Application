@@ -1,19 +1,22 @@
 //
-//  bucketsTableViewCell.swift
+//  studentBucketsCell.swift
 //  Nixor Student Application
 //
-//  Created by Hassan Abbasi on 19/07/2018.
+//  Created by Hassan Abbasi on 24/07/2018.
 //  Copyright © 2018 Hassan Abbasi. All rights reserved.
 //
 
 import UIKit
 
-class bucketsTableViewCell: UITableViewCell{
-    @IBOutlet weak var student_name: UILabel!
-    @IBOutlet weak var class_type: UILabel!
+class studentBucketsCell: UITableViewCell {
+
+    @IBOutlet weak var thumbnail: UIImageView!
     
-    @IBOutlet weak var student_photo: UIImageView!
-    @IBOutlet weak var nixor_points: UILabel!
+    @IBOutlet weak var image_name: UILabel!
+    
+    @IBOutlet weak var date: UILabel!
+    
+    
     @IBOutlet weak var view: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()

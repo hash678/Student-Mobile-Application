@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>The app needs access to user&apos;s camera to upload to SharksOnCloud</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -32,11 +34,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>The app needs to access user's location for Nixor Carpool feature</string>
+	<string>The app needs to access user&apos;s location for Nixor Carpool feature</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>The app needs to access user's location for Nixor Carpool feature</string>
+	<string>The app needs to access user&apos;s location for Nixor Carpool feature</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>The app needs to access user's location for Nixor Carpool feature</string>
+	<string>The app needs to access user&apos;s location for Nixor Carpool feature</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Used for photo sharing in chat app and SharksOnCloud</string>
 	<key>UIBackgroundModes</key>

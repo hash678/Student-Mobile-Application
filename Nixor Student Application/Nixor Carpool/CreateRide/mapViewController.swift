@@ -356,7 +356,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         let origin = "\(origin[0]),\(origin[1])"
         let destination = "\(destination[0]),\(destination[1])"
 
-        let params:[String:Any] = ["destination":destination,"origin":origin,"apikey":delegate.mapAppkey]
+        let params:[String:Any] = ["destination":destination,"origin":origin,"devicetype":"ios"]
         functions.httpsCallable("map_function").call(params) { (response, error) in
     
             if error == nil {

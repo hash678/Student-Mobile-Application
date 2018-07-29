@@ -10,6 +10,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseStorage
 import Kingfisher
+import FirebaseDatabase
 import M13Checkbox
 class common_util{
     
@@ -198,6 +199,39 @@ class common_util{
     }
     
     
+    
+    func checkActivation(username:String,view:UIViewController){
+        Database.database().reference().child("activated").observe(.value) { (snapshot) in
+            
+           
+                
+            if  let value = snapshot.value as? NSDictionary{
+                if value["all"] == nil{
+                    if value[username] == nil{
+                    
+                let alertController = UIAlertController(title: "Account not activated", message: "It seems like your account is not activated. Please contact Nixor Administration. Thank you", preferredStyle: .alert)
+                
+               
+                
+                // Present the controller
+                        view.present(alertController, animated: true, completion: nil)}
+            }
+                
+            }else{
+                let alertController = UIAlertController(title: "Account not activated", message: "It seems like your account is not activated. Please contact Nixor Administration. Thank you", preferredStyle: .alert)
+                
+                
+                
+                // Present the controller
+                view.present(alertController, animated: true, completion: nil)}
+                
+            }
+        }
+
+    
+    
+    
+    
     func showAlert(title:String,message:String,buttonMessage:String,view:UIViewController){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -238,12 +272,13 @@ class common_util{
    
 }
 
-extension UIImageView{
+extension UIView{
      func circleImage(){
         self.layer.cornerRadius = 25
         self.layer.masksToBounds = true
     }
 }
+
 extension UIView{
     //cell.view.layer.shadowColor = UIColor.black.cgColor
    
@@ -352,6 +387,23 @@ extension UIView{
     
 }
 
+extension UIImage {
+    enum JPEGQuality: CGFloat {
+        case lowest  = 0
+        case low     = 0.25
+        case medium  = 0.5
+        case high    = 0.75
+        case highest = 1
+    }
+    
+    /// Returns the data for the specified image in JPEG format.
+    /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
+    /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
+    func jpeg(_ quality: JPEGQuality) -> Data? {
+        return UIImageJPEGRepresentation(self, quality.rawValue)
+    }
+}
+
 extension UIView {
     
     func setCardView(){
@@ -366,4 +418,7 @@ extension UIView {
         view.layer.masksToBounds = true
         
     }
+    
 }
+
+

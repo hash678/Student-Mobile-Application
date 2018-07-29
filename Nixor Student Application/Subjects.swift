@@ -16,16 +16,40 @@ class SOCSubjects: UIViewController,UITableViewDelegate,UITableViewDataSource, a
     var selectedSubjectList = [String]()
     var filteredSubjectList = [String]()
     
+    var favSubjects = [String]()
+    
     @IBOutlet weak var tableview: UITableView!
     
     @IBOutlet weak var header: headerMain!
+    
+    func setMyFavSubjects(){
+        if favSubjects.count > 0
+        let defaults = UserDefaults.standard
+        defaults.set(favSubjects, forKey: "SOCFavSubjects")
+tableview.reloadDate()
+        
+    }
+    }
+
+func getMyFavSubjects(){
+    if let myarray = defaults.stringArray(forKey: "SOCFavSubjects") ?? [String](){
+        favSubjects = myarray
+    }
+}
+
+func addToFavSubjects(subjectName:String){
+    favSubjects.append(subjectName)
+setMyFavSubjects()
+    
+}
     
     override func viewDidLoad() {
         super.viewDidLoad()
         username = commonUtil.getUserData(key: "username")
          getSubjects(selectedClassType)
+        getMyFavSubjects();
           tableview.tableFooterView = UIView()
-            tableview.rowHeight = 65
+            tableview.rowHeight = 60
         self.hideKeyboardWhenTappedAround()
    
     }
@@ -97,7 +121,7 @@ class SOCSubjects: UIViewController,UITableViewDelegate,UITableViewDataSource, a
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-       print("Clicked")
+       
         let BucketsController = storyboard?.instantiateViewController(withIdentifier: "Buckets") as! Buckets
         if selectedClassType == classTypeAsOrA2.AS{
               BucketsController.class_type = "AS"
@@ -165,33 +189,13 @@ class SOCSubjects: UIViewController,UITableViewDelegate,UITableViewDataSource, a
                 searchActive = false
             }
             tableview.reloadData()
-//        }else{
-//
-//            let obtanedTulips = filterSubjects(text: searchText, paperObjectArray: paperObjectList, paperListUrl: paperUrlList)
-//            filteredPaperObjects = obtanedTulips.paperS
-//            filteredPaperUrls = obtanedTulips.paperUrls
-//
-//            //            if(filteredPaperObjects.count == 0){
-//            //                searchActive = false
-//            //            } else {
-//
-//
-//            searchActive = true
-//
-//            if searchText == ""{
-//                searchActive = false
-//            }
-//            //
-//            tableView.reloadData()
-//        }
-//
-//
+
         
     }
     
     
-    
 }
+
 
 enum classTypeAsOrA2{
     case AS

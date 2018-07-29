@@ -22,28 +22,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nixorsharkoriginal" translatesAutoresizingMaskIntoConstraints="NO" id="XFK-QL-7Ap">
-                                        <rect key="frame" x="46.5" y="50" width="283" height="102"/>
+                                        <rect key="frame" x="46.5" y="104" width="283" height="102"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="283" id="5ad-EE-4UJ"/>
                                             <constraint firstAttribute="height" constant="102" id="8nV-6y-iDq"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xPw-s5-hVh" customClass="CountryPickerView" customModule="CountryPickerView">
-                                        <rect key="frame" x="15" y="212" width="345" height="45"/>
+                                        <rect key="frame" x="15" y="246" width="345" height="45"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="oUK-rQ-xeF"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbf-hM-pOI">
-                                        <rect key="frame" x="150" y="361" width="74" height="30"/>
-                                        <state key="normal" title="Send code"/>
-                                        <connections>
-                                            <action selector="sendCode:" destination="ROz-eo-onq" eventType="touchUpInside" id="4pC-3v-dqb"/>
-                                        </connections>
-                                    </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+92" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VAE-J2-MXp">
-                                        <rect key="frame" x="15" y="265" width="90" height="45"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+92" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VAE-J2-MXp">
+                                        <rect key="frame" x="15" y="299" width="90" height="45"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="0Nf-BY-p1h"/>
@@ -53,8 +46,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter your phone number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9iA-xy-zeH">
-                                        <rect key="frame" x="105" y="265" width="255" height="45"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter your phone number" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9iA-xy-zeH">
+                                        <rect key="frame" x="105" y="299" width="255" height="45"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="aMJ-6o-whK"/>
@@ -63,22 +56,28 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nixor Student Application" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOw-6V-Hvg">
+                                        <rect key="frame" x="77" y="40" width="222" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" name="NixorColor"/>
                                 <constraints>
                                     <constraint firstItem="9iA-xy-zeH" firstAttribute="leading" secondItem="VAE-J2-MXp" secondAttribute="trailing" id="1uB-0Y-ndw"/>
-                                    <constraint firstItem="Gbf-hM-pOI" firstAttribute="centerX" secondItem="LGu-Iv-shk" secondAttribute="centerX" id="3cY-zh-oRY"/>
                                     <constraint firstAttribute="trailing" secondItem="xPw-s5-hVh" secondAttribute="trailing" constant="15" id="PcO-Bn-yd4"/>
                                     <constraint firstItem="XFK-QL-7Ap" firstAttribute="centerX" secondItem="LGu-Iv-shk" secondAttribute="centerX" id="TIb-mx-jGK"/>
                                     <constraint firstItem="VAE-J2-MXp" firstAttribute="top" secondItem="xPw-s5-hVh" secondAttribute="bottom" constant="8" id="Y0J-FD-cVG"/>
                                     <constraint firstAttribute="trailing" secondItem="9iA-xy-zeH" secondAttribute="trailing" constant="15" id="db2-q6-6xS"/>
-                                    <constraint firstItem="xPw-s5-hVh" firstAttribute="top" secondItem="XFK-QL-7Ap" secondAttribute="bottom" constant="60" id="e3P-Oa-4cw"/>
+                                    <constraint firstItem="xPw-s5-hVh" firstAttribute="top" secondItem="XFK-QL-7Ap" secondAttribute="bottom" constant="40" id="e3P-Oa-4cw"/>
                                     <constraint firstItem="9iA-xy-zeH" firstAttribute="top" secondItem="xPw-s5-hVh" secondAttribute="bottom" constant="8" id="iwH-QD-1xa"/>
+                                    <constraint firstItem="nOw-6V-Hvg" firstAttribute="centerX" secondItem="LGu-Iv-shk" secondAttribute="centerX" id="mA6-kJ-w49"/>
+                                    <constraint firstItem="nOw-6V-Hvg" firstAttribute="top" secondItem="LGu-Iv-shk" secondAttribute="top" constant="40" id="mm9-9Z-pSX"/>
                                     <constraint firstItem="VAE-J2-MXp" firstAttribute="leading" secondItem="LGu-Iv-shk" secondAttribute="leading" constant="15" id="nMQ-1v-WMo"/>
-                                    <constraint firstItem="Gbf-hM-pOI" firstAttribute="top" secondItem="9iA-xy-zeH" secondAttribute="bottom" constant="51" id="pmj-jV-Jfz"/>
                                     <constraint firstItem="xPw-s5-hVh" firstAttribute="leading" secondItem="LGu-Iv-shk" secondAttribute="leading" constant="15" id="qZv-0j-yBI"/>
-                                    <constraint firstItem="XFK-QL-7Ap" firstAttribute="top" secondItem="LGu-Iv-shk" secondAttribute="top" constant="50" id="wQE-Rj-Yjq"/>
+                                    <constraint firstItem="XFK-QL-7Ap" firstAttribute="top" secondItem="nOw-6V-Hvg" secondAttribute="bottom" constant="40" id="xng-Q8-nZm"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -96,7 +95,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eCX-NB-IbI"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="Bx0-us-V4a"/>
+                    <navigationItem key="navigationItem" title="Enter phone number" id="Bx0-us-V4a">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="fJo-T7-9Dg">
+                            <connections>
+                                <action selector="sendCode:" destination="ROz-eo-onq" id="HYF-Na-RQ8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="countryPicker" destination="xPw-s5-hVh" id="J6T-1R-eb0"/>
                         <outlet property="phoneNumberEntry" destination="9iA-xy-zeH" id="Wu1-Kf-bYt"/>
@@ -120,16 +125,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nixorsharkoriginal" translatesAutoresizingMaskIntoConstraints="NO" id="BwX-MF-wor">
-                                        <rect key="frame" x="46.5" y="110" width="283" height="102"/>
+                                        <rect key="frame" x="46.5" y="100" width="283" height="102"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="283" id="LO9-lD-D5n"/>
                                             <constraint firstAttribute="height" constant="102" id="khA-rE-uLJ"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wdx-YU-nHg" customClass="PinCodeTextField" customModule="PinCodeTextField">
-                                        <rect key="frame" x="15" y="322" width="345" height="47"/>
+                                        <rect key="frame" x="68" y="290" width="240" height="47"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="47" id="NKF-Yp-M3V"/>
+                                            <constraint firstAttribute="width" constant="240" id="Rmc-FO-Cm3"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="underlineWidth">
@@ -156,24 +163,30 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJl-cI-962">
-                                        <rect key="frame" x="167.5" y="399" width="40" height="30"/>
-                                        <state key="normal" title="Verify"/>
-                                        <connections>
-                                            <action selector="verifyCode:" destination="DIg-tK-8Z8" eventType="touchUpInside" id="iVs-mL-Lqi"/>
-                                        </connections>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the 6-digit code we sent to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6Q-Uu-mmq">
+                                        <rect key="frame" x="81" y="218" width="213" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+9233344554" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHs-VY-Ufx">
+                                        <rect key="frame" x="140.5" y="243" width="95.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" name="NixorColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="Wdx-YU-nHg" firstAttribute="top" secondItem="BwX-MF-wor" secondAttribute="bottom" constant="110" id="GMf-5T-C4i"/>
-                                    <constraint firstItem="BwX-MF-wor" firstAttribute="top" secondItem="eeD-tG-LZa" secondAttribute="top" constant="110" id="MHZ-oP-PbL"/>
-                                    <constraint firstItem="SJl-cI-962" firstAttribute="top" secondItem="Wdx-YU-nHg" secondAttribute="bottom" constant="30" id="PQ6-UO-LaX"/>
-                                    <constraint firstItem="Wdx-YU-nHg" firstAttribute="leading" secondItem="eeD-tG-LZa" secondAttribute="leading" constant="15" id="RpQ-Je-cc1"/>
+                                    <constraint firstItem="Wdx-YU-nHg" firstAttribute="centerX" secondItem="eeD-tG-LZa" secondAttribute="centerX" id="1S6-7x-oMA"/>
+                                    <constraint firstItem="JHs-VY-Ufx" firstAttribute="top" secondItem="Q6Q-Uu-mmq" secondAttribute="bottom" constant="8" id="BkA-HG-xDF"/>
+                                    <constraint firstItem="Wdx-YU-nHg" firstAttribute="top" secondItem="JHs-VY-Ufx" secondAttribute="bottom" constant="30" id="Dcv-zy-9Gt"/>
+                                    <constraint firstItem="BwX-MF-wor" firstAttribute="top" secondItem="eeD-tG-LZa" secondAttribute="top" constant="100" id="MHZ-oP-PbL"/>
+                                    <constraint firstItem="Q6Q-Uu-mmq" firstAttribute="centerX" secondItem="eeD-tG-LZa" secondAttribute="centerX" id="Xti-dh-rMM"/>
                                     <constraint firstItem="BwX-MF-wor" firstAttribute="centerX" secondItem="eeD-tG-LZa" secondAttribute="centerX" id="aQM-JX-Fwz"/>
-                                    <constraint firstItem="SJl-cI-962" firstAttribute="centerX" secondItem="eeD-tG-LZa" secondAttribute="centerX" id="hjY-fx-zEG"/>
+                                    <constraint firstItem="Q6Q-Uu-mmq" firstAttribute="top" secondItem="BwX-MF-wor" secondAttribute="bottom" constant="16" id="iVh-Pc-LNn"/>
                                     <constraint firstItem="Wdx-YU-nHg" firstAttribute="centerX" secondItem="eeD-tG-LZa" secondAttribute="centerX" id="m52-YH-b17"/>
-                                    <constraint firstAttribute="trailing" secondItem="Wdx-YU-nHg" secondAttribute="trailing" constant="15" id="o8P-YD-xXC"/>
+                                    <constraint firstItem="JHs-VY-Ufx" firstAttribute="centerX" secondItem="eeD-tG-LZa" secondAttribute="centerX" id="udk-1n-xiV"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -181,7 +194,11 @@
                         <color key="tintColor" name="NixorColor"/>
                         <constraints>
                             <constraint firstItem="eeD-tG-LZa" firstAttribute="bottom" secondItem="TOb-Sy-Q9w" secondAttribute="bottom" id="4Wy-A6-m84"/>
+                            <constraint firstItem="eeD-tG-LZa" firstAttribute="leading" secondItem="TOb-Sy-Q9w" secondAttribute="leading" id="9Kv-UF-Qm8"/>
                             <constraint firstItem="eeD-tG-LZa" firstAttribute="trailing" secondItem="TOb-Sy-Q9w" secondAttribute="trailing" id="HbM-jb-xH3"/>
+                            <constraint firstItem="eeD-tG-LZa" firstAttribute="top" secondItem="TOb-Sy-Q9w" secondAttribute="top" id="OHx-ih-N8i"/>
+                            <constraint firstItem="eeD-tG-LZa" firstAttribute="trailing" secondItem="TOb-Sy-Q9w" secondAttribute="trailing" id="SIN-Rg-4Kx"/>
+                            <constraint firstItem="eeD-tG-LZa" firstAttribute="bottom" secondItem="TOb-Sy-Q9w" secondAttribute="bottom" id="gfc-z8-6yN"/>
                             <constraint firstItem="eeD-tG-LZa" firstAttribute="leading" secondItem="TOb-Sy-Q9w" secondAttribute="leading" id="jtA-93-MGD"/>
                             <constraint firstItem="eeD-tG-LZa" firstAttribute="top" secondItem="flP-ci-A55" secondAttribute="top" id="v8G-5m-OkL"/>
                         </constraints>
@@ -189,12 +206,12 @@
                     </view>
                     <connections>
                         <outlet property="codeEntry" destination="Wdx-YU-nHg" id="y7b-xB-1kR"/>
-                        <outlet property="verifyCode" destination="SJl-cI-962" id="FAO-E6-tK4"/>
+                        <outlet property="phoneNumber" destination="JHs-VY-Ufx" id="Fdz-0e-b9f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVp-5E-nVP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2014" y="-765"/>
+            <point key="canvasLocation" x="2013.5999999999999" y="-765.06746626686663"/>
         </scene>
         <!--Nsp Login-->
         <scene sceneID="vez-EQ-svI">
@@ -281,16 +298,102 @@
             </objects>
             <point key="canvasLocation" x="2922" y="-765"/>
         </scene>
-        <!--Home screen-->
-        <scene sceneID="CzS-tG-2VJ">
+        <!--Select Account Type-->
+        <scene sceneID="ZSW-g2-wcZ">
             <objects>
-                <viewController storyboardIdentifier="home_sceenIntent" id="mZt-VW-BQP" customClass="home_screen" customModule="Nixor_Student_Application" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4TH-EE-izm">
+                <viewController storyboardIdentifier="SelectAccountType" useStoryboardIdentifierAsRestorationIdentifier="YES" id="x2p-MT-3RQ" customClass="SelectAccountType" customModule="Nixor_Student_Application" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fAP-Qp-bxN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="76g-mf-XYR">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWO-h7-fJ3">
+                                        <rect key="frame" x="133" y="136" width="108" height="117"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="117" id="B5o-gk-v7c"/>
+                                            <constraint firstAttribute="width" constant="108" id="Vhg-Vl-tNS"/>
+                                        </constraints>
+                                        <state key="normal" image="student_mode"/>
+                                        <connections>
+                                            <action selector="student_mode:" destination="x2p-MT-3RQ" eventType="touchUpInside" id="ZvE-yZ-DTc"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M9P-du-PEs">
+                                        <rect key="frame" x="157" y="261" width="61" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" name="NixorColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8W0-9P-qnS">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <color key="barTintColor" name="NixorColor"/>
+                                        <textAttributes key="titleTextAttributes">
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </textAttributes>
+                                        <items>
+                                            <navigationItem title="Select Account Type" id="sh2-Nz-Qa4"/>
+                                        </items>
+                                    </navigationBar>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Xa-lj-S8I">
+                                        <rect key="frame" x="120" y="343" width="134" height="115"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="115" id="aJ9-gR-t0a"/>
+                                            <constraint firstAttribute="width" constant="134" id="maN-hi-SUm"/>
+                                        </constraints>
+                                        <state key="normal" image="parent_mode"/>
+                                        <connections>
+                                            <action selector="parent_mode:" destination="x2p-MT-3RQ" eventType="touchUpInside" id="fAU-0z-grT"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I4k-u4-U7f">
+                                        <rect key="frame" x="162" y="465" width="50" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" name="NixorColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="BWO-h7-fJ3" firstAttribute="centerX" secondItem="76g-mf-XYR" secondAttribute="centerX" id="0db-dY-ufY"/>
+                                    <constraint firstItem="BWO-h7-fJ3" firstAttribute="top" secondItem="76g-mf-XYR" secondAttribute="top" constant="136" id="8Yc-Ey-NM7"/>
+                                    <constraint firstAttribute="trailing" secondItem="8W0-9P-qnS" secondAttribute="trailing" id="CSY-t3-kSh"/>
+                                    <constraint firstItem="9Xa-lj-S8I" firstAttribute="top" secondItem="M9P-du-PEs" secondAttribute="bottom" constant="61" id="Fhs-bR-50P"/>
+                                    <constraint firstItem="M9P-du-PEs" firstAttribute="centerX" secondItem="76g-mf-XYR" secondAttribute="centerX" id="G0v-dX-h4g"/>
+                                    <constraint firstItem="8W0-9P-qnS" firstAttribute="leading" secondItem="76g-mf-XYR" secondAttribute="leading" id="Lsg-NS-J7R"/>
+                                    <constraint firstItem="M9P-du-PEs" firstAttribute="top" secondItem="BWO-h7-fJ3" secondAttribute="bottom" constant="8" id="NWF-CY-00f"/>
+                                    <constraint firstItem="I4k-u4-U7f" firstAttribute="top" secondItem="9Xa-lj-S8I" secondAttribute="bottom" constant="7" id="PXP-b0-Wq6"/>
+                                    <constraint firstItem="8W0-9P-qnS" firstAttribute="top" secondItem="76g-mf-XYR" secondAttribute="top" id="Qx2-wB-U1L"/>
+                                    <constraint firstItem="I4k-u4-U7f" firstAttribute="centerX" secondItem="76g-mf-XYR" secondAttribute="centerX" id="puc-Us-NrU"/>
+                                    <constraint firstItem="9Xa-lj-S8I" firstAttribute="centerX" secondItem="76g-mf-XYR" secondAttribute="centerX" id="yex-Z3-86O"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="NixorColor"/>
+                        <constraints>
+                            <constraint firstItem="76g-mf-XYR" firstAttribute="trailing" secondItem="Jn3-9B-qkJ" secondAttribute="trailing" id="CGK-qc-3HT"/>
+                            <constraint firstItem="76g-mf-XYR" firstAttribute="top" secondItem="Jn3-9B-qkJ" secondAttribute="top" id="TjA-LZ-Z1A"/>
+                            <constraint firstItem="76g-mf-XYR" firstAttribute="bottom" secondItem="Jn3-9B-qkJ" secondAttribute="bottom" id="YqL-uD-ad8"/>
+                            <constraint firstItem="76g-mf-XYR" firstAttribute="leading" secondItem="Jn3-9B-qkJ" secondAttribute="leading" id="dCe-I7-i4g"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Jn3-9B-qkJ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8v1-dj-htH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3685.5999999999999" y="-765.06746626686663"/>
+        </scene>
+        <!--NIxor Portal-->
+        <scene sceneID="CzS-tG-2VJ">
+            <objects>
+                <viewController storyboardIdentifier="home_sceenIntent" title="NIxor Portal" id="mZt-VW-BQP" customClass="home_screen" customModule="Nixor_Student_Application" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4TH-EE-izm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggk-PZ-7GG">
-                                <rect key="frame" x="0.0" y="145" width="375" height="522"/>
+                                <rect key="frame" x="0.0" y="81" width="375" height="522"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dY-OG-leH">
                                         <rect key="frame" x="149" y="246" width="77" height="30"/>
@@ -303,7 +406,7 @@
                                         <rect key="frame" x="135" y="283" width="107" height="30"/>
                                         <state key="normal" title="SharksOnCloud"/>
                                         <connections>
-                                            <segue destination="BLZ-lO-K3K" kind="show" id="U9c-jr-DoH"/>
+                                            <segue destination="VAp-fs-doD" kind="show" id="fqc-LX-Zx6"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYg-NK-hnj">
@@ -330,7 +433,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="akk-1b-h3z" customClass="headerMain" customModule="Nixor_Student_Application" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="q6I-Cx-Jjd"/>
@@ -366,12 +469,12 @@
             <point key="canvasLocation" x="3081" y="510"/>
         </scene>
         <!--SharksOnCloud-->
-        <scene sceneID="BAH-31-eif">
+        <scene sceneID="24N-iO-hQo">
             <objects>
-                <viewControllerPlaceholder storyboardName="SharksoncloudStoryboard" referencedIdentifier="SharksOnCloud" id="BLZ-lO-K3K" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZI2-Ky-zpR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="SocStoryboard" referencedIdentifier="SharksOnCloud" id="VAp-fs-doD" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a8i-UJ-SMQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3686" y="-216"/>
+            <point key="canvasLocation" x="3744" y="-148"/>
         </scene>
         <!--PastPapers-->
         <scene sceneID="HbN-b3-kHp">
@@ -386,10 +489,11 @@
             <objects>
                 <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Iud-rN-JF9" customClass="NavigationController" customModule="Nixor_Student_Application" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="HRL-J7-0KS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="HRL-J7-0KS">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" name="NixorColor"/>
                         <textAttributes key="largeTitleTextAttributes">
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -477,6 +581,8 @@
     </scenes>
     <resources>
         <image name="nixorsharkoriginal" width="554" height="196"/>
+        <image name="parent_mode" width="200" height="172"/>
+        <image name="student_mode" width="214" height="263"/>
         <namedColor name="NixorColor">
             <color red="0.56499999761581421" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -15,12 +15,23 @@ class home_screen: UIViewController {
     var commonutil = common_util()
     var userClass = UserPhoto()
     var username:String?
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+         initialize()
+        
+        username = commonutil.getUserData(key: "username")
+        commonutil.checkActivation(username: username!, view: self)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
        
        
-        initialize()
+       
         }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

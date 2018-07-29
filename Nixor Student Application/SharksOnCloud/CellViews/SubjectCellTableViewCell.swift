@@ -10,21 +10,24 @@ import UIKit
 
 
 protocol addToFav{
-    func addToFav(added:Bool)
+    func addToFav(sender:IndexPath)
     
 }
 
 class SubjectCellTableViewCell: UITableViewCell {
 
+    
+    var indexpath:IndexPath?
     var addedToFav:Bool = false
     var delegate:addToFav?
+    var cell:SubjectCellTableViewCell?
     
     @IBOutlet weak var heartButton: UIButton!
     @IBAction func favButton(_ sender: UIButton) {
         if !addedToFav{
-            delegate?.addToFav(added:true)
+            delegate?.addToFav(sender:indexpath!)
         }else{
-            delegate?.addToFav(added:false)
+            delegate?.addToFav(sender:indexpath!)
         }
         
     }
