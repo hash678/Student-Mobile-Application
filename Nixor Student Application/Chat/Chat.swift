@@ -46,8 +46,8 @@ class Chat: JSQMessagesViewController, UIImagePickerControllerDelegate, UINaviga
 		MessagesHandler.Instance.observerMessages()
 		self.senderId = commonUtil.getUserData(key: "username")
 		//TODO: Change this back
-		//self.senderDisplayName = commonUtil.getUserData(key: "student_name")
-		self.senderDisplayName = "Hassan Abbasi"
+		self.senderDisplayName = commonUtil.getUserData(key: "name")
+		//self.senderDisplayName = "Hassan Abbasi"
 		
 		picker.delegate = self
 	}

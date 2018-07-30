@@ -30,6 +30,8 @@ class common_util{
         return formattedNumber
     }
     
+    
+    
     func convertSecondsToDateOnly(interval:Double) -> String{
         
         let calendar = NSCalendar.current
@@ -165,24 +167,24 @@ class common_util{
     public func documentToStudentObject(firebaseDocument: DocumentSnapshot) -> StudentDetails{
         var student:StudentDetails = StudentDetails()
         
-        if let email = firebaseDocument.get("student_email"){
+        if let email = firebaseDocument.get("studentEmail"){
             student.student_email = email as? String
            
         }
         
-        if let house = firebaseDocument.get("student_house"){
+        if let house = firebaseDocument.get("studentHouse"){
             student.student_house = house as? String
         }
         
-        if let year = firebaseDocument.get("student_year"){
+        if let year = firebaseDocument.get("studentYear"){
             student.student_year = year as? String
         }
         
-        if let id = firebaseDocument.get("student_id"){
+        if let id = firebaseDocument.get("studentID"){
             student.student_id = id as? String
         }
         
-        if let name = firebaseDocument.get("student_name"){
+        if let name = firebaseDocument.get("studentName"){
             student.student_name = name as? String
         }
         
@@ -191,7 +193,7 @@ class common_util{
             student.student_profileUrl = nsp_photo as? String
         }
         
-        if let guid = firebaseDocument.get("student_guid"){
+        if let guid = firebaseDocument.get("GUID"){
             student.student_guid = guid as? String
         }
         print("Student Details: \(student)")

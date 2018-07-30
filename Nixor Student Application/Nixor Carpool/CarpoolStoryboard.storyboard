@@ -472,7 +472,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k67-xZ-jel">
-                                <rect key="frame" x="20" y="109" width="335" height="449"/>
+                                <rect key="frame" x="20" y="109" width="374" height="449"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3j-jr-lLD">
                                         <rect key="frame" x="15" y="8" width="34" height="30"/>
@@ -482,7 +482,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wL-Hl-NLT" customClass="GMSMapView">
-                                        <rect key="frame" x="0.0" y="41" width="335" height="408"/>
+                                        <rect key="frame" x="0.0" y="41" width="374" height="408"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="delegate" destination="kyn-Vx-3Ee" id="gje-3B-zyC"/>

@@ -1,12 +1,10 @@
-
-
 import UIKit
 import FirebaseFirestore
 import FirebaseDatabase
 class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-   
     
-
+    
+    
     @IBOutlet weak var myNixorPoints: UILabel!
     @IBOutlet weak var classNameMyBucket: UILabel!
     @IBOutlet weak var tableview: UITableView!
@@ -20,7 +18,7 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
     var filteredbucketArray = [BucketObject]()
     
     @IBAction func openMyBucket(_ sender: Any) {
-      //MyBucketViewController
+        //MyBucketViewController
         
         let MyBucketViewController = storyboard?.instantiateViewController(withIdentifier: "MyBucketViewController") as! MyBucketViewController
         if class_type == "AS"{
@@ -42,7 +40,7 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
         if searchActive{
             return filteredbucketArray.count
         }else{
-        
+            
             return bucketArray.count}
     }
     
@@ -74,7 +72,7 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       let cell = tableView.dequeueReusableCell(withIdentifier: "bucketsTableViewCell") as! bucketsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "bucketsTableViewCell") as! bucketsTableViewCell
         cell.view.setCardView()
         cell.student_photo.circleImage()
         cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -98,7 +96,7 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
             let photoURL = URL(string: photourl)
             cell.student_photo.kf.setImage(with: photoURL)
         }else{
-        self.getPhotoUrl(username: myBucketArray[indexPath.row].username!, cell: cell)
+            self.getPhotoUrl(username: myBucketArray[indexPath.row].username!, cell: cell)
         }
         
         
@@ -116,13 +114,13 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
                     cell.student_photo.circleImage()
                     
                     if let indexPath:Int = self.userBucketsArray.index(of: username){
-                    if self.bucketArray[indexPath].student_name == nil{
-                        
-                        if let student_name = response?.get("student_name") as? String{
-                        cell.student_name.text = student_name
-                        self.bucketArray[indexPath].student_name = student_name
+                        if self.bucketArray[indexPath].student_name == nil{
+                            
+                            if let student_name = response?.get("student_name") as? String{
+                                cell.student_name.text = student_name
+                                self.bucketArray[indexPath].student_name = student_name
+                            }
                         }
-                    }
                     }}
                 
             }
@@ -130,21 +128,21 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
         
     }
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-         tableview.tableFooterView = UIView()
+        tableview.tableFooterView = UIView()
         tableview.rowHeight = 90
         
         
-    self.title = "\(class_type!) \(subjectName!)"
+        self.title = "\(class_type!) \(subjectName!)"
         getAllBuckets()
         
-
+        
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(Buckets.back(sender:)))
-      
+        
         self.navigationItem.leftBarButtonItem = newBackButton
         
         
@@ -154,8 +152,8 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
         navigationController?.popViewController(animated: true)
         
     }
-  
-   
+    
+    
     func getAllBuckets(){
         print("Getting all buckets")
         bucketArray = [BucketObject]()
@@ -169,8 +167,8 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
         
         ref!.document(subjectName!).collection("Users").addSnapshotListener({ (query, error) in
             var student_name:String?
-           // print(query?.count)
-           // print(self.class_type)
+            // print(query?.count)
+            // print(self.class_type)
             for documents in (query?.documents)!{
                 print(documents)
                 let username:String = documents.documentID
@@ -181,7 +179,7 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
                     
                     let bucketObject = BucketObject(username: username, student_name: student_name, className: className)
                     if !self.userBucketsArray.contains(username){
-                    self.bucketArray.append(bucketObject)
+                        self.bucketArray.append(bucketObject)
                         self.userBucketsArray.append(username)
                         
                     }
@@ -198,7 +196,7 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
         
         
     }
-   
+    
     
     
     
@@ -225,11 +223,11 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-     
-   
+        
+        
         filteredbucketArray = filterObjects(text: searchText, paperObjectArray: bucketArray)
-   
-   
+        
+        
         searchActive = true
         
         if searchText == ""{
@@ -267,7 +265,7 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
     
     func filterObjects(text:String, paperObjectArray:[BucketObject]) -> [BucketObject]{
         var filteredPaperObjects = [BucketObject]()
-     
+        
         
         let constraint = text.trimmingCharacters(in: .whitespacesAndNewlines)
         var firstsplit = constraint.split(separator: " ")
@@ -279,10 +277,10 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
             
             for index in firstsplit.indices{
                 let value = firstsplit[index].trimmingCharacters(in: .whitespacesAndNewlines).capitalized
-              
-                    count += 1
-                    // print("Count: \(count)")
-               
+                
+                count += 1
+                // print("Count: \(count)")
+                
                 let contains = itContains(value: value, paperObject: paperObjectArray[indexPath])
                 //print("value: \(value) contains: \(contains)")
                 if contains {
@@ -294,16 +292,16 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
             }
             if found == count {
                 filteredPaperObjects.append(paperObjectArray[indexPath])
-               
+                
             }
             
             
         }
-       
+        
         return filteredPaperObjects
     }
     
-
+    
     
     
     
@@ -311,5 +309,5 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return UIStatusBarStyle.lightContent
     }
-
+    
 }

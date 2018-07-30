@@ -30,6 +30,9 @@
 		195E33E12109E71800E21E37 /* Maintain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33E02109E71800E21E37 /* Maintain.swift */; };
 		195E33E3210BC74900E21E37 /* uploadedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33E2210BC74900E21E37 /* uploadedCell.swift */; };
 		195E33E7210E04F200E21E37 /* BucketController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33E6210E04F200E21E37 /* BucketController.swift */; };
+		195E33EA210E8DA100E21E37 /* nspCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33E9210E8DA100E21E37 /* nspCell.swift */; };
+		195E33EC210E91B700E21E37 /* sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33EB210E91B700E21E37 /* sidebar.swift */; };
+		195E33EE210E9B3A00E21E37 /* headerForImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33ED210E9B3A00E21E37 /* headerForImageViewer.swift */; };
 		195F2AF120F8CB9F0088A18D /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2AF020F8CB9F0088A18D /* constants.swift */; };
 		195F2AF520FB4C100088A18D /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2AF420FB4C100088A18D /* Chat.swift */; };
 		195F2AF720FB4CD00088A18D /* message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2AF620FB4CD00088A18D /* message.swift */; };
@@ -115,6 +118,9 @@
 		195E33E02109E71800E21E37 /* Maintain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maintain.swift; sourceTree = "<group>"; };
 		195E33E2210BC74900E21E37 /* uploadedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = uploadedCell.swift; sourceTree = "<group>"; };
 		195E33E6210E04F200E21E37 /* BucketController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketController.swift; sourceTree = "<group>"; };
+		195E33E9210E8DA100E21E37 /* nspCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nspCell.swift; sourceTree = "<group>"; };
+		195E33EB210E91B700E21E37 /* sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sidebar.swift; sourceTree = "<group>"; };
+		195E33ED210E9B3A00E21E37 /* headerForImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = headerForImageViewer.swift; sourceTree = "<group>"; };
 		195F2AF020F8CB9F0088A18D /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		195F2AF420FB4C100088A18D /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; usesTabs = 1; };
 		195F2AF620FB4CD00088A18D /* message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = message.swift; sourceTree = "<group>"; };
@@ -250,7 +256,10 @@
 		1948E15520EE5A8A00AADC59 /* Application_Home */ = {
 			isa = PBXGroup;
 			children = (
+				19CA0CA921049DBF00F74057 /* Main.storyboard */,
 				1948E15320EE5A7C00AADC59 /* home_screen.swift */,
+				195E33E9210E8DA100E21E37 /* nspCell.swift */,
+				195E33EB210E91B700E21E37 /* sidebar.swift */,
 			);
 			path = Application_Home;
 			sourceTree = "<group>";
@@ -377,7 +386,6 @@
 				19D53D352101E1240065D8E7 /* NspLogin.swift */,
 				19CA0CAF2104EC5400F74057 /* SelectAccountType.swift */,
 				193B578420F25697009FCD68 /* NavigationController.swift */,
-				19CA0CA921049DBF00F74057 /* Main.storyboard */,
 				19B59C3120E52EBA00D865DF /* Info.plist */,
 				1937B7EE20EE207D0024A047 /* GoogleService-Info.plist */,
 			);
@@ -442,6 +450,7 @@
 				19D53D3721020A110065D8E7 /* HudView.swift */,
 				193B577A20F22392009FCD68 /* header.xib */,
 				193B577E20F226CB009FCD68 /* headerMain.swift */,
+				195E33ED210E9B3A00E21E37 /* headerForImageViewer.swift */,
 			);
 			path = Design;
 			sourceTree = "<group>";
@@ -682,6 +691,7 @@
 				"${BUILT_PRODUCTS_DIR}/PinCodeTextField/PinCodeTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
@@ -710,6 +720,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PinCodeTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
@@ -735,6 +746,7 @@
 				19FFEA362100CB4B00E5429C /* LaunchScreenViewController.swift in Sources */,
 				1937B7F720EE4BD50024A047 /* accountTypeGetSet.swift in Sources */,
 				19AE4DAE20FE7378001A5BC9 /* VerifyCode.swift in Sources */,
+				195E33EA210E8DA100E21E37 /* nspCell.swift in Sources */,
 				195E33DB2106831F00E21E37 /* studentBucketsCell.swift in Sources */,
 				19FFEA382100CCC400E5429C /* LoginHandler.swift in Sources */,
 				195E33DF21069AD000E21E37 /* MyBucketViewController.swift in Sources */,
@@ -746,9 +758,11 @@
 				19FFEA302100A93000E5429C /* Buckets.swift in Sources */,
 				190ECF9D20F014B000AEF69A /* paperCellTableViewCell.swift in Sources */,
 				195F2AF920FB4DE10088A18D /* messageItem.swift in Sources */,
+				195E33EC210E91B700E21E37 /* sidebar.swift in Sources */,
 				193B577F20F226CB009FCD68 /* headerMain.swift in Sources */,
 				1937B7F120EE3BCA0024A047 /* common_util.swift in Sources */,
 				19C3A41320F0B1F0007E7912 /* PdfLoader.swift in Sources */,
+				195E33EE210E9B3A00E21E37 /* headerForImageViewer.swift in Sources */,
 				195F2AF520FB4C100088A18D /* Chat.swift in Sources */,
 				195E33D921067F0300E21E37 /* studentBucker.swift in Sources */,
 				19AE4DAC20FE6674001A5BC9 /* LoginController.swift in Sources */,
