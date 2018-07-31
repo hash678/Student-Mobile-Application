@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AuthNavigationController: UINavigationController {
+class AuthNavigationController: GeneralLayout {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,8 +16,5 @@ class AuthNavigationController: UINavigationController {
         // Do any additional setup after loading the view.
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return UIStatusBarStyle.lightContent;
-    }
 
 }

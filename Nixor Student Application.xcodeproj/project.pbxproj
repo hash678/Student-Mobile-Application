@@ -31,8 +31,11 @@
 		195E33E3210BC74900E21E37 /* uploadedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33E2210BC74900E21E37 /* uploadedCell.swift */; };
 		195E33E7210E04F200E21E37 /* BucketController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33E6210E04F200E21E37 /* BucketController.swift */; };
 		195E33EA210E8DA100E21E37 /* nspCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33E9210E8DA100E21E37 /* nspCell.swift */; };
-		195E33EC210E91B700E21E37 /* sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33EB210E91B700E21E37 /* sidebar.swift */; };
-		195E33EE210E9B3A00E21E37 /* headerForImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33ED210E9B3A00E21E37 /* headerForImageViewer.swift */; };
+		195E33F0210E9B9200E21E37 /* headerForImageviewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 195E33EF210E9B9200E21E37 /* headerForImageviewer.xib */; };
+		195E33F2210F3E4500E21E37 /* headerImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33F1210F3E4500E21E37 /* headerImageViewerController.swift */; };
+		195E33F9210FB6D600E21E37 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 195E33F8210FB6D600E21E37 /* NotificationCenter.framework */; };
+		195E340A210FD73000E21E37 /* SideBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E3409210FD73000E21E37 /* SideBarViewController.swift */; };
+		195E340C2110739C00E21E37 /* GeneralLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E340B2110739C00E21E37 /* GeneralLayout.swift */; };
 		195F2AF120F8CB9F0088A18D /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2AF020F8CB9F0088A18D /* constants.swift */; };
 		195F2AF520FB4C100088A18D /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2AF420FB4C100088A18D /* Chat.swift */; };
 		195F2AF720FB4CD00088A18D /* message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F2AF620FB4CD00088A18D /* message.swift */; };
@@ -119,8 +122,12 @@
 		195E33E2210BC74900E21E37 /* uploadedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = uploadedCell.swift; sourceTree = "<group>"; };
 		195E33E6210E04F200E21E37 /* BucketController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketController.swift; sourceTree = "<group>"; };
 		195E33E9210E8DA100E21E37 /* nspCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nspCell.swift; sourceTree = "<group>"; };
-		195E33EB210E91B700E21E37 /* sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sidebar.swift; sourceTree = "<group>"; };
-		195E33ED210E9B3A00E21E37 /* headerForImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = headerForImageViewer.swift; sourceTree = "<group>"; };
+		195E33EF210E9B9200E21E37 /* headerForImageviewer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = headerForImageviewer.xib; sourceTree = "<group>"; };
+		195E33F1210F3E4500E21E37 /* headerImageViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = headerImageViewerController.swift; sourceTree = "<group>"; };
+		195E33F7210FB6D500E21E37 /* SharksOnCloudExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SharksOnCloudExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		195E33F8210FB6D600E21E37 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		195E3409210FD73000E21E37 /* SideBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarViewController.swift; sourceTree = "<group>"; };
+		195E340B2110739C00E21E37 /* GeneralLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLayout.swift; sourceTree = "<group>"; };
 		195F2AF020F8CB9F0088A18D /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		195F2AF420FB4C100088A18D /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; usesTabs = 1; };
 		195F2AF620FB4CD00088A18D /* message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = message.swift; sourceTree = "<group>"; };
@@ -175,6 +182,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		195E33F4210FB6D500E21E37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				195E33F9210FB6D600E21E37 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19B59C1F20E52EBA00D865DF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -257,9 +272,9 @@
 			isa = PBXGroup;
 			children = (
 				19CA0CA921049DBF00F74057 /* Main.storyboard */,
+				195E3409210FD73000E21E37 /* SideBarViewController.swift */,
 				1948E15320EE5A7C00AADC59 /* home_screen.swift */,
 				195E33E9210E8DA100E21E37 /* nspCell.swift */,
-				195E33EB210E91B700E21E37 /* sidebar.swift */,
 			);
 			path = Application_Home;
 			sourceTree = "<group>";
@@ -363,6 +378,7 @@
 				19B59C2220E52EBA00D865DF /* Nixor Student Application.app */,
 				19B59C3620E52EBA00D865DF /* Nixor Student ApplicationTests.xctest */,
 				19B59C4120E52EBA00D865DF /* Nixor Student ApplicationUITests.xctest */,
+				195E33F7210FB6D500E21E37 /* SharksOnCloudExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -450,7 +466,9 @@
 				19D53D3721020A110065D8E7 /* HudView.swift */,
 				193B577A20F22392009FCD68 /* header.xib */,
 				193B577E20F226CB009FCD68 /* headerMain.swift */,
-				195E33ED210E9B3A00E21E37 /* headerForImageViewer.swift */,
+				195E33EF210E9B9200E21E37 /* headerForImageviewer.xib */,
+				195E33F1210F3E4500E21E37 /* headerImageViewerController.swift */,
+				195E340B2110739C00E21E37 /* GeneralLayout.swift */,
 			);
 			path = Design;
 			sourceTree = "<group>";
@@ -470,6 +488,7 @@
 			isa = PBXGroup;
 			children = (
 				BDAEDD2DD69566AE02CAA810 /* Pods_Nixor_Student_Application.framework */,
+				195E33F8210FB6D600E21E37 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -486,6 +505,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		195E33F6210FB6D500E21E37 /* SharksOnCloudExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 195E3404210FB6D600E21E37 /* Build configuration list for PBXNativeTarget "SharksOnCloudExtension" */;
+			buildPhases = (
+				195E33F3210FB6D500E21E37 /* Sources */,
+				195E33F4210FB6D500E21E37 /* Frameworks */,
+				195E33F5210FB6D500E21E37 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SharksOnCloudExtension;
+			productName = SharksOnCloudExtension;
+			productReference = 195E33F7210FB6D500E21E37 /* SharksOnCloudExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		19B59C2120E52EBA00D865DF /* Nixor Student Application */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19B59C4A20E52EBA00D865DF /* Build configuration list for PBXNativeTarget "Nixor Student Application" */;
@@ -548,10 +584,14 @@
 		19B59C1A20E52EBA00D865DF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Hassan Abbasi";
 				TargetAttributes = {
+					195E33F6210FB6D500E21E37 = {
+						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
+					};
 					19B59C2120E52EBA00D865DF = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -560,6 +600,9 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -592,15 +635,24 @@
 				19B59C2120E52EBA00D865DF /* Nixor Student Application */,
 				19B59C3520E52EBA00D865DF /* Nixor Student ApplicationTests */,
 				19B59C4020E52EBA00D865DF /* Nixor Student ApplicationUITests */,
+				195E33F6210FB6D500E21E37 /* SharksOnCloudExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		195E33F5210FB6D500E21E37 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19B59C2020E52EBA00D865DF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				195E33F0210E9B9200E21E37 /* headerForImageviewer.xib in Resources */,
 				19CA0CA821049CD400F74057 /* PastpapersStoryboard.storyboard in Resources */,
 				19B59C3020E52EBA00D865DF /* LaunchScreen.storyboard in Resources */,
 				1937B7EF20EE207D0024A047 /* GoogleService-Info.plist in Resources */,
@@ -688,6 +740,7 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Lightbox/Lightbox.framework",
 				"${BUILT_PRODUCTS_DIR}/M13Checkbox/M13Checkbox.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/PinCodeTextField/PinCodeTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -717,6 +770,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lightbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M13Checkbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PinCodeTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
@@ -736,6 +790,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		195E33F3210FB6D500E21E37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19B59C1E20E52EBA00D865DF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -752,17 +813,16 @@
 				195E33DF21069AD000E21E37 /* MyBucketViewController.swift in Sources */,
 				190ECF9B20F0086400AEF69A /* paperObject.swift in Sources */,
 				195E33DD210683DD00E21E37 /* bucketItem.swift in Sources */,
+				195E340C2110739C00E21E37 /* GeneralLayout.swift in Sources */,
 				199139F420F62C7700E6F27B /* initialRideData.swift in Sources */,
 				19FFEA332100AE7900E5429C /* bucketsTableViewCell.swift in Sources */,
 				19FFEA2E210094E700E5429C /* SubjectCellTableViewCell.swift in Sources */,
 				19FFEA302100A93000E5429C /* Buckets.swift in Sources */,
 				190ECF9D20F014B000AEF69A /* paperCellTableViewCell.swift in Sources */,
 				195F2AF920FB4DE10088A18D /* messageItem.swift in Sources */,
-				195E33EC210E91B700E21E37 /* sidebar.swift in Sources */,
 				193B577F20F226CB009FCD68 /* headerMain.swift in Sources */,
 				1937B7F120EE3BCA0024A047 /* common_util.swift in Sources */,
 				19C3A41320F0B1F0007E7912 /* PdfLoader.swift in Sources */,
-				195E33EE210E9B3A00E21E37 /* headerForImageViewer.swift in Sources */,
 				195F2AF520FB4C100088A18D /* Chat.swift in Sources */,
 				195E33D921067F0300E21E37 /* studentBucker.swift in Sources */,
 				19AE4DAC20FE6674001A5BC9 /* LoginController.swift in Sources */,
@@ -776,8 +836,10 @@
 				19E2053E20F35D9800132494 /* Carpool.swift in Sources */,
 				1948E15420EE5A7C00AADC59 /* home_screen.swift in Sources */,
 				195E33D6210661F100E21E37 /* BucketObject.swift in Sources */,
+				195E340A210FD73000E21E37 /* SideBarViewController.swift in Sources */,
 				19B59C2620E52EBA00D865DF /* AppDelegate.swift in Sources */,
 				19E2054020F3770A00132494 /* mapViewController.swift in Sources */,
+				195E33F2210F3E4500E21E37 /* headerImageViewerController.swift in Sources */,
 				190ECF9520EF5F9C00AEF69A /* PastPapers.swift in Sources */,
 				195E33E12109E71800E21E37 /* Maintain.swift in Sources */,
 				19B0E34020F7C14900BFCEEF /* CarpoolFilters.swift in Sources */,
@@ -843,6 +905,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		195E3405210FB6D600E21E37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8U8ABLMRK4;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = SharksOnCloudExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.btb.Nixor-Student-Application.SharksOnCloudExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		195E3406210FB6D600E21E37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8U8ABLMRK4;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = SharksOnCloudExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.btb.Nixor-Student-Application.SharksOnCloudExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		19B59C4820E52EBA00D865DF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1057,6 +1159,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		195E3404210FB6D600E21E37 /* Build configuration list for PBXNativeTarget "SharksOnCloudExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				195E3405210FB6D600E21E37 /* Debug */,
+				195E3406210FB6D600E21E37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		19B59C1D20E52EBA00D865DF /* Build configuration list for PBXProject "Nixor Student Application" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

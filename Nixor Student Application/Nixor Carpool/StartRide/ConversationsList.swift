@@ -8,7 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
-class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ConversationsList: GeneralLayout, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableview: UITableView!
     var convoList = [conversation]()
@@ -268,9 +268,6 @@ class ConversationsList: UIViewController, UITableViewDataSource, UITableViewDel
        
          let myDate = Date().timeIntervalSince1970
         return conversation(user: nil, chatID: nil, date: nil, lastMessage: nil, lastMessageUser: nil, lastMessageDate: myDate)
-    }
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return UIStatusBarStyle.lightContent
     }
     
     

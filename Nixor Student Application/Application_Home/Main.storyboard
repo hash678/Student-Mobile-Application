@@ -224,7 +224,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPY-jD-Mvo">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="nixorsharkoriginal" translatesAutoresizingMaskIntoConstraints="NO" id="ixv-h5-Zp5">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nixorsharkoriginal" translatesAutoresizingMaskIntoConstraints="NO" id="ixv-h5-Zp5">
                                         <rect key="frame" x="46" y="110" width="283" height="102"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="102" id="hXp-4n-wXk"/>
@@ -268,9 +268,11 @@
                                     <constraint firstItem="VFo-Bx-COZ" firstAttribute="leading" secondItem="OPY-jD-Mvo" secondAttribute="leading" constant="15" id="0hg-9A-y5d"/>
                                     <constraint firstItem="4xe-Cg-4Ta" firstAttribute="top" secondItem="ixv-h5-Zp5" secondAttribute="bottom" constant="50" id="5Dg-5o-9fj"/>
                                     <constraint firstItem="VFo-Bx-COZ" firstAttribute="top" secondItem="4xe-Cg-4Ta" secondAttribute="bottom" constant="20" id="5cd-Iz-geU"/>
+                                    <constraint firstAttribute="trailing" secondItem="ixv-h5-Zp5" secondAttribute="trailing" constant="46" id="Daa-AZ-4kl"/>
                                     <constraint firstItem="9UO-Or-yT8" firstAttribute="centerX" secondItem="OPY-jD-Mvo" secondAttribute="centerX" id="KyM-5p-bQA"/>
                                     <constraint firstAttribute="trailing" secondItem="VFo-Bx-COZ" secondAttribute="trailing" constant="15" id="P3k-V7-Vkj"/>
                                     <constraint firstItem="9UO-Or-yT8" firstAttribute="top" secondItem="VFo-Bx-COZ" secondAttribute="bottom" constant="50" id="X5Q-1A-4pL"/>
+                                    <constraint firstItem="ixv-h5-Zp5" firstAttribute="leading" secondItem="OPY-jD-Mvo" secondAttribute="leading" constant="46" id="hZW-92-Dve"/>
                                     <constraint firstItem="4xe-Cg-4Ta" firstAttribute="leading" secondItem="DbG-px-dB0" secondAttribute="trailing" constant="-6" id="k8M-lh-1cB"/>
                                     <constraint firstItem="ixv-h5-Zp5" firstAttribute="top" secondItem="OPY-jD-Mvo" secondAttribute="top" constant="110" id="kM2-Le-6R1"/>
                                     <constraint firstItem="DbG-px-dB0" firstAttribute="top" secondItem="ixv-h5-Zp5" secondAttribute="bottom" constant="50" id="sT5-cp-Nzg"/>
@@ -516,33 +518,30 @@
             </objects>
             <point key="canvasLocation" x="4510" y="139"/>
         </scene>
-        <!--View Controller-->
+        <!--Side Bar View Controller-->
         <scene sceneID="tuv-eh-95b">
             <objects>
-                <viewController id="TGH-88-5gN" sceneMemberID="viewController">
+                <viewController id="TGH-88-5gN" customClass="SideBarViewController" customModule="Nixor_Student_Application" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jtW-4w-VJW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zh-2H-N78">
-                                <rect key="frame" x="147" y="160" width="81" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zh-2H-N78">
+                                <rect key="frame" x="30" y="110" width="81" height="30"/>
                                 <state key="normal" title="Past papers"/>
                                 <connections>
                                     <segue destination="dsx-pd-Xee" kind="show" id="cwy-x0-bib"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXQ-Ee-hKw">
-                                <rect key="frame" x="160" y="198" width="54" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXQ-Ee-hKw">
+                                <rect key="frame" x="30" y="148" width="54" height="30"/>
                                 <state key="normal" title="Carpool"/>
                                 <connections>
                                     <segue destination="1iV-L8-Aro" kind="show" id="hRq-lw-s0N"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55j-an-R3p">
-                                <rect key="frame" x="130" y="236" width="115" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55j-an-R3p">
+                                <rect key="frame" x="30" y="186" width="115" height="30"/>
                                 <state key="normal" title="Sharks On Cloud"/>
                                 <connections>
                                     <segue destination="VAp-fs-doD" kind="show" id="kVl-1Z-wCw"/>
@@ -571,16 +570,44 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5o-BI-UeG">
+                                <rect key="frame" x="30" y="224" width="33" height="30"/>
+                                <state key="normal" title="Chat"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HMA-f5-2sk">
+                                <rect key="frame" x="30" y="262" width="73" height="30"/>
+                                <state key="normal" title="BookMyTA"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWM-vp-qzP">
+                                <rect key="frame" x="336" y="10" width="23" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="23" id="5ex-zp-yVJ"/>
+                                    <constraint firstAttribute="height" constant="23" id="SSM-VP-SSI"/>
+                                </constraints>
+                                <state key="normal" image="settings"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="bXQ-Ee-hKw" firstAttribute="leading" secondItem="hRE-sz-FkB" secondAttribute="leading" constant="30" id="9fj-Wo-t4m"/>
                             <constraint firstItem="hRE-sz-FkB" firstAttribute="trailing" secondItem="b0h-9t-t0w" secondAttribute="trailing" id="AND-aE-f0R"/>
+                            <constraint firstItem="HMA-f5-2sk" firstAttribute="top" secondItem="T5o-BI-UeG" secondAttribute="bottom" constant="8" id="CSG-UM-7Ou"/>
+                            <constraint firstItem="55j-an-R3p" firstAttribute="leading" secondItem="hRE-sz-FkB" secondAttribute="leading" constant="30" id="Ldj-eG-lQU"/>
+                            <constraint firstItem="6zh-2H-N78" firstAttribute="top" secondItem="b0h-9t-t0w" secondAttribute="bottom" constant="30" id="Qeg-LR-cOK"/>
+                            <constraint firstItem="hRE-sz-FkB" firstAttribute="trailing" secondItem="gWM-vp-qzP" secondAttribute="trailing" constant="16" id="ROu-Ch-wH3"/>
+                            <constraint firstItem="6zh-2H-N78" firstAttribute="leading" secondItem="hRE-sz-FkB" secondAttribute="leading" constant="30" id="Wlg-85-hfi"/>
                             <constraint firstItem="Oyp-Mx-IwH" firstAttribute="leading" secondItem="2Ze-Tm-vzV" secondAttribute="trailing" constant="20" id="XV7-ep-fvN"/>
+                            <constraint firstItem="T5o-BI-UeG" firstAttribute="top" secondItem="55j-an-R3p" secondAttribute="bottom" constant="8" id="aRU-Nm-VIK"/>
                             <constraint firstItem="2Ze-Tm-vzV" firstAttribute="top" secondItem="hRE-sz-FkB" secondAttribute="top" constant="10" id="fXQ-6u-0hh"/>
                             <constraint firstItem="b0h-9t-t0w" firstAttribute="leading" secondItem="hRE-sz-FkB" secondAttribute="leading" id="ffN-FU-xg5"/>
                             <constraint firstItem="b0h-9t-t0w" firstAttribute="top" secondItem="hRE-sz-FkB" secondAttribute="top" id="gOd-1Z-Sdy"/>
+                            <constraint firstItem="55j-an-R3p" firstAttribute="top" secondItem="bXQ-Ee-hKw" secondAttribute="bottom" constant="8" id="ihu-Yx-OUV"/>
                             <constraint firstItem="2Ze-Tm-vzV" firstAttribute="leading" secondItem="hRE-sz-FkB" secondAttribute="leading" constant="30" id="lGw-WM-AeZ"/>
+                            <constraint firstItem="bXQ-Ee-hKw" firstAttribute="top" secondItem="6zh-2H-N78" secondAttribute="bottom" constant="8" id="mYu-Nu-VfJ"/>
                             <constraint firstItem="Oyp-Mx-IwH" firstAttribute="top" secondItem="hRE-sz-FkB" secondAttribute="top" constant="35" id="nBq-aS-hpg"/>
+                            <constraint firstItem="HMA-f5-2sk" firstAttribute="leading" secondItem="hRE-sz-FkB" secondAttribute="leading" constant="30" id="wQd-DG-gLR"/>
+                            <constraint firstItem="gWM-vp-qzP" firstAttribute="top" secondItem="hRE-sz-FkB" secondAttribute="top" constant="10" id="xqc-Qr-rrv"/>
+                            <constraint firstItem="T5o-BI-UeG" firstAttribute="leading" secondItem="hRE-sz-FkB" secondAttribute="leading" constant="30" id="yCM-aW-Qki"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hRE-sz-FkB"/>
                     </view>
@@ -706,6 +733,7 @@
         <image name="newprofile" width="300" height="300"/>
         <image name="nixorsharkoriginal" width="554" height="196"/>
         <image name="parent_mode" width="200" height="172"/>
+        <image name="settings" width="192" height="192"/>
         <image name="student_mode" width="214" height="263"/>
         <namedColor name="NixorColor">
             <color red="0.56499999761581421" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

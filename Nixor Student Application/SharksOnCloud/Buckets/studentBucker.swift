@@ -9,7 +9,75 @@
 import UIKit
 import FirebaseFirestore
 import Lightbox
-class studentBucker: UIViewController, UICollectionViewDataSource,UICollectionViewDelegate {
+class studentBucker: UIViewController, UICollectionViewDataSource,UICollectionViewDelegate,headerImageDelegate,LightboxControllerPageDelegate {
+    func lightboxController(_ controller: LightboxController, didMoveToPage page: Int) {
+        let totalItems = bucketItems.count - folderNames.count
+        
+        let view = self.Controller.setHeaderView(currentPage: page, totalImages: totalItems, delegate: self, controller: controller)
+        let oldView = controller.footerView.subviews[controller.footerView.subviews.count - 1]
+        oldView.removeFromSuperview()
+        controller.footerView.addSubview(view)
+        view.bindFrameToSuperviewBounds()
+    }
+  
+    var lightboxController:LightboxController?
+    let commonUtil = common_util()
+    
+    func downloadImage(controller:LightboxController) {
+        let index = controller.currentPage + folderNames.count
+        let urlString = bucketItems[index].photourl
+        let url = URL(string: urlString!)
+        self.Controller.downloadImage(url: url!) { (image) in
+            self.lightboxController = controller
+            self.saveImage(image: image)
+            
+        }
+        
+        
+        
+    }
+    
+    private func saveImage(image:UIImage){
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        let ac = UIAlertAction(title: "OK", style: .default)
+        if let error = error {
+            //ERROR
+            commonUtil.showAlert(vc: lightboxController!, title: "Save error", message: error.localizedDescription, buttons: [ac]) { (alert) in
+                
+            }
+            
+        } else {
+            //SUCCESS
+            commonUtil.showAlert(vc: lightboxController!, title: "Saved!", message: "The screenshot has been saved to your photos.", buttons: [ac]) { (alert) in
+                
+            }
+            
+        }
+    }
+    
+    
+    
+    
+    
+    func shareImage(controller:LightboxController) {
+        let index = controller.currentPage + folderNames.count
+        let urlString = bucketItems[index].photourl
+        let url = URL(string: urlString!)
+        self.Controller.downloadImage(url: url!) { (image) in
+            let imageToShare = [ image ]
+            let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            controller.present(activityViewController, animated: true, completion: nil)
+        }
+        
+        
+        
+    }
+    
+    
 
     var bucketItems = [bucketItem]()
     var imageID = [String]()
@@ -27,68 +95,30 @@ class studentBucker: UIViewController, UICollectionViewDataSource,UICollectionVi
     }
 
     
-    //MARK: Get data from firebase
+    //MARK: Method to load images from Firebase.
     func getAllUploadedImages(){
+        
         var ref:CollectionReference?
         switch class_type{
         case "AS": ref = constants.sharksOnCloudSubjectsAs
         case "A2": ref = constants.sharksOnCloudSubjectsA2
         default:break;
         }
-        ref?.document(selectedSubject!).collection("Users").document(userBucket!).collection("Buckets")
-            .addSnapshotListener({ (Query, error) in
-          
-            if Query != nil{
-                
-                for documents in (Query?.documents)!{
-                    
-                    //For files
-                    if documents.documentID != "Folder Names"{
-                    print("Not folder \(documents.documentID)")
-                    if let name = documents["Name"] as? String ,
-                        let photourl = documents["PhotoUrlImageViewver"] as? String,
-                        let PhotoUrlThumbnail = documents["PhotoUrlThumbnail"] as? String{
-                        let item = bucketItem(imageName: name, creationDate: nil, points: nil, thumnailUrl: PhotoUrlThumbnail , photourl: photourl,folder:false)
-                        
-                      
-                        
-                        if !self.imageID.contains(documents.documentID){
-                            self.bucketItems.append(item)
-                            self.imageID.append(documents.documentID)
-                        
-                        }
-                    
-                    
-                    }
-                    
-                    }else{
-                         print("Folder \(documents.data())")
-                        let folderArray = documents.data()
-                            if let folders = folderArray["FolderNames"] as? [String]{
-                                for folderName in folders{
-                                let item = bucketItem(imageName: folderName, creationDate: nil, points: nil, thumnailUrl: nil , photourl: nil,folder:true)
-                            if !self.folderNames.contains(folderName){
-                                self.bucketItems.append(item)
-                                self.folderNames.append(folderName)
-                                
-                                    }}
-                            
-                            
-                        }
-                        
-                        
-                        
-                    }
-                    
-                    
-                }
-                self.bucketItems = self.Controller.sortFilesAndfolders(self.bucketItems)
-                self.tableview.reloadData()
-            }
+       
+        let myDocumentRef = ref?.document(selectedSubject!).collection("Users").document(userBucket!)
+        self.Controller.getUploadedImages(documentRef: myDocumentRef!) { (myImageId, myBucketItems, myfolderNames) in
             
-        })
+            print(myfolderNames)
+            self.imageID = myImageId
+            self.folderNames = myfolderNames
+            self.bucketItems = myBucketItems
+            self.bucketItems = self.Controller.sortFilesAndfolders(self.bucketItems)
+            self.tableview.reloadData()
+        }
+
         
     }
+    
     
 
     
@@ -98,13 +128,17 @@ class studentBucker: UIViewController, UICollectionViewDataSource,UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return Controller.createCell(indexPath: indexPath, bucketItems: self.bucketItems,collectionView:collectionView)
+        return Controller.createCell(indexPath: indexPath, bucketItems: self.bucketItems,collectionView:tableview)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        Controller.showImageViewer(images: Controller.imageObject(urlArray: bucketItems), currentpage: indexPath.item, vc:self)
+        if !bucketItems[indexPath.row].folder{
+            Controller.showImageViewer(images: Controller.imageObject(urlArray: bucketItems), currentpage: (indexPath.item - folderNames.count), vc:self,delegate: self,changePage:self)
+        }
+        
     }
-    //CollectionView Methods
     
+    
+    //CollectionView Methods
     
 
 }

@@ -9,9 +9,13 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
-class home_screen: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource {
- 
+import FirebaseFunctions
+class home_screen: GeneralLayout, UICollectionViewDelegate,UICollectionViewDataSource {
+ let Controller = BucketController()
+    var loading = false
+        
     
+     lazy var functions = Functions.functions()
     var commonutil = common_util()
     var userClass = UserPhoto()
     var username:String?
@@ -28,6 +32,9 @@ class home_screen: UIViewController, UICollectionViewDelegate,UICollectionViewDa
         cell.name.text = nspButtons[indexPath.row]
         cell.photo.image = getIconForItem(name: nspButtons[indexPath.row])
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        downloadDocument(name: nspButtons[indexPath.row])
     }
     
     func getIconForItem(name:String)-> UIImage{
@@ -66,6 +73,77 @@ class home_screen: UIViewController, UICollectionViewDelegate,UICollectionViewDa
         }
     
     
+    func loadDocumentFromMemory(name:String) -> URL?{
+        let nameOffile = "\(name).pdf"
+       // print(nameOffile)
+        if let url = self.commonutil.fileExists(name: nameOffile){
+          print(url)
+            return url
+            
+        }else{
+            dismiss(animated: true, completion: {
+                self.commonutil.showAlert(title: "Can't access document", message: "Unable to access document. If the problem persists. Please contact Nixor College ", buttonMessage: "OK", view: self)
+            })
+            
+            return nil
+        }
+        
+    }
+    
+    func downloadDocument(name:String){
+        
+        loading = commonutil.showLoading(vc: self, title: "Please wait", message: "")
+        
+        var data = [String:String]()
+        data["name"] = name
+        data["guid"] = commonutil.getUserData(key: "guid")
+        functions.httpsCallable("DocumentAccessFunc").call(data) { (response, error) in
+           
+            if error != nil {
+                
+                if let url = self.loadDocumentFromMemory(name: name){
+                    self.dismiss(animated: true, completion: {
+                          self.commonutil.openPdfViewer(url: url, vc: self)
+                    })
+                   
+                }
+                
+                
+            }else{
+            if response != nil{
+                let decodedData = Data(base64Encoded: (response?.data as! String))
+                let url = decodedData?.write(withName: "\(name).pdf")
+              
+                if url != nil{
+                    self.dismiss(animated: true, completion: {
+                        self.commonutil.openPdfViewer(url: url!, vc: self)
+                    })
+                    
+                }else{
+                    
+                    if let url = self.loadDocumentFromMemory(name: name){
+                        self.dismiss(animated: true, completion: {
+                            self.commonutil.openPdfViewer(url: url, vc: self)
+                        })
+                    }
+                }
+                
+            }else
+            {
+                if let url = self.loadDocumentFromMemory(name: name){
+                    self.dismiss(animated: true, completion: {
+                        self.commonutil.openPdfViewer(url: url, vc: self)
+                    })
+                }
+                
+                }
+            }
+        }
+        
+    }
+    
+    
+   
 
     func getNspButtons(){
         constants.userDB.document(username!).getDocument { (snapshot, error) in
@@ -81,9 +159,7 @@ class home_screen: UIViewController, UICollectionViewDelegate,UICollectionViewDa
         
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+    
     func initialize(){
      navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()

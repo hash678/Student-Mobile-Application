@@ -15,6 +15,57 @@ import M13Checkbox
 class common_util{
     
     
+    func sortFiles(array:[Any],priorityItem:(Any) -> Bool) -> [Any]{
+        var sortedArray = [Any]()
+        
+        for index in array{
+            if priorityItem(index){
+                sortedArray.append(index)
+            }
+        }
+        
+        for index in array{
+            if !priorityItem(index){
+                sortedArray.append(index)
+            }
+        }
+        
+        
+        
+        return sortedArray
+    }
+    
+    func showAlertAction(vc:UIViewController,title:String,message:String,buttons:[UIAlertAction],extra:(UIAlertController) -> Void){
+        
+        let alert =  UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        
+        for button in buttons {
+            alert.addAction(button)
+        }
+        
+          extra(alert)
+        vc.present(alert, animated:true, completion: nil)
+    }
+    
+    
+    func showAlert(vc:UIViewController,title:String,message:String,buttons:[UIAlertAction],extra:(UIAlertController) -> Void){
+        
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        for button in buttons{
+            alert.addAction(button)
+        }
+        extra(alert)
+        
+        vc.present(alert, animated: true, completion: nil)
+        
+        
+    }
+    
+    
+    
     public func formatNumber(number: String) -> String{
         print(number.count)
         var formattedNumber:String = number
@@ -30,6 +81,12 @@ class common_util{
         return formattedNumber
     }
     
+    
+    
+    
+    
+    
+  
     
     
     func convertSecondsToDateOnly(interval:Double) -> String{
@@ -72,7 +129,7 @@ class common_util{
             formatter.pmSymbol = "PM"
             
             let dateString = formatter.string(from: date)
-            return "Tomorrow, \(dateString)"
+            return "\(dateString)"
             
         }
     }
@@ -204,9 +261,6 @@ class common_util{
     
     func checkActivation(username:String,view:UIViewController){
         Database.database().reference().child("activated").observe(.value) { (snapshot) in
-            
-           
-                
             if  let value = snapshot.value as? NSDictionary{
                 if value["all"] == nil{
                     if value[username] == nil{
@@ -230,7 +284,34 @@ class common_util{
             }
         }
 
+    func fileExists(name:String) -> URL?{
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let localURL = documentsURL.appendingPathComponent(name)
+        if  FileManager().fileExists(atPath: localURL.path){
+            return localURL
+        }
+        return nil
+        
+    }
     
+    
+    func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
+        return CGRect(x: x, y: y, width: width, height: height)
+    }
+    
+    func showLoading(vc:UIViewController,title:String,message:String) -> Bool{
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alert.view.tintColor = UIColor.black
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.startAnimating();
+        alert.view.addSubview(loadingIndicator)
+        vc.present(alert, animated: true, completion: nil)
+        return true
+    }
     
     
     
@@ -248,12 +329,13 @@ class common_util{
         
        
     }
-    
-    //    public String extractUsername(Context context, String email){
-    //    String domain = context.getString(R.string.domain_textView);
-    //    return  email.replaceAll(domain,"").replace(".","-");
-    //    }
-   
+    func openPdfViewer(url:URL, vc:UIViewController){
+        
+        let storyboard = UIStoryboard(name: "PastpapersStoryboard", bundle: nil)
+        let singleView = storyboard.instantiateViewController(withIdentifier: "pdfIntent") as! PdfLoader
+        singleView.url = url
+        vc.present(singleView,animated: true, completion: nil)
+    }
     public func getUserData(key: String) -> String?{
         return UserDefaults.standard.string(forKey: key)
     }
@@ -261,14 +343,7 @@ class common_util{
     public func loadImageViewURLFirebase(url: String, imageview:UIImageView){
         let url = URL(string: url)
         imageview.kf.setImage(with: url)
-        
-        //        let storageRef = Storage.storage().reference(forURL: url)
-//        storageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) -> Void in
-//            let pic = UIImage(data: data!)
-//                imageview.image = pic
-//        }
-//
-//    }
+       
 }
     
    
@@ -404,6 +479,21 @@ extension UIImage {
     func jpeg(_ quality: JPEGQuality) -> Data? {
         return UIImageJPEGRepresentation(self, quality.rawValue)
     }
+    
+    func scaleImage (scaledToWidth: CGFloat) -> UIImage {
+        let oldWidth = self.size.width
+        let scaleFactor = scaledToWidth / oldWidth
+        
+        let newHeight = self.size.height * scaleFactor
+        let newWidth = oldWidth * scaleFactor
+        
+        UIGraphicsBeginImageContext(CGSize(width:newWidth, height:newHeight))
+        self.draw(in: CGRect(x:0, y:0, width:newWidth, height:newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
+    
 }
 
 extension UIView {
@@ -421,6 +511,35 @@ extension UIView {
         
     }
     
+}
+extension Data {
+    
+    func write(withName name: String) -> URL {
+        
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let url = documentsURL.appendingPathComponent(name)
+        try! write(to: url, options: .atomic)
+        
+        return url
+    }
+    
+   
+}
+
+extension UIView {
+    func bindFrameToSuperviewBounds() {
+        guard let superview = self.superview else {
+            print("Error! `superview` was nil – call `addSubview(view: UIView)` before calling `bindFrameToSuperviewBounds()` to fix this.")
+            return
+        }
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.topAnchor.constraint(equalTo: superview.topAnchor, constant: 50).isActive = true
+        self.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: 0).isActive = true
+        self.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 0).isActive = true
+        self.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: 0).isActive = true
+        
+    }
 }
 
 

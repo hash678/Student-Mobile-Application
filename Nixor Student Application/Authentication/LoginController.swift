@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import CountryPickerView
-class LoginController: UIViewController , CountryPickerViewDelegate, CountryPickerViewDataSource  {
+class LoginController: GeneralLayout , CountryPickerViewDelegate, CountryPickerViewDataSource  {
 
     @IBOutlet weak var selectedCountryCode: UITextField!
     var phoneNumberVar:String?
@@ -59,13 +59,7 @@ class LoginController: UIViewController , CountryPickerViewDelegate, CountryPick
         
     }
     
-   
-    
-    
-
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return UIStatusBarStyle.lightContent
-    }
+  
  
     func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
         selectedCountryCode.text = country.phoneCode

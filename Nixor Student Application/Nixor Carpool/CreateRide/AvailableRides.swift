@@ -14,7 +14,7 @@ import CoreLocation
 import FirebaseFunctions
 import FirebaseDatabase
 import FoldingCell
-class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate, onRequestButtonClicked, CLLocationManagerDelegate{
+class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate, onRequestButtonClicked, CLLocationManagerDelegate{
    
     
     var locationManager:LocationManager?
@@ -51,9 +51,6 @@ class AvailableRides:UIViewController, UITableViewDelegate, UITableViewDataSourc
     
    
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
     
     func getAvailableRides(){
 

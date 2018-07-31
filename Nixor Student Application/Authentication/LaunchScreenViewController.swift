@@ -11,7 +11,7 @@ import FirebaseAuth
 import Firebase
 import FirebaseFirestore
 import FirebaseDatabase
-class LaunchScreenViewController: UIViewController {
+class LaunchScreenViewController: GeneralLayout {
     var handler:LoginHandler? 
     var LoggedInUser:AuthDataResult?
     var commonutil = common_util()
@@ -57,8 +57,5 @@ class LaunchScreenViewController: UIViewController {
         
     }
    
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return UIStatusBarStyle.lightContent
-    }
 
 }

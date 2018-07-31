@@ -10,7 +10,7 @@ import UIKit
 import PinCodeTextField
 import FirebaseAuth
 import Firebase
-class VerifyCode: UIViewController {
+class VerifyCode: GeneralLayout {
     var verification:String?
     var number:String?
     
@@ -71,11 +71,7 @@ class VerifyCode: UIViewController {
         }
         
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return UIStatusBarStyle.lightContent
-    }
-
+   
 
 
 

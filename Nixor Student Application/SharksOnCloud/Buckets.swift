@@ -1,7 +1,7 @@
 import UIKit
 import FirebaseFirestore
 import FirebaseDatabase
-class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class Buckets: GeneralLayout, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     
     
@@ -306,8 +306,6 @@ class Buckets: UIViewController, UITableViewDelegate, UITableViewDataSource, UIS
     
     
     
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return UIStatusBarStyle.lightContent
-    }
+   
     
 }

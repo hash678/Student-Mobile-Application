@@ -8,7 +8,7 @@
 
 import UIKit
 import WebKit
-class pdfMultiView: UIViewController {
+class pdfMultiView: GeneralLayout {
 
     
     public var firstPaper:URL?
@@ -98,10 +98,7 @@ class pdfMultiView: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
+   
 }
 
 

@@ -8,7 +8,7 @@
 
 import UIKit
 import WebKit
-class PdfLoader: UIViewController {
+class PdfLoader: GeneralLayout {
     public var url: URL?
     
     @IBOutlet weak var web: WKWebView!
@@ -20,6 +20,8 @@ class PdfLoader: UIViewController {
         super.viewDidLoad()
        // print(url)
         web.loadFileURL(url!, allowingReadAccessTo: url!)
+        
+        web.isOpaque = false
         // Do any additional setup after loading the view.
     }
 
@@ -28,8 +30,6 @@ class PdfLoader: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+   
 
 }

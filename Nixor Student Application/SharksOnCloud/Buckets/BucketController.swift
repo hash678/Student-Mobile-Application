@@ -12,52 +12,71 @@ import FirebaseDatabase
 import FirebaseStorage
 import Lightbox
 import Firebase
+import Kingfisher
 class BucketController{
     let commonUtil = common_util()
+  
+    
+    
     public func sortFilesAndfolders(_ bucketArray:[bucketItem]) -> [bucketItem]{
-        var newBucketArray = [bucketItem]()
-        for value in bucketArray{
-            if value.folder{
-                newBucketArray.append(value)
+        
+        return  (commonUtil.sortFiles(array: bucketArray) { (value) -> Bool in
+            if let item = value as? bucketItem{
+                if item.folder{
+                    return true
+                }
             }
-        }
-        for value in bucketArray{
-            if !value.folder{
-                newBucketArray.append(value)
-            }
-        }
-        return newBucketArray
+            return false
+        }) as! [bucketItem]
+  
+ 
+    }
+
+   
+    func dateForSoc(interval:Double) -> String{
+        
+        let date = Date(timeIntervalSince1970: interval)
+        
+        
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "dd/MMMM/yyyy"
+        formatter.amSymbol = "AM"
+        formatter.pmSymbol = "PM"
+        
+        let dateString = formatter.string(from: date)
+        
+        
+        return dateString
+        
+        
+        
         
     }
+    
     
     func showLoading(vc:UIViewController) -> Bool{
-        let alert = UIAlertController(title: "Please wait", message: "Uploading images...", preferredStyle: .alert)
-        
-        alert.view.tintColor = UIColor.black
-        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
-       
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        loadingIndicator.startAnimating();
-        alert.view.addSubview(loadingIndicator)
-        vc.present(alert, animated: true, completion: nil)
-        return true
+        return commonUtil.showLoading(vc: vc, title: "Please wait", message: "Uploading images")
     }
     
-    func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
-        return CGRect(x: x, y: y, width: width, height: height)
-    }
     
     func createCell(indexPath:IndexPath, bucketItems:[bucketItem], collectionView:UICollectionView) -> uploadedCell{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "uploadedCell", for: indexPath) as! uploadedCell
         
         
         if !bucketItems[indexPath.row].folder{
-        cell.folder = false
+            cell.folder = false
             let url = URL(string: bucketItems[indexPath.row].thumnailUrl!)
             cell.thumbnail.kf.setImage(with:url)
-            cell.date.text = commonUtil.convertSecondsToDateOnly(interval: bucketItems[indexPath.row].creationDate!)
-            cell.points_label.text = "1000 points"
+            cell.date.text = dateForSoc(interval: bucketItems[indexPath.row].creationDate!)
+            
+            if let points = bucketItems[indexPath.row].points{
+                cell.points_label.text = "\(points) points"
+                
+            }else{
+                
+                cell.points_label.text = "\(0) points"
+            }
         }else{
             cell.date.text = bucketItems[indexPath.row].imageName
             cell.points_label.isHidden = true
@@ -73,6 +92,7 @@ class BucketController{
         var lightboxImages = [LightboxImage]();
         for urls in urlArray{
             if !urls.folder{
+                
                 lightboxImages.append(LightboxImage(imageURL: URL(string: urls.photourl!)!))}
         }
         return lightboxImages
@@ -80,126 +100,112 @@ class BucketController{
     }
     
     //MARK: Imageviewe
-    func showImageViewer(images:[LightboxImage],currentpage:Int, vc:UIViewController){
+    func showImageViewer(images:[LightboxImage],currentpage:Int, vc:UIViewController, delegate:headerImageDelegate,changePage:LightboxControllerPageDelegate){
         let controller = LightboxController(images: images)
-        controller.dynamicBackground = true
-        //controller.headerView = HeaderView(
+        //controller.dynamicBackground = true
+        
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        customView.backgroundColor = #colorLiteral(red: 0.5649999976, green: 0, blue: 0, alpha: 1)
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        button.setImage(#imageLiteral(resourceName: "heartIcon"), for: .normal)
+     
+       
+        if let _ = vc as? MyBucketViewController{
+        }else{
+            controller.headerView.addSubview(customView)
+        }
+        
+       controller.pageDelegate = changePage
+      
+        let view = setHeaderView(currentPage: currentpage, totalImages: images.count, delegate: delegate,controller: controller)
+        controller.footerView.addSubview(view)
+        view.bindFrameToSuperviewBounds()
         vc.present(controller, animated: true, completion: nil)
         controller.goTo(currentpage)
         
     }
     
-    func imageWithImage (sourceImage:UIImage, scaledToWidth: CGFloat) -> UIImage {
-        let oldWidth = sourceImage.size.width
-        let scaleFactor = scaledToWidth / oldWidth
+    func setHeaderView(currentPage:Int,totalImages:Int,delegate:headerImageDelegate, controller:LightboxController) -> UIView{
+        let view = headerImageViewerController.instanceFromNib() as! headerImageViewerController
+        view.delegate = delegate
+        view.imageIndex = currentPage
+        view.controller = controller
+        view.text_label.text = "\(currentPage + 1) of \(totalImages + 1)"
         
-        let newHeight = sourceImage.size.height * scaleFactor
-        let newWidth = oldWidth * scaleFactor
-        
-        UIGraphicsBeginImageContext(CGSize(width:newWidth, height:newHeight))
-        sourceImage.draw(in: CGRect(x:0, y:0, width:newWidth, height:newHeight))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage!
+        return view
     }
-    
     
     
     func showCreateFolder(vc:UIViewController, folderNamesdoc:DocumentReference){
-        let alert = UIAlertController(title: "Create folder",
-                                      message: "",
-                                      preferredStyle: .alert)
-        // Submit button
-        let submitAction = UIAlertAction(title: "Submit", style: .default, handler: { (action) -> Void in
-            // Get 1st TextField's text
-             let textField = alert.textFields![0]
-            if textField.text != nil {
-                if textField.text != ""{
-                self.uploadFolder(folderNamesdoc: folderNamesdoc, folderName: textField.text!)
-              //  vc.dismiss(animated: true, completion: nil)
-                }}
-        })
-        // Cancel button
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
-       
-        alert.addTextField { (textField: UITextField) in
-            textField.keyboardAppearance = .dark
-            textField.keyboardType = .default
-            textField.autocorrectionType = .default
-            textField.placeholder = "Enter folder name"
-            textField.clearButtonMode = .whileEditing
-        }
-        // Add action buttons and present the Alert
-        alert.addAction(submitAction)
-        alert.addAction(cancel)
-        vc.present(alert, animated: true, completion: nil)
+        commonUtil.showAlert(vc: vc, title: "Create folder", message: "", buttons: [cancel]) { (alert) in
+            alert.addTextField { (textField: UITextField) in
+                textField.keyboardAppearance = .dark
+                textField.keyboardType = .default
+                textField.autocorrectionType = .default
+                textField.placeholder = "Enter folder name"
+                textField.clearButtonMode = .whileEditing
+                let submitAction = UIAlertAction(title: "Submit", style: .default, handler: { (action) -> Void in
+                    
+                    let textField = alert.textFields![0]
+                    if textField.text != nil {
+                        if textField.text != ""{
+                            self.uploadFolder(folderNamesdoc: folderNamesdoc, folderName: textField.text!)
+                        }}
+                })
+                alert.addAction(submitAction)
+                
+            }}
+        
     }
-    func showDeletePrompt(indexPath:IndexPath, vc:UIViewController, tableview:UICollectionView,storageRef:StorageReference){
-        let alert = UIAlertController(title: "Delete item",
-                                      message: "",
-                                      preferredStyle: .alert)
-        // Submit button
+    
+    
+    
+    
+    func showDeletePrompt(vc:UIViewController,title:String,method:@escaping () -> Void){
         let submitAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
-           
-            self.showWarningDelete(indexPath:indexPath, vc:vc, tableview:tableview,storageRef:storageRef)
-          
-        })
-        // Cancel button
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
-          let cell = tableview.cellForItem(at: indexPath) as! uploadedCell
-            cell.selectedBool = false
+            self.showWarningDelete(vc: vc,title:title, method: {
+                method()
+            })
             
         })
-        
-       
-        // Add action buttons and present the Alert
-        alert.addAction(submitAction)
-        alert.addAction(cancel)
-        vc.present(alert, animated: true, completion: nil)
-        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in })
+        commonUtil.showAlert(vc: vc, title: title, message: "", buttons: [submitAction,cancel]) { (alert) in
+            
+        }
         
     }
     
-    func showWarningDelete(indexPath:IndexPath, vc:UIViewController, tableview:UICollectionView,storageRef:StorageReference){
-        
-        let alert = UIAlertController(title: "Delete item",
-                                      message: "This action cannot be reversed. Are you sure?",
-                                      preferredStyle: .alert)
-        // Submit button
+    private func showWarningDelete(vc:UIViewController,title:String,method:@escaping () -> Void){
         let submitAction = UIAlertAction(title: "Yes, delete", style: .destructive, handler: { (action) -> Void in
-            
-            
-            let cell = tableview.cellForItem(at: indexPath) as! uploadedCell
-            cell.selectedBool = false
-        })
-        // Cancel button
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
-            let cell = tableview.cellForItem(at: indexPath) as! uploadedCell
-            cell.selectedBool = false
-            
+            method()
         })
         
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in })
         
-        // Add action buttons and present the Alert
-        alert.addAction(submitAction)
-        alert.addAction(cancel)
-        vc.present(alert, animated: true, completion: nil)
+        commonUtil.showAlert(vc: vc, title: title, message: "This action cannot be reversed. Are you sure?",buttons: [submitAction,cancel]) { (alert) in
+            
+        }
+        
     }
     
-    func deleteItemStorage(vc:UIViewController,documentRef:DocumentReference,storageRef:StorageReference){
-       
+    
+    func deleteItemStorage(vc:UIViewController,documentRef:DocumentReference,storageRefPhoto:StorageReference,storageRefThumb:StorageReference){
+        
         documentRef.delete { (error) in
             if error == nil{
-            storageRef.delete { (error) in
-                
-                }}
-        }
-        
-       
-            
-        
-        
+                storageRefPhoto.delete { (error) in
+                    storageRefThumb.delete { (error) in
+                        
+                    }}
+            }}
     }
+    
+    
+    
+    
+    
+    
     
     
     
@@ -207,13 +213,13 @@ class BucketController{
         
         var data = [String:Any]()
         folderNamesdoc.getDocument { (snapshot, error) in
-             var currentFolders = [String]()
+            var currentFolders = [String]()
             if snapshot?.data() != nil{
                 currentFolders = snapshot!.data()!["FolderNames"] as! [String]
                 currentFolders.append(folderName)
                 
             }else{
-               currentFolders.append(folderName)
+                currentFolders.append(folderName)
             }
             data["FolderNames"] = currentFolders
             data["Date"] = Timestamp.init().seconds
@@ -223,29 +229,69 @@ class BucketController{
         }
         
         
-        //        private void uploadFolder(final String folderName) {
-        //            final Map<String, Object> map = new HashMap<>();
-        //
-        //            folderNamesdoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-        //            @Override
-        //            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-        //            if (task.getResult().exists()) {
-        //            ArrayList<String> folderNamesList = new ArrayList<>();
-        //            folderNamesList = (ArrayList<String>) task.getResult().get("FolderNames");
-        //            folderNamesList.add(folderName);
-        //            map.put("FolderNames", folderNamesList);
-        //            folderNamesdoc.set(map);
-        //            } else {
-        //            ArrayList<String> folderNamesList = new ArrayList<>();
-        //            folderNamesList.add(folderName);
-        //            map.put("FolderNames", folderNamesList);
-        //            folderNamesdoc.set(map);
-        //            }
-        //            }
-        //
+        
+    }
+    
+    func getUploadedImages(documentRef:DocumentReference, onComplete:@escaping ([String],[bucketItem],[String]) -> Void){
+        var imageID = [String]()
+        var bucketItems = [bucketItem]()
+        var folderNames = [String]()
+        documentRef.collection("Buckets").order(by: "Date", descending: true)
+            .addSnapshotListener({ (Query, error) in
+                if Query != nil{
+                    imageID = [String]()
+                    bucketItems = [bucketItem]()
+                    folderNames = [String]()
+                    
+                    
+                    for documents in (Query?.documents)!{
+                        //For files
+                        if documents.documentID != "Folder Names"{
+                            print("Not folder \(documents.documentID)")
+                            let points =  documents["Points"] as? Int
+                            
+                            if let name = documents["Name"] as? String ,
+                                let photourl = documents["PhotoUrlImageViewver"] as? String,
+                                let date = documents["Date"] as? Double,
+                                let PhotoUrlThumbnail = documents["PhotoUrlThumbnail"] as? String{
+                                let item = bucketItem(imageName: name, creationDate: date, points: points, thumnailUrl: PhotoUrlThumbnail , photourl: photourl,folder:false)
+                                if !imageID.contains(documents.documentID){
+                                    bucketItems.append(item)
+                                    imageID.append(documents.documentID)
+                                }}
+                        }else{
+                            print("Folder \(documents.data())")
+                            let folderArray = documents.data()
+                            if let folders = folderArray["FolderNames"] as? [String]{
+                                for folderName in folders{
+                                    let item = bucketItem(imageName: folderName, creationDate: nil, points: nil, thumnailUrl: nil , photourl: nil,folder:true)
+                                    if !folderNames.contains(folderName){
+                                        bucketItems.append(item)
+                                        folderNames.append(folderName)
+                                                print("folderNames : \(folderNames)")
+                                    }}
+                            }}
+                    }
+                   
+                    onComplete(imageID,bucketItems,folderNames)
+                }
+                
+            })
         
     }
     
     
+    func downloadImage(url:URL,method:@escaping (UIImage) -> Void){
+        ImageDownloader.default.downloadImage(with: url, options: [], progressBlock: nil) {
+            (image, error, url, data) in
+            method(image!)
+           
+        }
+    }
+   
+    
+    
     
 }
+
+

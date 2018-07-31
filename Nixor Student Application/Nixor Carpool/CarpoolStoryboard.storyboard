@@ -1145,7 +1145,7 @@
                                                 </constraints>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wVY-Mg-1Cq">
-                                                <rect key="frame" x="0.0" y="-211.5" width="375" height="55"/>
+                                                <rect key="frame" x="0.0" y="-246.5" width="375" height="55"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="HpN-GE-6UU">
                                                         <rect key="frame" x="49.5" y="2.3333333333333144" width="276" height="50.5"/>

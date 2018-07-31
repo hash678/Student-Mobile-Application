@@ -14,6 +14,6 @@ struct bucketItem{
     var thumnailUrl:String?
     var photourl:String?
     var folder:Bool!
-
+    
     
 }
