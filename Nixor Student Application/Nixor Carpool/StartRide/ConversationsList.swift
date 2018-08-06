@@ -50,8 +50,8 @@ class ConversationsList: GeneralLayout, UITableViewDataSource, UITableViewDelega
         cell.date.text = commonUtil.convertSecondsToDate(interval: selectedRideList[indexPath.item].date!)
         
         if let photourl = self.userPhotos[selectedRideList[indexPath.item].user!] {
-            let url = URL(string: photourl)
-            cell.student_photo.kf.setImage(with: url)
+         
+            cell.student_photo.setImage(url: photourl)
             cell.student_photo.circleImage()
             cell.student_id.text = self.userIDS[selectedRideList[indexPath.item].user!]
         }else{
@@ -146,8 +146,7 @@ class ConversationsList: GeneralLayout, UITableViewDataSource, UITableViewDelega
             if error == nil && response != nil{
                 
                 if response?.get("photourl") != nil{
-                    let url = URL(string: response?.get("photourl") as! String)
-                    cell.student_photo.kf.setImage(with: url )
+                    cell.student_photo.setImage(url: response?.get("photourl") as! String )
                     cell.student_photo.circleImage()
                     
                     

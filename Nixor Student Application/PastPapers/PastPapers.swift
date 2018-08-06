@@ -9,31 +9,28 @@
 import UIKit
 import FirebaseFirestore
 import FirebaseStorage
-class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
+import NVActivityIndicatorView
+class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate,NVActivityIndicatorViewable{
+    
     var subjects = [String]()
     let userClass = UserPhoto()
     var username:String?
     let commonutil = common_util()
     var paperObjectList = [paperObject]()
-    var paperUrlList = [String]()
-    var indicator: UIActivityIndicatorView?
     var subjectSelected:String?
     var multiviewOn = false
     var selectedRow:IndexPath?
     var selectedPaperURL:String?
     var secondSelectedPaperUrl:String?
     var secondSelectedRow:IndexPath?
-    
     var singlePaperSelectedRow:IndexPath?
-    
     let rowPaperHeight:CGFloat = 120
-    let rowSubjectHeight:CGFloat = 75
+    let rowSubjectHeight:CGFloat = 60
     
     //Search
     
     var filteredSubjects = [String]()
     var filteredPaperObjects = [paperObject]()
-    var filteredPaperUrls = [String]()
     var searchActive : Bool = false
     
     //StoryBoard Variables
@@ -42,11 +39,11 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     @IBOutlet weak var multiviewSwitch: UISegmentedControl!
     @IBOutlet weak var selector: UISegmentedControl!
     @IBOutlet weak var multiViewView: UIView!
-    
     @IBOutlet weak var headermain: headerMain!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    
+    let commonUtil = common_util()
+    var showingloading = false
     
     
     //Function for count
@@ -57,11 +54,10 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             if(searchActive) {
                 return filteredSubjects.count
             }else{
-                return subjects.count
-            }
+                return subjects.count}
         }else{
             if searchActive{
-                return filteredPaperUrls.count
+                return filteredPaperObjects.count
             }else{
                 return paperObjectList.count
             }
@@ -74,11 +70,9 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
    
     //Tableview design
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indicator!.isAnimating{
-            indicator!.stopAnimating()
+        self.stopLoading {
+            
         }
-        
         if subjectSelected == nil {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! subjectCellTableViewCell
             if subjects.count > indexPath.row{
@@ -112,8 +106,9 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             
             if multiviewOn && selectedPaperURL != nil {
                 if searchActive{
-                    if filteredPaperUrls.contains(selectedPaperURL!){
-                        if indexPath.item == filteredPaperUrls.index(of: selectedPaperURL!){
+                      let found = filteredPaperObjects.filter{$0.url == selectedPaperURL}.count > 0
+                    if found{
+                        if indexPath.item == filteredPaperObjects.index(where: { $0.url == selectedPaperURL }){
                             tableView.selectRow(at: indexPath, animated: true, scrollPosition: UITableViewScrollPosition.init(rawValue: indexPath.item)!)
                         }
                     }else{
@@ -121,9 +116,9 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                     }
                     
                 }else{
-                
-                if paperUrlList.contains(selectedPaperURL!){
-                if indexPath.item == paperUrlList.index(of: selectedPaperURL!){
+                 let found = paperObjectList.filter{$0.url == selectedPaperURL}.count > 0
+                if found {
+                if indexPath.item == paperObjectList.index(where: { $0.url == selectedPaperURL }){
                     tableView.selectRow(at: indexPath, animated: true, scrollPosition: UITableViewScrollPosition.init(rawValue: indexPath.item)!)
                 }
                 }else{
@@ -170,20 +165,21 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 if selectedRow == nil {
                     selectedRow = indexPath
                     if searchActive {
-                        selectedPaperURL = filteredPaperUrls[indexPath.row]
+                        selectedPaperURL = filteredPaperObjects[indexPath.row].url!
                     }else{
-                        selectedPaperURL = paperUrlList[indexPath.row]
+                        selectedPaperURL = paperObjectList[indexPath.row].url!
                         
                     }
                 }else {
                     secondSelectedRow = indexPath
                     if searchActive {
-                        secondSelectedPaperUrl = filteredPaperUrls[indexPath.row]
+                        secondSelectedPaperUrl = filteredPaperObjects[indexPath.row].url!
                     }else{
-                        secondSelectedPaperUrl = paperUrlList[indexPath.row]
+                        secondSelectedPaperUrl =  paperObjectList[indexPath.row].url!
                         
                     }
-                    indicator?.startAnimating()
+                 self.showLoading()
+                    print("Called here1")
                     
                     if searchActive{
                         self.downloadPDF(paperName: selectedPaperURL!, subject: subjectSelected!, isItMultiview: true)
@@ -198,19 +194,39 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 
                 
             }else{
-                //let downloadClass = paperdownload()
-                indicator?.startAnimating()
+    
+                    //self.showLoading()
+           
+
                 singlePaperSelectedRow = indexPath
                 if searchActive {
-                    self.downloadPDF(paperName: filteredPaperUrls[indexPath.row], subject: subjectSelected!, isItMultiview: false)
+                    self.downloadPDF(paperName: filteredPaperObjects[indexPath.row].url!, subject: subjectSelected!, isItMultiview: false)
                 }else{
-                    self.downloadPDF(paperName: paperUrlList[indexPath.row], subject: subjectSelected!, isItMultiview: false)
+                    self.downloadPDF(paperName:  paperObjectList[indexPath.row].url!, subject: subjectSelected!, isItMultiview: false)
                 }
                 
             }
             
         }
     }
+    
+    
+    func showLoading(){
+        let size = CGSize(width: 40, height: 40)
+           startAnimating(size, message: "Please wait", messageFont: nil, type: NVActivityIndicatorType.ballScale, color: #colorLiteral(red: 0.5649999976, green: 0, blue: 0, alpha: 1), padding: nil, displayTimeThreshold: nil, minimumDisplayTime: nil, backgroundColor:#colorLiteral(red: 0.7897366751, green: 0.7897366751, blue: 0.7897366751, alpha: 0.75), textColor: nil, fadeInAnimation: nil)
+    }
+    func saveSubjects(){
+    
+        let defaults = UserDefaults.standard
+        defaults.set(subjects, forKey: "PastpaperSubjects")
+    }
+    func getSavedSubjects(){
+        let defaults = UserDefaults.standard
+        subjects = defaults.stringArray(forKey: "PastpaperSubjects") ?? [String]()
+        self.subjects.sort()
+            self.tableView.reloadData()
+    }
+    
     //Gets subjects
     func getSubjects(){
         searchBar.text = ""
@@ -222,27 +238,42 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         self.tableView.rowHeight = rowSubjectHeight
         subjectSelected = nil
         selector.removeAllSegments()
-        selector.insertSegment(withTitle: "All", at: 0, animated: true)
-        selector.insertSegment(withTitle: "Sciences", at: 1, animated: true)
-        selector.insertSegment(withTitle: "Commerce", at: 2, animated: true)
-        selector.insertSegment(withTitle: "Other", at: 3, animated: true)
-        selector.selectedSegmentIndex = 0
-        indicator!.startAnimating()
+ 
+
+        getSavedSubjects()
         constants.pastpaperSubjectDB.getDocument { (document, error) in
             if document != nil{
                 let data = document?.data()
+                
+                var subjectsArray = [String]()
                 for indexPath in (data?.indices)!{
-                    self.subjects.append(data![indexPath].value as! String)
                     
-                    //print ("Value: \(data![indexPath].value)")
-                    //print("Something else: \(data?.count)")
+                    
+                    subjectsArray.append(data![indexPath].value as! String)
+                
                 }
-                self.subjects.sort()
-                self.tableView.reloadData()
+                
+                if self.subjects != subjectsArray{
+                    self.subjects = subjectsArray
+                    self.saveSubjects()
+                       self.subjects.sort()
+                    self.tableView.reloadData()
+                }
+                
+              
+                
             }
         }
     }
     
+    
+    func stopLoading(check:@escaping ()-> Void){
+       
+          stopAnimating()
+           
+        
+        
+    }
     
     //Gets papers for the subject
     func getPapers(subjectName:String, onlythesepapers:String?){
@@ -250,10 +281,9 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         searchBar.text = ""
         searchActive = false
           self.title = subjectName
-        
         multiViewView.isHidden = false
         paperObjectList = [paperObject]()
-        paperUrlList = [String]()
+        
         self.tableView.rowHeight = rowPaperHeight
         subjects = [String]()
         self.tableView.reloadData()
@@ -267,7 +297,9 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             selector.insertSegment(withTitle: "GT", at: 4, animated: true)
             selector.selectedSegmentIndex = 0}
         subjectSelected = subjectName
-        indicator!.startAnimating()
+        self.showLoading()
+              print("Called here3")
+        
         var query:Query
         if onlythesepapers == nil {
             query = constants.pastpaperSubjects.collection(subjectName).order(by: "year")
@@ -281,10 +313,11 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                     let docs:Dictionary = documents.data()
                     if docs["name"] != nil{
                         //  map.get("month"), map.get("year"), map.get("variant"), map.get("type"))
-                        let paper = self.addDataToObject(monthO: docs["month"] as? String, yearO: docs["year"] as? String, variantO: docs["variant"] as? String, typeO: docs["type"] as? String)
+                        let paper = paperObject(monthO: docs["month"] as? String, yearO: docs["year"] as? String, variantO: docs["variant"] as? String, typeO: docs["type"] as? String, url: docs["name"] as! String)
+                     
                         if !self.isPaperObjectInvalid(paperObject: paper){
-                        //    print(paper)
-                            self.paperUrlList.append(docs["name"] as! String)
+                     
+                           
                             self.paperObjectList.append(paper)
                             
                         }
@@ -293,8 +326,15 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                     
                 }
                 
+                if onlythesepapers != nil{
+                   self.paperObjectList = self.paperObjectList.sorted(by: { ($0.year! < $1.year!)})
+                }
+                self.stopLoading {
+                    
+                }
+                   self.tableView.reloadData()
                 
-                self.tableView.reloadData()
+                
                 
             }
         }
@@ -325,55 +365,22 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(PastPapers.back(sender:)))
         self.navigationItem.leftBarButtonItem = newBackButton
         self.tableView.tableFooterView = UIView()
-        intLoading()
-        setMyData()
+ 
+        if let username_local = commonutil.getUserData(key: "username"){
+            username = username_local
+            
+        }
         getSubjects()
         searchBar.delegate = self
         
     }
     
-    //Simple meethod to convert data from firebase into a paper object.
-    func addDataToObject(monthO: String? ,yearO: String? ,variantO:String?,typeO:String?) -> paperObject {
-        var paper = paperObject()
-        if let month = monthO{
-            paper.month = month
-        }else{
-            paper.month = "error"
-        }
-        if let year = yearO{
-            paper.year = year
-        }else{
-            paper.year = "error"
-        }
-        if let variant = variantO{
-            paper.variant = variant
-        }else{
-            paper.variant = "error"
-        }
-        
-        if let type = typeO{
-            paper.type = type
-        }else{
-            paper.type = "error"
-        }
-        return paper
-        
-    }
+
     
-    //Function to setHeaderData
-    func setMyData(){
-        //    student_photo.circleImage()
-        if let username_local = commonutil.getUserData(key: "username"){
-            //  userClass.getMyPhoto(username: username_local, imageview: student_photo!)
-            username = username_local
-        }
-        
-    }
     //Creates your paper cell
     func getPaperCell(indexPath: Int, paper: paperObject) -> paperCellTableViewCell{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "paperCell") as! paperCellTableViewCell
-        
         cell.view.giveMeShadowsBitch()
         if paper.month != "error"{
             cell.monthLabel.text = paper.month
@@ -429,19 +436,11 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         }
         
     }
-    //Just some basic loading and shashkay scene
-    func intLoading(){
-        indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-        indicator!.frame = CGRect(x: 0, y: 0, width: 70, height: 70)
-        indicator!.center = view.center
-        indicator!.color = #colorLiteral(red: 0.5647058824, green: 0, blue: 0, alpha: 1)
-        self.view.addSubview(indicator!)
-        self.view.bringSubview(toFront: indicator!)
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-    }
+   
     //Downloads paper and if multiview is selected calls download second paper method else opens pdf viewer
     func downloadPDF(paperName:String, subject:String, isItMultiview:Bool){
         
+        showLoading()
         let storageRef = Storage.storage().reference()
         let islandRef = storageRef.child("PastPapers").child("Subjects").child(subject).child(paperName)
         
@@ -455,12 +454,16 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 
                 if let error = error {
                     print("Error is: \(error)")
-                    if(self.indicator?.isAnimating)!{
-                        self.indicator?.stopAnimating()
+                    self.stopLoading {
+                        //TODO: Show error
                     }
+                    
                 } else {
                     print("Success Man: \(paperName)")
                     if !isItMultiview{
+                        self.stopLoading {
+                            
+                        }
                         self.openPDFViewer(url: localURL,secondPaper: nil)}else{
                         self.downloadSecondPDF(paperName: self.secondSelectedPaperUrl!, subject: subject, previousPaper: localURL)
                     }
@@ -470,6 +473,9 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             print("Success Man: \(paperName)")
             
             if !isItMultiview{
+                self.stopLoading {
+                    
+                }
                 self.openPDFViewer(url: localURL,secondPaper: nil)}else{
                 self.downloadSecondPDF(paperName: secondSelectedPaperUrl!, subject: subject, previousPaper: localURL)
             }
@@ -481,7 +487,7 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     //Download's the second paper and passes the URL of the first paper to the open pdf viewer method
     func downloadSecondPDF(paperName:String, subject:String, previousPaper:URL){
-        
+        showLoading()
         let storageRef = Storage.storage().reference()
         let islandRef = storageRef.child("PastPapers").child("Subjects").child(subject).child(paperName)
         
@@ -494,18 +500,28 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             let _ = islandRef.write(toFile: localURL) { url, error in
                 if let error = error {
                     print("Error is: \(error)")
-                    if(self.indicator?.isAnimating)!{
-                        self.indicator?.stopAnimating()
+                    self.stopLoading {
+                        //TODO:Show error
                     }
+                    
                 } else {
+                    self.stopLoading {
+                        //TODO:Show error
+                    }
                     print("Success Man: \(paperName)")
                     
+                    self.stopLoading {
+                        
+                    }
                     self.openPDFViewer(url: localURL,secondPaper: previousPaper)}
                 //Download Second paper
             }
             
         }else{
             print("Success Man: \(paperName)")
+            self.stopLoading {
+                
+            }
             self.openPDFViewer(url: localURL,secondPaper: previousPaper)}
         
         
@@ -514,18 +530,21 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
     //Open's PDF. Checks if MultiView is required or Single paper view.
     func openPDFViewer(url: URL, secondPaper:URL?){
-        //        let document = PDFDocument(url: url)!
-        //      let readerController = PDFViewController.createNew(with: document)
-        //    navigationController?.pushViewController(readerController, animated: true)
-        if(indicator?.isAnimating)!{
-            indicator?.stopAnimating()
+        self.stopLoading {
+            
+            
         }
+     
         if secondPaper == nil {
             let storyboard = UIStoryboard(name: "PastpapersStoryboard", bundle: nil)
             let singleView = storyboard.instantiateViewController(withIdentifier: "pdfIntent")as! PdfLoader
             singleView.url = url
             self.tableView.deselectRow(at: singlePaperSelectedRow!, animated: true)
+         
+            
             self.present(singleView,animated: true, completion: nil)
+           
+          
             
         }else{
             
@@ -540,7 +559,10 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             selectedRow = nil
             selectedPaperURL = nil
             secondSelectedPaperUrl = nil
+          
             self.present(multiView,animated: true, completion: nil)
+            
+            
         }
         
         
@@ -609,101 +631,42 @@ class PastPapers: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             
             tableView.reloadData()
         }else{
-
-            let obtanedTulips = filterSubjects(text: searchText, paperObjectArray: paperObjectList, paperListUrl: paperUrlList)
-            filteredPaperObjects = obtanedTulips.paperS
-            filteredPaperUrls = obtanedTulips.paperUrls
-            
-//            if(filteredPaperObjects.count == 0){
-//                searchActive = false
-//            } else {
-            
+ filteredPaperObjects = filterSubjects(text: searchText, paperObjectArray: paperObjectList)
+          
             
                 searchActive = true
             
             if searchText == ""{
                 searchActive = false
             }
-//
             tableView.reloadData()
-        }
+        }}
+    
+
+    func filterSubjects(text:String, paperObjectArray:[paperObject]) -> [paperObject]{
         
-        
-        
-    }
-    
-    
-    
-    
-    //Search Subjects
-    func stringContains(key:String, value:String) -> Bool{
-        if key.contains(value) {
-            return true
-        }
-        return false
-    }
-    func itContains(value:String,paperObject:paperObject) -> Bool{
-        
-        if (stringContains(key: paperObject.variant!, value: value)
-            ||  stringContains(key: paperObject.year!, value: value)
-            ||  stringContains(key: paperObject.month!, value: value)
-            ||  stringContains(key: paperObject.type!, value: value)
-            ) {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    func filterSubjects(text:String, paperObjectArray:[paperObject],paperListUrl:[String]) -> (paperUrls:[String], paperS:[paperObject]){
         var filteredPaperObjects = [paperObject]()
-        var filteredPaperUrls = [String]()
-        var returnTulip = (filteredPaperUrls,filteredPaperObjects)
-        let constraint = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        var firstsplit = constraint.split(separator: " ")
-       // print(firstsplit.count)
-        
+       
+        let exclude = [String]()
         for indexPath in paperObjectArray.indices {
-            var count = 0
-            var found = 0
-            
-            for index in firstsplit.indices{
-                let value = firstsplit[index].trimmingCharacters(in: .whitespacesAndNewlines).capitalized
-                if(value != "PAPER" || value != "SCHEME"){
-                    count += 1
-                   // print("Count: \(count)")
-                }else{
-                    count += 1
-                    found += 1
-                }
-                let contains = itContains(value: value, paperObject: paperObjectArray[indexPath])
-                //print("value: \(value) contains: \(contains)")
-                if contains {
-                    found += 1
-                   // print("found: \(found)")
-                    //print("Got here: \(value)")
-                }
-                
+
+            let contains = commonUtil.NewfilterObjects(text: text, exclude: exclude) { (value) -> Bool in
+                self.commonUtil.itContains(value: value, object: paperObjectArray[indexPath])
             }
-            if found == count {
+            if contains{
                 filteredPaperObjects.append(paperObjectArray[indexPath])
-                filteredPaperUrls.append(paperListUrl[indexPath])
+        
+
             }
-            
-           
         }
-         returnTulip = (filteredPaperUrls,filteredPaperObjects)
-        return returnTulip
+
+
+    
+        return filteredPaperObjects
+
     }
-    
-    
+
+
 
     
 }

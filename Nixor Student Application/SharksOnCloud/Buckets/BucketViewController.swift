@@ -16,7 +16,7 @@ import Lightbox
 import FirebaseDatabase
 import FirebaseRemoteConfig
 
-class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionViewDelegate,UICollectionViewDataSource,GalleryControllerDelegate,UIGestureRecognizerDelegate, headerImageDelegate,LightboxControllerPageDelegate{
+class BucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionViewDelegate,UICollectionViewDataSource,GalleryControllerDelegate,UIGestureRecognizerDelegate, headerImageDelegate,LightboxControllerPageDelegate{
     
     
     
@@ -29,16 +29,19 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var tableview: UICollectionView!
     
+    @IBOutlet weak var subscribeButton: UIButton!
     var class_type:String?
     var selectedSubject:String?
     var uploadCount = 0
     let thumbnailSize:CGFloat = 200
     let photoSize:CGFloat = 800
     let maxImageCount = 30
-    let Controller = BucketController()
+    let Controller = Model()
     var showingLoading = false
     var folderNamesdoc:DocumentReference?
     var foldersdoc:DocumentReference?
+    var folderCount = 0
+    let maxNumberFolders = 10
     var firebaseUploadCount = 0 {
         didSet{
             if self.uploadCount == self.firebaseUploadCount{
@@ -61,8 +64,19 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
     var storageReference:StorageReference?
     var myUploadsCollection:CollectionReference?
     var lightboxController:LightboxController?
-    
-    
+    var bucketUser:String?
+    var myBucket = false
+    var folderName:String?
+    var subscribed = false {
+        didSet {
+             subscribeButton.isHidden = false
+            if !subscribed{
+                subscribeButton.setImage(#imageLiteral(resourceName: "subscribeButton"), for: .normal)
+            }else{
+                subscribeButton.setImage(#imageLiteral(resourceName: "unSubscribeButton"), for: .normal)
+            }
+        }
+    }
     
     
     
@@ -137,7 +151,9 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
     
     func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
         dismiss(animated: true) {
-            self.showingLoading = self.Controller.showLoading(vc:self)
+            self.commonUtil.showLoading(vc: self, title: "Please wait", message: "") {
+                self.showingLoading = true
+            }
         }
         self.uploadCount = images.count * 2
         for image in images {
@@ -153,8 +169,8 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
                     let compressedThumnail = thumnailResized.jpeg(UIImage.JPEGQuality.low)
                     let documentName = Database.database().reference().child("SOCIDS").childByAutoId().key
                     
-                    self.uploadImageToFirebase(documentName:documentName, image: compressed!, username: self.username!,thumnail: false)
-                    self.uploadImageToFirebase(documentName:documentName,image: compressedThumnail!, username: self.username!,thumnail: true)
+                    self.uploadImageToFirebase(documentName:documentName, image: compressed!, bucketUser: self.bucketUser!,thumnail: false)
+                    self.uploadImageToFirebase(documentName:documentName,image: compressedThumnail!, bucketUser: self.bucketUser!,thumnail: true)
                 }else{
                     self.uploadCount -= 2
                 }
@@ -165,11 +181,11 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
         var userInfo = [String:String]()
         userInfo["className"] = "101"
         userInfo["student_name"] = commonUtil.getUserData(key: "name")
-        myUploadsCollection!.document(username!).setData(userInfo)
+       // myUploadsCollection!.setData(userInfo)
         
         let batch = Firestore.firestore().batch()
         for keys in photoURL.keys{
-            let documetRef = myUploadsCollection!.document(username!).collection("Buckets").document(keys)
+            let documetRef = myUploadsCollection!.document(keys)
             let data = self.storeToFirestore(name: keys, type: "Image", PhotoUrlImageViewver: photoURL[keys]!, PhotoUrlThumbnail: thumnailURL[keys]!)
             batch.setData(data, forDocument: documetRef)
         }
@@ -207,12 +223,12 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
     
     
     func errorHandling (){
-        print("ERROR OCCURED UPLAODING")
+        print("Error Occurred while Uploading")
         
         uploadCount -= 1
     }
     
-    private func uploadImageToFirebase(documentName:String, image: Data, username: String, thumnail:Bool){
+    private func uploadImageToFirebase(documentName:String, image: Data, bucketUser: String, thumnail:Bool){
         
         let key = Database.database().reference().child("SOCIDS").childByAutoId().key
         let photoURLRef = storageReference!.child("\(key).jpg")
@@ -242,9 +258,7 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
                 
                 print("UPLOAD COUNT \(self.uploadCount) UPLOAD DONE COUNT \(self.uploadDoneCount)")
             }
-            
-            // let size = metadata.size
-            // print("Size is \(size)")
+          
         }
     }
     
@@ -275,9 +289,16 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
         })
         
         
+        if folderCount <= maxNumberFolders{
         
-        commonUtil.showAlertAction(vc: self, title: "", message: "Manage Bucket", buttons: [photos,createFolder,clearBucket,cancel]) { (alert) in
+            commonUtil.showAlertAction(vc: self, title: "", message: "Manage Bucket", buttons: [photos,createFolder,clearBucket,cancel]) { (alert) in
+                
+            }
             
+        }else{
+            commonUtil.showAlertAction(vc: self, title: "", message: "Manage Bucket", buttons: [photos,clearBucket,cancel]) { (alert) in
+                
+            }
         }
         
     }
@@ -295,7 +316,7 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
     
     
     private func getAllUploadedImages(){
-        let myDocumentRef =  myUploadsCollection!.document(username!)
+        let myDocumentRef =  myUploadsCollection!
         self.Controller.getUploadedImages(documentRef: myDocumentRef) { (myImageId, myBucketItems, myfolderNames) in
             print(myfolderNames)
             self.imageID = myImageId
@@ -312,7 +333,15 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
         super.viewDidLoad()
         username = commonUtil.getUserData(key: "username")
         setMyReferences()
-        addButton.circleImage()
+        myBucket = username == bucketUser ? true : false
+        addButton.isHidden = myBucket ? false : true
+        subscribeButton.isHidden = true
+        
+        
+        self.title = folderName !=  nil ? folderName : (myBucket ? "My Bucket" : bucketUser)
+       
+        if !myBucket{
+            checkIfSubscribed()}
         self.hideKeyboardWhenTappedAround()
         getAllUploadedImages()
         let lpgr : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress))
@@ -323,13 +352,24 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
         
     }
     
+    
+    
+   
+    
+    
     func setMyReferences(){
         let storage = Storage.storage()
         let storageRef = storage.reference();
-        storageReference = storageRef.child("SOC").child(class_type!).child(selectedSubject!).child(username!)
-        myUploadsCollection = Firestore.firestore().collection("SharksOnCloud").document(class_type!).collection("Subjects").document(selectedSubject!).collection("Users")
-        folderNamesdoc = myUploadsCollection!.document(username!).collection("Buckets").document("Folder Names")
-        foldersdoc = myUploadsCollection!.document(username!).collection("Buckets").document("Folders")
+        storageReference = storageRef.child("SOC").child(class_type!).child(selectedSubject!).child(bucketUser!)
+        
+        if myUploadsCollection != nil{
+             myUploadsCollection = myUploadsCollection!.document(folderName!).collection("Buckets")
+        }else{
+        myUploadsCollection = Firestore.firestore().collection("SharksOnCloud").document(class_type!).collection("Subjects").document(selectedSubject!).collection("Users").document(bucketUser!).collection("Buckets")
+        }
+        
+        folderNamesdoc = myUploadsCollection!.document("Folder Names")
+        foldersdoc = myUploadsCollection!.document("Folders")
     }
     
     
@@ -362,7 +402,7 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
     //Functions For deleting files and folders
     func deleteSelectedFile(index:Int){
         let name = bucketItems[index].imageName
-        let documentRef =  myUploadsCollection!.document(username!).collection("Buckets").document(name!)
+        let documentRef =  myUploadsCollection!.document(name!)
         
         
         
@@ -379,7 +419,7 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
             if !self.bucketItems[index].folder && self.bucketItems.count > 0{
                 
                 let name = self.bucketItems[index].imageName
-                let documentRef = myUploadsCollection!.document(self.username!).collection("Buckets").document(name!)
+                let documentRef = myUploadsCollection!.document(name!)
                 
                 
                 
@@ -404,16 +444,46 @@ class MyBucketViewController: GeneralLayout, UISearchBarDelegate,UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !bucketItems[indexPath.row].folder{
             Controller.showImageViewer(images: Controller.imageObject(urlArray: bucketItems), currentpage: (indexPath.item - folderNames.count), vc:self,delegate: self,changePage:self)
+        }else{
+            
+            let Folders = storyboard?.instantiateViewController(withIdentifier: "BucketViewController") as! BucketViewController
+     
+            Folders.class_type = class_type
+            Folders.folderName = self.folderNames[indexPath.row]
+            Folders.selectedSubject = selectedSubject
+            Folders.bucketUser = bucketUser
+            Folders.myUploadsCollection = myUploadsCollection
+            Folders.folderCount = self.folderCount + 1
+          self.navigationController?.pushViewController(Folders, animated: true)
+            
+            
+            
         }
         
     }
-    
     //CollectionView Methods
-    
-    
-    
-    
-    
+   
+    func checkIfSubscribed(){
+        
+            let collectionRef =  Firestore.firestore().collection("SharksOnCloud").document(class_type!).collection("Subjects").document(selectedSubject!).collection("Users").document(bucketUser!).collection("Buckets")
+        
+        Controller.checkIfSubscribed(username: username!, collectionref: collectionRef) { (subscribed) in
+           
+           self.subscribed = subscribed
+        }
+        
+    }
+ 
+    @IBAction func subscribeToBucket(_ sender: UIButton) {
+      subscribeButton.isHidden = true
+        let collectionRef =  Firestore.firestore().collection("SharksOnCloud").document(class_type!).collection("Subjects").document(selectedSubject!).collection("Users").document(bucketUser!).collection("Buckets")
+        Controller.subscribeToBucket(username: username!, collectionRef: collectionRef, subscribe:!subscribed) {
+            self.subscribed = !self.subscribed
+            let toastMessage = self.subscribed ? "Subscribed" : "Unsubscribed "
+            self.showToast(message: toastMessage)
+           
+        }
+    }
     
     
     func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {

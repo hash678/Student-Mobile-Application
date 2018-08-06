@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFunctions
 class home_screen: GeneralLayout, UICollectionViewDelegate,UICollectionViewDataSource {
- let Controller = BucketController()
+ let Controller = Model()
     var loading = false
         
     
@@ -92,7 +92,10 @@ class home_screen: GeneralLayout, UICollectionViewDelegate,UICollectionViewDataS
     
     func downloadDocument(name:String){
         
-        loading = commonutil.showLoading(vc: self, title: "Please wait", message: "")
+        commonutil.showLoading(vc: self, title: "Please wait", message: "") {
+            self.loading = true
+        }
+        
         
         var data = [String:String]()
         data["name"] = name

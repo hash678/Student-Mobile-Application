@@ -11,17 +11,26 @@ import FirebaseAuth
 import Firebase
 import FirebaseFirestore
 import FirebaseDatabase
+import NVActivityIndicatorView
 class LaunchScreenViewController: GeneralLayout {
     var handler:LoginHandler? 
     var LoggedInUser:AuthDataResult?
+  
+    @IBOutlet weak var loading: NVActivityIndicatorView!
     var commonutil = common_util()
     override func viewDidLoad() {
         super.viewDidLoad()
        
         
         
+        
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        loading.stopAnimating()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
+        loading.startAnimating()
         handler = LoginHandler(view: self)
         
         if commonutil.getUserData(key: "HasRunBefore") == nil && Auth.auth().currentUser != nil{
@@ -51,9 +60,11 @@ class LaunchScreenViewController: GeneralLayout {
     }
     private func openLoginViewController(){
         print("Open login controller")
-        print("Open activity")
-        let AuthNavigationController = storyboard?.instantiateViewController(withIdentifier: "AuthNavigationController") as! AuthNavigationController
-        present(AuthNavigationController, animated: true, completion:nil)
+   
+performSegue(withIdentifier: "openLogin", sender: nil)
+        //openLogin
+//        let AuthNavigationController = storyboard?.instantiateViewController(withIdentifier: "AuthNavigationController") as! AuthNavigationController
+//        present(AuthNavigationController, animated: true, completion:nil)
         
     }
    

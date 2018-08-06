@@ -12,6 +12,7 @@ import FirebaseStorage
 import Kingfisher
 import FirebaseDatabase
 import M13Checkbox
+import NVActivityIndicatorView
 class common_util{
     
     
@@ -34,6 +35,39 @@ class common_util{
         
         return sortedArray
     }
+    
+    func NewfilterObjects(text:String,exclude:[String] ,check:(String) -> Bool) -> Bool{
+        
+        let excludedWords = exclude.capitalizeArray() as! [String]
+        let constraint = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        var firstsplit = constraint.split(separator: " ")
+        
+        var count = 0
+        var found = 0
+        for index in firstsplit.indices{
+            let value = firstsplit[index].trimmingCharacters(in: .whitespacesAndNewlines).capitalized
+            
+            if(!excludedWords.contains(value)){
+                count += 1
+            }else{
+                count += 1
+                found += 1
+            }
+            
+            let contains = check(value)
+            if contains {
+                found += 1}}
+        if found == count {
+            return true
+            
+        }
+        return false
+        
+        
+        
+    }
+    
+    
     
     func showAlertAction(vc:UIViewController,title:String,message:String,buttons:[UIAlertAction],extra:(UIAlertController) -> Void){
         
@@ -203,10 +237,28 @@ class common_util{
         }
     }
     
+    
+    
+    
     //Simple method to skip the rubbish syntax, used to store values in "IOS SharedPref (yes I know.)"
     func storeinUserDetails(key: String, value: String){
         UserDefaults.standard.set(value, forKey: key)
     }
+    
+ 
+    
+    //Search Objects
+    func itContains(value:String,object:Any) -> Bool{
+        let mirror = Mirror(reflecting: object)
+        for values in mirror.children{
+            if let text = values.value as? String{
+                if text.contains(value){
+                    return true}
+                }}
+        return false
+    }
+    
+    
     
     //Method to extract Username from user's email address
     func extractUsername(student_email:String) -> String{
@@ -299,18 +351,19 @@ class common_util{
         return CGRect(x: x, y: y, width: width, height: height)
     }
     
-    func showLoading(vc:UIViewController,title:String,message:String) -> Bool{
+    func showLoading(vc:UIViewController,title:String,message:String,complete:@escaping () -> Void){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         alert.view.tintColor = UIColor.black
-        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
         
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        let loadingIndicator = NVActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50), type: NVActivityIndicatorType.ballScale, color: #colorLiteral(red: 0.5649999976, green: 0, blue: 0, alpha: 1), padding: nil)
         loadingIndicator.startAnimating();
         alert.view.addSubview(loadingIndicator)
-        vc.present(alert, animated: true, completion: nil)
-        return true
+        vc.present(alert, animated: true) {
+            complete()
+            
+        }
+   
     }
     
     
@@ -341,8 +394,8 @@ class common_util{
     }
     
     public func loadImageViewURLFirebase(url: String, imageview:UIImageView){
-        let url = URL(string: url)
-        imageview.kf.setImage(with: url)
+      
+        imageview.setImage(url: url)
        
 }
     
@@ -473,6 +526,8 @@ extension UIImage {
         case highest = 1
     }
     
+    
+    
     /// Returns the data for the specified image in JPEG format.
     /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
     /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
@@ -494,6 +549,18 @@ extension UIImage {
         return newImage!
     }
     
+}
+extension UIImageView{
+    func setImage(url:String){
+        let url = URL(string: url)
+        self.kf.indicatorType = .activity
+        self.kf.setImage(with: url)
+
+    }
+    func setImage(url:URL){
+        self.kf.indicatorType = .activity
+        self.kf.setImage(with: url)
+    }
 }
 
 extension UIView {
@@ -526,6 +593,7 @@ extension Data {
    
 }
 
+
 extension UIView {
     func bindFrameToSuperviewBounds() {
         guard let superview = self.superview else {
@@ -540,6 +608,21 @@ extension UIView {
         self.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: 0).isActive = true
         
     }
+}
+
+extension Array{
+    func capitalizeArray() -> [Any]{
+        if var array = self as? [String]{
+            for index in array.indices{
+                array[index] = array[index].localizedCapitalized
+                
+            }
+            return array
+            
+        }
+        return self
+    }
+    
 }
 
 

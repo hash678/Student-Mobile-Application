@@ -143,9 +143,10 @@ class Chat: JSQMessagesViewController, UIImagePickerControllerDelegate, UINaviga
 		
 		if messages[indexPath.item].senderId != "NixorApp"{
 		if  let  photo = userAvatars[messages[indexPath.item].senderId]  {
-		let url = URL(string:photo)
+	
 			cell.avatarImageView.circleImage()
-			cell.avatarImageView.kf.setImage(with: url)
+			
+			cell.avatarImageView.setImage(url: photo)
 		}else{
 				getPhotoUrl(cell: cell, username: messages[indexPath.item].senderId)
 		}
@@ -164,9 +165,9 @@ class Chat: JSQMessagesViewController, UIImagePickerControllerDelegate, UINaviga
 		Firestore.firestore().collection("users").document(username).getDocument { (response, error) in
 			if error == nil && response != nil{
 				if response?.get("photourl") != nil{
-					let url = URL(string: response?.get("photourl") as! String)
+				
 					self.userAvatars[username] = (response?.get("photourl") as! String)
-					cell.avatarImageView.kf.setImage(with: url )
+					cell.avatarImageView.setImage(url: response?.get("photourl") as! String )
 					cell.avatarImageView.circleImage()
 					cell.avatarImageView.isHidden = false;
 				}

@@ -27,7 +27,7 @@ struct constants{
     public static let pastpaperSubjects = Firestore.firestore().collection("Past Papers").document("Subjects")
     
     //Messages displayed
-   public static let carpoolRideNotBooked = "We could not post your ride. Please make sure you are connected to the internet."
+    public static let carpoolRideNotBooked = "We could not post your ride. Please make sure you are connected to the internet."
     public static let carpoolRideBooked = "Congratulations your ride has been posted. 10 Nixor points for you!"
     
     //Carpool Available rides node

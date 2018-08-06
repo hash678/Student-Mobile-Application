@@ -106,10 +106,11 @@ class Model{
         button.setImage(#imageLiteral(resourceName: "heartIcon"), for: .normal)
      
        
-        if let _ = vc as? MyBucketViewController{
-        }else{
-            controller.headerView.addSubview(customView)
+        if let myVc = vc as? BucketViewController{
+            if !myVc.myBucket {
+                controller.headerView.addSubview(customView)}
         }
+        
         
        controller.pageDelegate = changePage
       
@@ -290,6 +291,35 @@ class Model{
     }
    
     
+    func checkIfSubscribed(username:String, collectionref:CollectionReference, check:@escaping (Bool) -> Void){
+        collectionref.document("Subscribers").getDocument { (snapshot, error) in
+            if let data = snapshot?.data() {
+                if let value = data[username] as? Bool{
+                
+                    check(value)
+                }else{
+                    check(false)
+}
+            }else{
+                check(false)
+            }
+        }
+        
+        
+    }
+    func subscribeToBucket(username:String, collectionRef:CollectionReference,subscribe:Bool, check:@escaping () -> Void){
+       
+    
+        collectionRef.document("Subscribers").setData([username:subscribe]) { (error) in
+            if error != nil{
+                print("Error")
+            }else{
+                check()
+            }
+        }
+        
+        
+    }
     
     
 }

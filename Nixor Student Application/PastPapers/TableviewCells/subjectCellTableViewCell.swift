@@ -10,6 +10,17 @@ import UIKit
 
 class subjectCellTableViewCell: UITableViewCell {
 
+    var indexpath:IndexPath?
+    var addedToFav:Bool = false
+    var delegate:addToFav?
+    @IBAction func addToFavButton(_ sender: Any) {
+        if !addedToFav{
+            delegate?.addToFav(sender:indexpath!)
+        }else{
+            delegate?.addToFav(sender:indexpath!)
+        }
+    }
+    @IBOutlet weak var favIcon: UIButton!
     @IBOutlet weak var subjectName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

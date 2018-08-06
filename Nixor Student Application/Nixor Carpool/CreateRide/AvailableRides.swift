@@ -14,9 +14,11 @@ import CoreLocation
 import FirebaseFunctions
 import FirebaseDatabase
 import FoldingCell
-class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate, onRequestButtonClicked, CLLocationManagerDelegate{
+class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate, onRequestButtonClicked, CLLocationManagerDelegate, UISearchBarDelegate{
    
+    @IBOutlet weak var searchbar: UISearchBar!
     
+    @IBOutlet weak var tableview: UITableView!
     var locationManager:LocationManager?
     var coreLocationManager = CLLocationManager()
      lazy var functions = Functions.functions()
@@ -24,6 +26,7 @@ class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, 
     var selectedIndexPath:IndexPath?
       var indicator: UIActivityIndicatorView?
     var rides = [rideData]()
+    var filteredRides = [rideData]()
     let userClass = UserPhoto()
     @IBOutlet weak var tableView: UITableView!
    
@@ -34,8 +37,8 @@ class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, 
     var usersPhoto = [String:String]()
     var myLat:Double?
     var myLong:Double?
+    var searchActive = false
     
- 
     
     @IBAction func changeCampusSegment(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex{
@@ -53,7 +56,8 @@ class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, 
     
     
     func getAvailableRides(){
-
+searchActive = false
+        searchbar.text = ""
         
       handler = constants.carpoolDB.whereField("mainCampusOrNcfp", isEqualTo: self.campus).addSnapshotListener { (response, error) in
             if error == nil && response != nil {
@@ -171,8 +175,8 @@ class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, 
         constants.userDB.document(username).getDocument { (response, error) in
             if error == nil && response != nil{
                 if response?.get("photourl") != nil{
-                          let url = URL(string: response?.get("photourl") as! String)
-                    cell.student_photo.kf.setImage(with: url )
+                    
+                    cell.student_photo.setImage(url: response?.get("photourl") as! String )
                     
                     self.usersPhoto[username] = (response?.get("photourl") as! String)
                 }
@@ -275,6 +279,52 @@ class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, 
     }
     
     
+    
+    //Search Objects
+    func itContains(value:String,object:Any) -> Bool{
+        let mirror = Mirror(reflecting: object)
+        for values in mirror.children{
+            let text = self.convertToString(key: values.label!, value: values.value, object: object as! rideData)
+            if text.contains(value){
+                return true}
+            }
+            
+        
+        
+        
+        
+        return false
+    }
+    func convertToString(key:String, value:Any,object:rideData) -> String{
+        var returnValue = ""
+        switch key {
+        case "selectedTime":
+            
+        let date = Date.init(timeIntervalSince1970: value as! Double)
+        //Format date
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "h:mm a"
+        formatter.amSymbol = "AM"
+        formatter.pmSymbol = "PM"
+        
+        let dateString = formatter.string(from: date)
+        // Format: "4:44 PM"
+        
+        returnValue = dateString
+        case"selectedDays":  if object.oneTimeOrScheduled == "scheduled"{
+            returnValue = daysArraytoString(dayArray: value as! [String:Bool])
+            
+        }
+        default:
+            returnValue = "\(value)"
+        }
+        
+        return returnValue
+        
+    }
+    
+    
     func setRideInformation(ride object:rideData, cell:AvailablerideCell) -> AvailablerideCell{
         
         //Set cell background and design
@@ -292,8 +342,9 @@ class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, 
             
             if let photourl = usersPhoto[object.student_username]{
                 cell.student_photo.circleImage()
-                let url = URL(string: photourl)
-                cell.student_photo.kf.setImage(with: url)
+            
+                
+                cell.student_photo.setImage(url: photourl)
                   }else{
             
                 getPhotoUrl(cell: cell, username: object.student_username)}
@@ -312,10 +363,6 @@ class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, 
             cell.number_seats.text = "\(object.numberOfSeats!)"
           
             
-            
-            //Set ride timings and related information
-            
-            //If the ride is scheduled
             if object.oneTimeOrScheduled == "scheduled"{
                 //Get the name of days for the schedule
                 cell.available_days.text = daysArraytoString(dayArray: object.selectedDays!)
@@ -323,8 +370,6 @@ class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, 
                  cell.available_days.text = commonUtil.convertSecondsToDateOnly(interval: object.selectedTime)
              }
             
-            //Get timing for the schedule
-            //Convert seconds to date
             let date = Date.init(timeIntervalSince1970: object.selectedTime)
             //Format date
             let formatter = DateFormatter()
@@ -356,6 +401,10 @@ class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, 
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchActive{
+            return filteredRides.count
+        }
+        
         return rides.count
     }
     
@@ -364,12 +413,16 @@ class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "AvailablerideCell", for: indexPath) as! AvailablerideCell
+        
         let durations: [TimeInterval] = [0.26, 0.26, 0.26]
         cell.durationsForExpandedState = durations
         cell.durationsForCollapsedState = durations
         cell.currentIndexPath = indexPath
         cell.delegate = self
-        cell = setRideInformation(ride: rides[indexPath.row], cell: cell)
+        if searchActive{
+              cell = setRideInformation(ride: filteredRides[indexPath.row], cell: cell)
+        }else{
+            cell = setRideInformation(ride: rides[indexPath.row], cell: cell)}
         return cell
         
         
@@ -595,6 +648,46 @@ class AvailableRides:GeneralLayout, UITableViewDelegate, UITableViewDataSource, 
         
     }
     
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true}
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if searchBar.text == ""{
+            searchActive = false
+        }else{searchActive = true}}
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false}
+    
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = true}
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredRides = filterObjects(text: searchText, paperObjectArray: rides)
+        searchActive = true
+        if searchText == ""{searchActive = false}
+        tableview.reloadData()}
+    
+    func filterObjects(text:String, paperObjectArray:[rideData]) -> [rideData]{
+        var filteredObjects = [rideData]()
+        for indexPath in paperObjectArray.indices {
+            let contains = commonUtil.NewfilterObjects(text: text, exclude: [String]()) { (value) -> Bool in
+                self.itContains(value: value, object: paperObjectArray[indexPath])
+            }
+            if contains{
+                filteredObjects.append(paperObjectArray[indexPath])
+            }
+            
+            
+        }
+        
+        
+        return filteredObjects
+    }
+   
     
     
     

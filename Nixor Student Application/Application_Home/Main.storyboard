@@ -111,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cb1-zT-SR6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1261.5999999999999" y="-765.06746626686663"/>
+            <point key="canvasLocation" x="2200.8000000000002" y="-765.06746626686663"/>
         </scene>
         <!--Verify-->
         <scene sceneID="fCg-CM-ysD">
@@ -211,7 +211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVp-5E-nVP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2013.5999999999999" y="-765.06746626686663"/>
+            <point key="canvasLocation" x="2952.8000000000002" y="-765.06746626686663"/>
         </scene>
         <!--Nsp Login-->
         <scene sceneID="vez-EQ-svI">
@@ -298,7 +298,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="euZ-Dk-qsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2922" y="-765"/>
+            <point key="canvasLocation" x="3860" y="-765.06746626686663"/>
         </scene>
         <!--Select Account Type-->
         <scene sceneID="ZSW-g2-wcZ">
@@ -384,7 +384,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8v1-dj-htH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3685.5999999999999" y="-765.06746626686663"/>
+            <point key="canvasLocation" x="4624.8000000000002" y="-765.06746626686663"/>
         </scene>
         <!--NIxor Portal-->
         <scene sceneID="CzS-tG-2VJ">
@@ -671,19 +671,32 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nixorsharkoriginal" translatesAutoresizingMaskIntoConstraints="NO" id="XHu-mR-uOf">
                                         <rect key="frame" x="15" y="225" width="345" height="196"/>
                                     </imageView>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="prF-IF-L9m">
-                                        <rect key="frame" x="177" y="429" width="20" height="20"/>
-                                        <color key="color" name="NixorColor"/>
-                                    </activityIndicatorView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uxq-a3-wXk" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                        <rect key="frame" x="162.5" y="429" width="50" height="50"/>
+                                        <color key="tintColor" name="NixorColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="Eso-Fu-Z1J"/>
+                                            <constraint firstAttribute="height" constant="50" id="JNn-05-6M2"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballScale"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" name="NixorColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="Uxq-a3-wXk" firstAttribute="top" secondItem="XHu-mR-uOf" secondAttribute="bottom" constant="8" id="Cj6-Af-Bw8"/>
                                     <constraint firstItem="XHu-mR-uOf" firstAttribute="centerY" secondItem="K3j-Ds-hqh" secondAttribute="centerY" id="DcK-kL-PBW"/>
                                     <constraint firstItem="XHu-mR-uOf" firstAttribute="leading" secondItem="K3j-Ds-hqh" secondAttribute="leading" constant="15" id="Fe0-MV-eQO"/>
                                     <constraint firstItem="XHu-mR-uOf" firstAttribute="centerX" secondItem="K3j-Ds-hqh" secondAttribute="centerX" id="Plo-NA-Y2r"/>
-                                    <constraint firstItem="prF-IF-L9m" firstAttribute="top" secondItem="XHu-mR-uOf" secondAttribute="bottom" constant="8" id="a12-ev-5n7"/>
+                                    <constraint firstItem="Uxq-a3-wXk" firstAttribute="centerX" secondItem="K3j-Ds-hqh" secondAttribute="centerX" id="eEm-bc-sG1"/>
                                     <constraint firstAttribute="trailing" secondItem="XHu-mR-uOf" secondAttribute="trailing" constant="15" id="egA-fv-yZX"/>
-                                    <constraint firstItem="prF-IF-L9m" firstAttribute="centerX" secondItem="K3j-Ds-hqh" secondAttribute="centerX" id="qnz-AQ-xVU"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -696,36 +709,34 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DDm-2U-5VE"/>
                     </view>
+                    <connections>
+                        <outlet property="loading" destination="Uxq-a3-wXk" id="YYB-94-1bo"/>
+                        <segue destination="lgD-yE-fUA" kind="show" identifier="openLogin" id="gZH-m0-dXk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hO7-nG-U9J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-271" y="-745"/>
+            <point key="canvasLocation" x="-271.19999999999999" y="-745.27736131934034"/>
         </scene>
-        <!--Auth Navigation Controller-->
-        <scene sceneID="tqw-6V-RWt">
+        <!--Navigation Controller-->
+        <scene sceneID="YtX-Xa-kJB">
             <objects>
-                <navigationController storyboardIdentifier="AuthNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="H47-cJ-koK" customClass="AuthNavigationController" customModule="Nixor_Student_Application" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lgD-yE-fUA" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="PSV-1y-4Eq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="mga-MR-elY">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" name="NixorColor"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                        <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ROz-eo-onq" kind="relationship" relationship="rootViewController" id="YpU-za-4P4"/>
+                        <segue destination="ROz-eo-onq" kind="relationship" relationship="rootViewController" id="8Pe-5N-CMx"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="39k-Bl-1ch" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KnE-qP-t2r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="494" y="-765"/>
+            <point key="canvasLocation" x="1261.5999999999999" y="-765.06746626686663"/>
         </scene>
     </scenes>
     <resources>
@@ -736,7 +747,7 @@
         <image name="settings" width="192" height="192"/>
         <image name="student_mode" width="214" height="263"/>
         <namedColor name="NixorColor">
-            <color red="0.56499999761581421" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.56499999759999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="NixorColor">
             <color red="0.56499999761581421" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

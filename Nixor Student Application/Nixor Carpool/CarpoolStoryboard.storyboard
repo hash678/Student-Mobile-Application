@@ -71,6 +71,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                                                 <color key="barTintColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="9kN-r6-OaI" id="M64-0s-6ZL"/>
+                                                </connections>
                                             </searchBar>
                                         </subviews>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -342,7 +345,9 @@
                     <tabBarItem key="tabBarItem" title="Rides" image="CarpoolIcon" id="kdK-Ax-gKg"/>
                     <connections>
                         <outlet property="noAvailableRides" destination="eYg-tS-fMb" id="zKA-Qz-Ooy"/>
+                        <outlet property="searchbar" destination="tsh-HN-vfh" id="uUp-Tb-gla"/>
                         <outlet property="tableView" destination="XFb-b2-RAT" id="0vz-9c-TyX"/>
+                        <outlet property="tableview" destination="XFb-b2-RAT" id="sIm-rv-X4U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UZe-xj-xnc" userLabel="First Responder" sceneMemberID="firstResponder"/>

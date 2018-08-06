@@ -11,6 +11,7 @@
 		190ECF9920EFCAEA00AEF69A /* subjectCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190ECF9820EFCAEA00AEF69A /* subjectCellTableViewCell.swift */; };
 		190ECF9B20F0086400AEF69A /* paperObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190ECF9A20F0086400AEF69A /* paperObject.swift */; };
 		190ECF9D20F014B000AEF69A /* paperCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190ECF9C20F014B000AEF69A /* paperCellTableViewCell.swift */; };
+		1930A0FE21171C9D00EBF9CE /* ratingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1930A0FD21171C9D00EBF9CE /* ratingClass.swift */; };
 		1937B7EF20EE207D0024A047 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1937B7EE20EE207D0024A047 /* GoogleService-Info.plist */; };
 		1937B7F120EE3BCA0024A047 /* common_util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1937B7F020EE3BCA0024A047 /* common_util.swift */; };
 		1937B7F320EE43BD0024A047 /* StudentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1937B7F220EE43BD0024A047 /* StudentDetails.swift */; };
@@ -23,13 +24,12 @@
 		1948E15720EE7D3D00AADC59 /* UserPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1948E15620EE7D3D00AADC59 /* UserPhoto.swift */; };
 		195E33D4210651E100E21E37 /* SocStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 195E33D3210651E100E21E37 /* SocStoryboard.storyboard */; };
 		195E33D6210661F100E21E37 /* BucketObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33D5210661F100E21E37 /* BucketObject.swift */; };
-		195E33D921067F0300E21E37 /* studentBucker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33D821067F0300E21E37 /* studentBucker.swift */; };
 		195E33DB2106831F00E21E37 /* studentBucketsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33DA2106831F00E21E37 /* studentBucketsCell.swift */; };
 		195E33DD210683DD00E21E37 /* bucketItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33DC210683DD00E21E37 /* bucketItem.swift */; };
-		195E33DF21069AD000E21E37 /* MyBucketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33DE21069AD000E21E37 /* MyBucketViewController.swift */; };
+		195E33DF21069AD000E21E37 /* BucketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33DE21069AD000E21E37 /* BucketViewController.swift */; };
 		195E33E12109E71800E21E37 /* Maintain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33E02109E71800E21E37 /* Maintain.swift */; };
 		195E33E3210BC74900E21E37 /* uploadedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33E2210BC74900E21E37 /* uploadedCell.swift */; };
-		195E33E7210E04F200E21E37 /* BucketController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33E6210E04F200E21E37 /* BucketController.swift */; };
+		195E33E7210E04F200E21E37 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33E6210E04F200E21E37 /* Model.swift */; };
 		195E33EA210E8DA100E21E37 /* nspCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33E9210E8DA100E21E37 /* nspCell.swift */; };
 		195E33F0210E9B9200E21E37 /* headerForImageviewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 195E33EF210E9B9200E21E37 /* headerForImageviewer.xib */; };
 		195E33F2210F3E4500E21E37 /* headerImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E33F1210F3E4500E21E37 /* headerImageViewerController.swift */; };
@@ -102,6 +102,7 @@
 		190ECF9820EFCAEA00AEF69A /* subjectCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = subjectCellTableViewCell.swift; sourceTree = "<group>"; };
 		190ECF9A20F0086400AEF69A /* paperObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paperObject.swift; sourceTree = "<group>"; };
 		190ECF9C20F014B000AEF69A /* paperCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paperCellTableViewCell.swift; sourceTree = "<group>"; };
+		1930A0FD21171C9D00EBF9CE /* ratingClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ratingClass.swift; sourceTree = "<group>"; };
 		1937B7EE20EE207D0024A047 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1937B7F020EE3BCA0024A047 /* common_util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = common_util.swift; sourceTree = "<group>"; };
 		1937B7F220EE43BD0024A047 /* StudentDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetails.swift; sourceTree = "<group>"; };
@@ -114,13 +115,12 @@
 		1948E15620EE7D3D00AADC59 /* UserPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhoto.swift; sourceTree = "<group>"; };
 		195E33D3210651E100E21E37 /* SocStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SocStoryboard.storyboard; sourceTree = SOURCE_ROOT; };
 		195E33D5210661F100E21E37 /* BucketObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketObject.swift; sourceTree = "<group>"; };
-		195E33D821067F0300E21E37 /* studentBucker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studentBucker.swift; sourceTree = "<group>"; };
 		195E33DA2106831F00E21E37 /* studentBucketsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studentBucketsCell.swift; sourceTree = "<group>"; };
 		195E33DC210683DD00E21E37 /* bucketItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bucketItem.swift; sourceTree = "<group>"; };
-		195E33DE21069AD000E21E37 /* MyBucketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBucketViewController.swift; sourceTree = "<group>"; };
+		195E33DE21069AD000E21E37 /* BucketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketViewController.swift; sourceTree = "<group>"; };
 		195E33E02109E71800E21E37 /* Maintain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maintain.swift; sourceTree = "<group>"; };
 		195E33E2210BC74900E21E37 /* uploadedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = uploadedCell.swift; sourceTree = "<group>"; };
-		195E33E6210E04F200E21E37 /* BucketController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketController.swift; sourceTree = "<group>"; };
+		195E33E6210E04F200E21E37 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		195E33E9210E8DA100E21E37 /* nspCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nspCell.swift; sourceTree = "<group>"; };
 		195E33EF210E9B9200E21E37 /* headerForImageviewer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = headerForImageviewer.xib; sourceTree = "<group>"; };
 		195E33F1210F3E4500E21E37 /* headerImageViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = headerImageViewerController.swift; sourceTree = "<group>"; };
@@ -232,6 +232,7 @@
 				19AD9C4920F1ECCA00C63B6D /* Objects */,
 				19AD9C4820F1ECB100C63B6D /* TableviewCells */,
 				190ECF9420EF5F9C00AEF69A /* PastPapers.swift */,
+				1930A0FD21171C9D00EBF9CE /* ratingClass.swift */,
 			);
 			path = PastPapers;
 			sourceTree = "<group>";
@@ -291,9 +292,8 @@
 		195E33E8210E0BB700E21E37 /* Buckets */ = {
 			isa = PBXGroup;
 			children = (
-				195E33D821067F0300E21E37 /* studentBucker.swift */,
-				195E33DE21069AD000E21E37 /* MyBucketViewController.swift */,
-				195E33E6210E04F200E21E37 /* BucketController.swift */,
+				195E33DE21069AD000E21E37 /* BucketViewController.swift */,
+				195E33E6210E04F200E21E37 /* Model.swift */,
 			);
 			path = Buckets;
 			sourceTree = "<group>";
@@ -802,7 +802,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1937B7F320EE43BD0024A047 /* StudentDetails.swift in Sources */,
-				195E33E7210E04F200E21E37 /* BucketController.swift in Sources */,
+				195E33E7210E04F200E21E37 /* Model.swift in Sources */,
 				19D53D362101E1240065D8E7 /* NspLogin.swift in Sources */,
 				19FFEA362100CB4B00E5429C /* LaunchScreenViewController.swift in Sources */,
 				1937B7F720EE4BD50024A047 /* accountTypeGetSet.swift in Sources */,
@@ -810,7 +810,8 @@
 				195E33EA210E8DA100E21E37 /* nspCell.swift in Sources */,
 				195E33DB2106831F00E21E37 /* studentBucketsCell.swift in Sources */,
 				19FFEA382100CCC400E5429C /* LoginHandler.swift in Sources */,
-				195E33DF21069AD000E21E37 /* MyBucketViewController.swift in Sources */,
+				195E33DF21069AD000E21E37 /* BucketViewController.swift in Sources */,
+				1930A0FE21171C9D00EBF9CE /* ratingClass.swift in Sources */,
 				190ECF9B20F0086400AEF69A /* paperObject.swift in Sources */,
 				195E33DD210683DD00E21E37 /* bucketItem.swift in Sources */,
 				195E340C2110739C00E21E37 /* GeneralLayout.swift in Sources */,
@@ -824,7 +825,6 @@
 				1937B7F120EE3BCA0024A047 /* common_util.swift in Sources */,
 				19C3A41320F0B1F0007E7912 /* PdfLoader.swift in Sources */,
 				195F2AF520FB4C100088A18D /* Chat.swift in Sources */,
-				195E33D921067F0300E21E37 /* studentBucker.swift in Sources */,
 				19AE4DAC20FE6674001A5BC9 /* LoginController.swift in Sources */,
 				19CA0CA32103585600F74057 /* PastpapersFilter.swift in Sources */,
 				19E2054920F5EC3900132494 /* rideData.swift in Sources */,
